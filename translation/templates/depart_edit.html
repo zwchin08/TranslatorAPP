@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="container">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">修改部门</h3>
+            </div>
+            <div class="panel-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label >标题</label>
+{#     使用"row_obj":row_obj}把对象row_obj当作参数传到模板中，在模板中直接拿到对象就可获取对应的对象的字段#}
+                        <input type="text" class="form-control"  placeholder="标题" name="title" value="{{ row_obj.title }}"/>
+                    </div>
+                     <button type="submit" class="btn btn-primary">提 交</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

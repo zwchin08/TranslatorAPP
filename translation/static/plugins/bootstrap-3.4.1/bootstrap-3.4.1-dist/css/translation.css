@@ -1,0 +1,22 @@
+.btn-container {
+    display: flex; /* 使用 Flex 布局 */
+    align-items: center; /* 垂直居中按钮 */
+    gap: 10px; /* 可选，按钮之间的间距 */
+}
+
+.account {
+    width: 400px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    box-shadow: 5px 5px 20px #aaa;
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    padding: 20px 40px;
+}
+
+.account h2 {
+    margin-top: 10px;
+    text-align: center;
+}

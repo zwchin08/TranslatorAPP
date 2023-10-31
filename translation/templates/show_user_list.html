@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<input type="button" value="获取数据" onclick="getData()">
+<div id="div1"></div>
+<img id="img1" alt="failed">
+<div class="container">
+    <h3>{{title}}</h3>
+    <div class="bs-example" data-example-id="bordered-table">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>UserName</th>
+                <th>PassWord</th>
+                <th>PassWord</th>
+                <th>最後操作</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in data_list %}
+            <tr>
+                <td>{{item.id}}</td>
+                <td>{{item.username}}</td>
+
+                <td>{{item.email}}</td>
+                <td>{{item.password}}</td>
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<script>
+    function getData() {
+        var xmlHttpRequest = new XMLHttpRequest();
+        console.log("start")
+        //2. 发送异步请求
+        //xmlHttpRequest.open('GET','http://yapi.smart-xwork.cn/mock/169327/emp/list');
+        //因为上边的网址访问不了，需要添加本地服务器访问
+        xmlHttpRequest.open('GET', '/getdatabase');
+        xmlHttpRequest.send();//发送请求
+        xmlHttpRequest.onreadystatechange = function () {
+            if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
+                console.log("success")
+                var result = JSON.parse(this.responseText);
+                var imageValues = result.map(entry => entry.image);
+                let images = []
+                imageValues.forEach(function(image) {
+                    images.push(image)
+                });
+                console.log(images[0])
+                document.getElementById("img1").src = images[0]
+            }
+        }
+    }
+</script>
+</body>
+</html>
