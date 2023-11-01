@@ -1,6 +1,5 @@
 from collections import OrderedDict
-
-import pymysql
+import pymysql,bcrypt
 from flask import Flask, render_template, request, redirect, jsonify
 
 app = Flask(__name__)
@@ -33,6 +32,72 @@ def insert_translation(text):
     conn.commit()
     close_database_connection(conn, cursor)
 
+
+@app.route("/top")
+def top():
+    return render_template("top.html")
+
+# 使用add_user.html可以添加，但是使用login.html添加不了
+@app.route("/add_user", methods=["GET", "POST"])
+def add_user():
+    if request.method == "GET":
+        return render_template("signup.html")
+    username = request.form.get("username")
+    password = request.form.get("pwd")
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    email = request.form.get("email")
+
+
+    conn = connect_to_database()
+    cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
+    sql = "insert into admin(username, email, password) values (%s, %s, %s)"
+    cursor.execute(sql, [username, email, hashed_password])
+    conn.commit()
+    close_database_connection(conn, cursor)
+    return redirect("/login_user")
+
+
+@app.route("/login_user", methods=["GET", "POST"])
+def login_user():
+    if request.method == "GET":
+        return render_template("login02.html")
+
+    login_username = request.form.get("username")
+    login_password = request.form.get("pwd")
+
+    conn = connect_to_database()
+    cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
+    cursor.execute("SELECT * FROM admin ")
+    user_data = cursor.fetchall()
+    print(user_data)
+    user_info = None
+    for user in user_data:
+        if user['username'] == login_username:
+            user_info = user
+            break
+    if user_info:
+        # 找到用户信息，验证密码
+        stored_password = user_info['password']
+        if bcrypt.checkpw(login_password.encode('utf-8'), stored_password.encode('utf-8')):
+            # 密码验证成功，允许用户登录
+            print("loginしました。")
+            return redirect("/index/2")
+        else:
+            # 密码验证失败，拒绝登录
+            print("login失败しました。")
+            return redirect("/login_user")
+    else:
+        # 用户名不存在，拒绝登录
+        print("ユーザ名が正しくない")
+        return redirect("/login_user")
+
+    close_database_connection(conn, cursor)
+
+
+@app.route("/passwordForgot", methods=["GET", "POST"])
+def passwordForgot():
+    if request.method == "GET":
+        return render_template("passwordForgot.html")
 
 @app.route("/index/<int:index>", methods=["GET", "POST"])
 def hello_world(index):
@@ -71,23 +136,6 @@ def delete_translation_list():
     close_database_connection(conn, cursor)
     return redirect('/show_translation_list')
 
-
-# 使用add_user.html可以添加，但是使用login.html添加不了
-@app.route("/add_user", methods=["GET", "POST"])
-def add_user():
-    if request.method == "GET":
-        return render_template("add_user.html")
-    username = request.form.get("username")
-    password = request.form.get("pwd")
-    email = request.form.get("email")
-
-    conn = connect_to_database()
-    cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
-    sql = "insert into admin(username, email, password) values (%s, %s, %s)"
-    cursor.execute(sql, [username, email, password])
-    conn.commit()
-    close_database_connection(conn, cursor)
-    return "添加成功"
 
 
 # 普通のユーザ検索
@@ -146,41 +194,6 @@ def show_user_list():
 def yemian():
     return render_template("depart_add.html")
 
-# 这个添加新的用户部分目前数据添加不进来;尝试换了数据库仍然不行
-@app.route("/log_up", methods=["GET", "POST"])
-def log_up():
-    if request.method == "GET":
-        return render_template("login.html")
-
-    username = request.form.get("username")
-    email = request.form.get("email")
-    password = request.form.get("password")
-
-    conn = connect_to_database()
-    cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
-    sql = "insert into log_up(username, email, password) values (%s, %s, %s)"
-    cursor.execute(sql, [username, email, password])
-    conn.commit()
-    close_database_connection(conn, cursor)
-    return "LogUp成功"
-
-
-# test成功
-@app.route("/login_user", methods=["GET", "POST"])
-def login_user():
-    if request.method == "GET":
-        return render_template("login02.html")
-
-    username = request.form.get("username")
-    password = request.form.get("pwd")
-
-    conn = connect_to_database()
-    cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
-    sql = "insert into tb_user(username, password) values (%s, %s)"
-    cursor.execute(sql, [username, password])
-    conn.commit()
-    close_database_connection(conn, cursor)
-    return "Login成功"
 
 
 if __name__ == '__main__':
