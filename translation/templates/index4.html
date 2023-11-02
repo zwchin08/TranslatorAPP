@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Translate Tool</title>
     <link rel="stylesheet" href="/static/plugins/bootstrap-3.4.1/bootstrap-3.4.1-dist/css/bootstrap.css">
-    <link rel="stylesheet" href="/static/plugins/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/plugins/font-awesome-4.7.0/font-awesome-4.7.0/">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
 
     <style>
@@ -19,6 +19,8 @@
             width: 100%; /* 条形框的宽度，与父元素宽度相同 */
             margin-top: 0px; /* 上外边距，将条形框与输出框分隔开 */
         }
+
+
     </style>
 </head>
 
@@ -81,7 +83,7 @@
             <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>Translate Tool</a>
     </div>
     <div>
-        <form action="/index/1" method="post">
+        <form action="/test/1" method="post">
             <label for="inputLanguage">入力言語：</label>
             <select name="inputLanguage" id="inputLanguage">
                 <option value="">入力したい言語</option>
@@ -116,7 +118,7 @@
                 コード コピー
             </button>
             <textarea id="text-to-copy" class="form-control" rows="10"
-                      style="background: #DFF0D8;">{{ result }}</textarea>
+                      style="background: #DFF0D8;">{{ text2 }}</textarea>
             <div class="copy-bar"></div>
         </div>
 
