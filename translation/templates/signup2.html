@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+    <link rel="stylesheet" href="/static/css/signup.css">
+</head>
+
+<body>
+<div class="loginBox">
+    <h2>Sign up</h2>
+    <form action="/add_user/2" method="post" onsubmit="return validateForm();">
+
+        <div class="item">
+            <input type="text" name="username" autocomplete="new-password" placeholder="username" class="input"/>
+            <span class="small-text" id="error-username"></span>
+        </div>
+        <div class="item">
+            <input type="email" name="email" autocomplete="new-password" placeholder="email" class="input"/>
+            <span class="small-text" id="error-email"></span>
+        </div>
+        <div class="item">
+            <input type="password" name="pwd" id="password" autocomplete="new-password" placeholder="password"
+                   class="input"/>
+        </div>
+        <div class="item">
+            <input type="password" name="pwd1" id="confirm-password" autocomplete="new-password" placeholder="confirm password"
+                   class="input"/>
+            <span class="small-text" id="error-password"></span>
+        </div>
+        <button class="btn" type="submit">submit</button>
+    </form>
+
+    <!-- 用于显示错误消息的 <div> 元素 -->
+    <div class="error-messages">
+        {% if error_messages %}
+            <ul>
+                {% for message in error_messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</div>
+<script src="/static/js/selef_js/signup1.js"></script>
+</body>
+
+</html>
