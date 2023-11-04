@@ -32,6 +32,7 @@ def close_database_connection(conn, cursor):
 """
 1.本函数用于创建新用户
 2.创建成功后会自动跳转到登陆页面
+3.给用户发送Email通知
 """
 
 
@@ -55,6 +56,7 @@ def log_up(index):
             error_messages.append("このメールアドレスは既に他のユーザーによって使用されています。別のメールアドレスを入力してください.")
 
     if not error_messages:
+        send_signup_email(index, email)
         sql = "INSERT INTO admin (username, email, password) VALUES (%s, %s, %s)"
         cursor.execute(sql, [username, email, hashed_password])
         conn.commit()
@@ -62,8 +64,6 @@ def log_up(index):
         return []  # 注册成功时返回空的错误消息列表
 
     return error_messages  # 返回错误消息列表
-
-
 
 
 """
@@ -92,7 +92,7 @@ def login_user(index):
         if bcrypt.checkpw(login_password.encode('utf-8'), stored_password.encode('utf-8')):
             # 密码验证成功，允许用户登录
             print("loginしました。")
-            return redirect("/index/2")
+            return redirect(f"/user_translation_page/{index}")
         else:
             # 密码验证失败，拒绝登录
             print("login失败しました。")
@@ -119,6 +119,26 @@ def generate_reset_token():
     characters = string.ascii_letters + string.digits
     reset_token = ''.join(random.choice(characters) for _ in range(token_length))
     return reset_token
+
+
+def send_signup_email(index, email):
+    signup_link = f"http://127.0.0.1:5000/login/{index}"
+    # 创建电子邮件对象
+    msg = MIMEMultipart()
+    msg['From'] = 'chinseii@126.com'
+    msg['To'] = email
+    msg['Subject'] = 'Password Reset'
+    body = f'おめでとうございます、翻訳アプリのアカウントが作成されました。ログインするためにリンクをクリックしてください。: {signup_link}'
+    msg.attach(MIMEText(body, 'plain'))
+    try:
+        server = smtplib.SMTP_SSL('smtp.126.com', 465)
+        server.login('chinseii@126.com', 'XLZQTRYNSEZDBQTW')
+        text = msg.as_string()
+        server.sendmail('chinseii@126.com', email, text)
+        server.quit()
+        return "邮件成功发送"
+    except smtplib.SMTPException as e:
+        return f"邮件发送失败: {str(e)}"
 
 
 def send_reset_email(index, email, reset_token):

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translate Tool</title>
+    <link rel="stylesheet" href="/static/plugins/bootstrap-3.4.1/bootstrap-3.4.1-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/plugins/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css">
+
+    <style>
+        .navbar {
+            border-radius: 0px;
+        }
+
+        .navbar-brand {
+            line-height: 32px;
+        }
+
+        .navbar-nav > li > a {
+            line-height: 32px;
+        }
+
+        /* 新添加的样式 */
+        .page-container {
+            width: 600px;
+            height: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #dddddd;
+            border-radius: 5px;
+            box-shadow: 5px 5px 20px #aaa;
+        }
+
+        .page-container h2 {
+            text-align: center;
+        }
+
+        .image-upload {
+            float: right;
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .buttons button {
+            width: 48%;
+        }
+
+        /* 新添加的样式，用于布局调整 */
+        .left {
+            width: 48%;
+            float: left;
+        }
+
+        .right {
+            width: 48%;
+            float: right;
+        }
+    </style>
+
+</head>
+
+<body>
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <img alt="Brand" width="32px"
+                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAB+0lEQVR4AcyYg5LkUBhG+1X2PdZGaW3btm3btm3bHttWrPomd1r/2Jn/VJ02TpxcH4CQ/dsuazWgzbIdrm9dZVd4pBz4zx2igTaFHrhvjneVXNHCSqIlFEjiwMyyyOBilRgGSqLNF1jnwNQdIvAt48C3IlBmHCiLQHC2zoHDu6zG1iXn6+y62ScxY9AODO6w0pvAqf23oSE4joOfH6OxfMoRnoGUm+de8wykbFt6wZtA07QwtNOqKh3ZbS3Wzz2F+1c/QJY0UCJ/J3kXWJfv7VhxCRRV1jGw7XI+gcO7rEFFRvdYxydwcPsVsC0bQdKScngt4iUTD4Fy/8p7PoHzRu1DclwmgmiqgUXjD3oTKHbAt869qdJ7l98jNTEblPTkXMwetpvnftA0LLHb4X8kiY9Kx6Q+W7wJtG0HR7fdrtYz+x7iya0vkEtUULIzCjC21wY+W/GYXusRH5kGytWTLxgEEhePPwhKYb7EK3BQuxWwTBuUkd3X8goUn6fMHLyTT+DCsQdAEXNzSMeVPAJHdF2DmH8poCREp3uwm7HsGq9J9q69iuunX6EgrwQVObjpBt8z6rdPfvE8kiiyhsvHnomrQx6BxYUyYiNS8f75H1w4/ISepDZLoDhNJ9cdNUquhRsv+6EP9oNH7Iff2A9g8h8CLt1gH0Qf9NMQAFnO60BJFQe0AAAAAElFTkSuQmCC">
+            </a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/top/1">翻訳アプリ</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="/user_translation_page/1">翻訳画面</a></li>
+                <li><a href="/show_translation_list">履歴画面</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false">言語選択<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/user_translation_page/1">日本語</a></li>
+                        <li><a href="/user_translation_page/2">English</a></li>
+                        <li><a href="/user_translation_page/3">中文</a></li>
+                        <li><a href="/user_translation_page/4">မြန်မာဘာသာ</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li><a href="#">Link</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class a="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">他のAPP<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/user_translation_page/1">チャットボット</a></li>
+                        <li><a href="/user_translation_page/2">データー分析</a></li>
+                        <li><a href="/user_translation_page/3">巡回ボード</a></li>
+                        <li><a href="/user_translation_page/4">管理システム</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"> <img width="32px" src="/static/img/user1.jpg"><span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">個人情報</a></li>
+                        <li><a href="#">パスワード変更</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/index1.html">LogOut</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br>
+<br>
+<br>
+<br>
+<div class="page-container">
+    <h2>個人情報</h2>
+    <div class="left">
+        <div class="form-group">
+            <label for="user-id">ユーザID</label>
+            <input type="text" id="user-id" name="user-id" value="userid" readonly>
+        </div>
+        <div class="form-group">
+            <label for="password">パスワード</label>
+            <input type="password" id="password" name="password" placeholder="password">
+        </div>
+        <div class="form-group">
+            <label for="email">メールアドレス</label>
+            <input type="email" id="email" name="email" value="email" readonly>
+        </div>
+        <div class="buttons">
+            <button id="change-password" onclick="showChangePasswordForm()">変更</button>
+            <button id="confirm-change" onclick="confirmChanges()" style="display: none;">確認</button>
+            <button id="cancel-change" onclick ="cancelChanges()" style="display: none;">キャンセル</button>
+        </div>
+    </div>
+    <div class="right">
+        <div class="image-upload">
+            <label for="profile-image">イメージ写真変更</label>
+            <input type="file" id="profile-image" name="profile-image">
+        </div>
+
+         <div class="image-download" >
+            <img width="151" src="/static/img/user1.jpg">
+        </div>
+
+    </div>
+</div>
+
+
+
+<script>
+    function showChangePasswordForm() {
+        document.getElementById('password').disabled = false;
+        document.getElementById('confirm-change').style.display = 'block';
+        document.getElementById('cancel-change').style.display = 'block';
+        document.getElementById('change-password').style.display = 'none';
+    }
+
+    function confirmChanges() {
+        // Add validation logic here, including checking the original password and matching new password entries.
+        // If the validation passes, submit the changes.
+        // If not, display an error message or handle it as needed.
+        // Then hide the password change form and show the original "Change Password" button.
+        document.getElementById('password').disabled = true;
+        document.getElementById('confirm-change').style.display = 'none';
+        document.getElementById('cancel-change').style.display = 'none';
+        document.getElementById('change-password').style.display = 'block';
+    }
+
+    function cancelChanges() {
+        // Reset the form and hide the password change form.
+        document.getElementById('password').value = '';
+        document.getElementById('password').disabled = true;
+        document.getElementById('confirm-change').style.display = 'none';
+        document.getElementById('cancel-change').style.display = 'none';
+        document.getElementById('change-password').style.display = 'block';
+    }
+</script>
+
+<script src="/static/index.js"></script>
+<script src="/static/plugins/jquery-3.6.0.min.js"></script>
+<script src="/static/plugins/bootstrap-3.4.1/bootstrap-3.4.1-dist/js/bootstrap.js"></script>
+</body>
+
+</html>

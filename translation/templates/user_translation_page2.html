@@ -22,18 +22,6 @@
             line-height: 32px; /* 与图标高度一致，根据需要进行调整 */
         }
 
-        /* 遮罩层 */
-        .overlay {
-            position: fixed;
-            top: 65px; /* 距离顶部的高度，根据您的导航栏高度调整 */
-            left: 0;
-            width: 100%;
-            height: calc(100% - 65px); /* 高度减去导航栏的高度 */
-            background-color: rgba(0, 0, 0, 0.2);
-            z-index: 1;
-        }
-
-
         .copy-bar {
             background-color: #f8f9fa;
             /* ChatGPT 风格的灰色背景 */
@@ -63,22 +51,36 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/login/1">翻訳アプリ</a>
+            <a class="navbar-brand" href="/top/2">The translation app</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/user_translation_page/1">翻訳画面</a></li>
-                <li><a href="/show_translation_list">履歴画面</a></li>
-                <li><a href="#">Link</a></li>
-                <ul class="nav navbar-nav navbar-right">
+                <li><a href="/user_translation_page/2">To translate </a></li>
+                <li><a href="/show_translation_list">History screen</a></li>
+                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-haspopup="true" aria-expanded="false">言語選択<span class="caret"></span></a>
+                           aria-haspopup="true" aria-expanded="false">Language selection<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="/user_translation_page/1">日本語</a></li>
                             <li><a href="/user_translation_page/2">English</a></li>
                             <li><a href="/user_translation_page/3">中文</a></li>
                             <li><a href="/user_translation_page/4">မြန်မာဘာသာ</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <li><a href="#">Link</a></li>
+
+                 <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false">Other apps<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                                <li><a href="/user_translation_page/1">Chatbot</a></li>
+                            <li><a href="/user_translation_page/2">Data analysis</a></li>
+                            <li><a href="/user_translation_page/3">PatrolBot</a></li>
+                            <li><a href="/user_translation_page/4">Management system</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -89,8 +91,8 @@
                        aria-expanded="false"> <img width="32px" src="/static/img/user1.jpg"><span
                             class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">個人情報</a></li>
-                        <li><a href="#">パスワード変更</a></li>
+                        <li><a href="#">Personal information</a></li>
+                        <li><a href="#">Password change</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="/index1.html">LogOut</a></li>
                     </ul>
@@ -102,39 +104,39 @@
 <div class="overlay"></div>
 <div class="container">
     <div>
-        <form action="/index/1" method="post">
-            <label for="inputLanguage">入力言語：</label>
+        <form action="/user_translation_page/1" method="post">
+            <label for="inputLanguage">Input language：</label>
             <select name="inputLanguage" id="inputLanguage">
-                <option value="">入力したい言語</option>
-                <option value="english">英語</option>
+                <option value="">language selection</option>
+                <option value="english">English</option>
                 <option value="japanese">日本語</option>
-                <option value="chinese">中国語</option>
-                <option value="Burmese">ミャンマー語</option>
+                <option value="chinese">中文</option>
+                <option value="Burmese">န်မာဘာသာ</option>
             </select>
             <br>
-            <label for="textToTranslate">翻訳されたい文章：</label>
+            <label for="textToTranslate">The text you want to be translated：</label>
             <br>
             <textarea class="form-control" name="textToTranslate" id="textToTranslate" rows="10" style="background: #DBDDDA;"
-                      placeholder="文章を入力してください"></textarea>
+                      placeholder="Please enter the text."></textarea>
             <br>
-            <label for="outputLanguage">出力言語：</label>
+            <label for="outputLanguage">Output language：</label>
             <select name="outputLanguage" id="outputLanguage">
-                <option value="">翻訳されたい言語</option>
-                <option value="english">英語</option>
+                <option value="">language selection</option>
+               <option value="english">English</option>
                 <option value="japanese">日本語</option>
-                <option value="chinese">中国語</option>
-                <option value="Burmese">ミャンマー語</option>
+                <option value="chinese">中文</option>
+                <option value="Burmese">န်မာဘာသာ</option>
             </select>
             <div style="margin-bottom: 10px">
-                <input type="submit" name="" id="" value="翻訳">
+                <input type="submit" name="" id="" value="Translation">
             </div>
         </form>
-        <a class="btn btn-primary btn-xs" href="/depart/20/edit/">翻訳結果</a>
+        <a class="btn btn-primary btn-xs" href="/depart/20/edit/">Translation result</a>
         <!-- 処理した結果ここの<div>に表示する -->
         <div id="result" name="result" style="position: relative; background: #F7F7F9;">
             <button class="copy-button" id="copy-button" data-clipboard-target="#text-to-copy"
                     style="background-color: dimgrey; color: #fff; padding: 1px; float: right; border: none;">
-                コード コピー
+                Copy code
             </button>
             <textarea id="text-to-copy" class="form-control" rows="10"
                       style="background: #DBDDDA;">{{ result }}</textarea>
@@ -151,7 +153,6 @@
 <script src="/static/plugins/bootstrap-3.4.1/bootstrap-3.4.1-dist/js/bootstrap.js"></script>
 <script>
     var clipboard = new ClipboardJS('#copy-button');
-
     clipboard.on('success', function (e) {
         var copyButton = document.getElementById('copy-button');
         copyButton.textContent = 'Copied!';
@@ -159,7 +160,7 @@
         var copyBar = document.querySelector('.copy-bar');
         copyBar.style.display = 'block';
         setTimeout(function () {
-            copyButton.textContent = 'コード コピー';
+            copyButton.textContent = 'Copy code';
             copyButton.classList.remove('clicked');
             copyBar.style.display = 'none';
         }, 2000); // 2秒后恢复按钮文本和隐藏条形框

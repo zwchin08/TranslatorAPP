@@ -8,6 +8,8 @@ import chatgpt_robot
 import top_page
 import user
 
+
+
 app = Flask(__name__)
 
 app.secret_key = 'my_secret_key_123'
@@ -99,11 +101,11 @@ def insert_translation(text, result):
     close_database_connection(conn, cursor)
 
 
-@app.route("/index/<int:index>", methods=["GET", "POST"])
+@app.route("/user_translation_page/<int:index>", methods=["GET", "POST"])
 def input_translate_output(index):
     if request.method == "GET":
-        if index in range(1, 5):
-            return render_template(f"index{index}.html")
+        if index in range(0, 5):
+            return render_template(f"user_translation_page{index}.html")
         else:
             return "Invalid index"
     if request.method == "POST":
@@ -111,8 +113,11 @@ def input_translate_output(index):
         text = request.form.get("textToTranslate")
         output_language = request.form.get("outputLanguage")
         result = chatgpt_robot.chatgpt_robot(input_Language, output_language, text)
-        insert_translation(text, result)
-        return render_template(f"index{index}.html", result=result)
+        if index != 0:
+            insert_translation(text, result)
+        return render_template(f"user_translation_page{index}.html", result=result)
+
+
 
 
 @app.route("/show_translation_list")

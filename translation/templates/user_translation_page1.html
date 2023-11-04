@@ -22,18 +22,6 @@
             line-height: 32px; /* 与图标高度一致，根据需要进行调整 */
         }
 
-        /* 遮罩层 */
-        .overlay {
-            position: fixed;
-            top: 65px; /* 距离顶部的高度，根据您的导航栏高度调整 */
-            left: 0;
-            width: 100%;
-            height: calc(100% - 65px); /* 高度减去导航栏的高度 */
-            background-color: rgba(0, 0, 0, 0.2);
-            z-index: 1;
-        }
-
-
         .copy-bar {
             background-color: #f8f9fa;
             /* ChatGPT 风格的灰色背景 */
@@ -63,14 +51,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/login/1">翻訳アプリ</a>
+            <a class="navbar-brand" href="/top/1">翻訳アプリ</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="/user_translation_page/1">翻訳画面</a></li>
                 <li><a href="/show_translation_list">履歴画面</a></li>
-                <li><a href="#">Link</a></li>
-                <ul class="nav navbar-nav navbar-right">
+                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                            aria-haspopup="true" aria-expanded="false">言語選択<span class="caret"></span></a>
@@ -79,6 +66,21 @@
                             <li><a href="/user_translation_page/2">English</a></li>
                             <li><a href="/user_translation_page/3">中文</a></li>
                             <li><a href="/user_translation_page/4">မြန်မာဘာသာ</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <li><a href="#">Link</a></li>
+
+                 <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false">他のAPP<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/user_translation_page/1">チャットボット</a></li>
+                            <li><a href="/user_translation_page/2">データー分析</a></li>
+                            <li><a href="/user_translation_page/3">巡回ボード</a></li>
+                            <li><a href="/user_translation_page/4">管理システム</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -102,7 +104,7 @@
 <div class="overlay"></div>
 <div class="container">
     <div>
-        <form action="/index/1" method="post">
+        <form action="/user_translation_page/1" method="post">
             <label for="inputLanguage">入力言語：</label>
             <select name="inputLanguage" id="inputLanguage">
                 <option value="">入力したい言語</option>
@@ -134,7 +136,7 @@
         <div id="result" name="result" style="position: relative; background: #F7F7F9;">
             <button class="copy-button" id="copy-button" data-clipboard-target="#text-to-copy"
                     style="background-color: dimgrey; color: #fff; padding: 1px; float: right; border: none;">
-                コード コピー
+                Copy code
             </button>
             <textarea id="text-to-copy" class="form-control" rows="10"
                       style="background: #DBDDDA;">{{ result }}</textarea>
@@ -159,7 +161,7 @@
         var copyBar = document.querySelector('.copy-bar');
         copyBar.style.display = 'block';
         setTimeout(function () {
-            copyButton.textContent = 'コード コピー';
+            copyButton.textContent = 'Copy code';
             copyButton.classList.remove('clicked');
             copyBar.style.display = 'none';
         }, 2000); // 2秒后恢复按钮文本和隐藏条形框
