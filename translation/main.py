@@ -63,6 +63,7 @@ def add_user(index):
 def login(index):
     if request.method == "GET":
         return render_template(f"login{index}.html")
+
     return user.login_user(index)
 
 
@@ -99,6 +100,11 @@ def insert_translation(text, result):
     cursor.execute(insert_query, (text, result))
     conn.commit()
     close_database_connection(conn, cursor)
+
+
+# 导入 user_routes.py 并注册 Blueprint
+from user_info import user_bp
+app.register_blueprint(user_bp)
 
 
 @app.route("/user_translation_page/<int:index>", methods=["GET", "POST"])

@@ -168,7 +168,7 @@
         </div>
         <div class="form-group">
             <label for="email">メールアドレス</label>
-            <input type="email" id="email" name="email" value="email">
+            <input type="email" id="email" name="email" value="email" readonly>
         </div>
         <div class="buttons">
             <button id="change-password" onclick="showChangePasswordForm()">変更</button>
@@ -191,8 +191,13 @@
 
 
 <script>
+    /*
+    * 下面这段代码时直接展示个人情报信息
+    *
+    *  */
     window.onload = function () {
-        fetch('/api/getUserInfo')
+        // 发送请求以获取用户信息
+        fetch('/api/getUserInfo')  // 发送到获取用户信息的API端点
             .then(response => response.json())
             .then(data => {
                 // 将用户名填充到 <h2> 元素中
@@ -200,7 +205,6 @@
                 // 将其他用户信息填充到表单字段
                 document.getElementById('user-id').value = data.id;
                 document.getElementById('email').value = data.email;
-
             })
             .catch(error => {
                 console.error('获取用户信息失败', error);
@@ -208,43 +212,87 @@
     }
 
 
-    // 弹出密码验证框
-    function showPasswordPrompt() {
-        const currentPassword = prompt("元パスワードを入力してください:");
-        if (currentPassword) {
-            // 发送密码到后台验证
-            fetch('/api/validatePassword', {
-                method: 'POST',
-                body: JSON.stringify({currentPassword}),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // 密码验证成功，继续在当前页面上执行后续操作
-                        // 例如，显示“確認”和“キャンセル”按钮
-                        document.getElementById('confirm-change').style.display = 'block';
-                        document.getElementById('cancel-change').style.display = 'block';
-                        document.getElementById('change-password').style.display = 'none';
-                    } else {
-                        alert('元パスワードが正しくない、情報は変更されませんでした。');
-                        // 验证失败时，将隐藏按钮
-                        document.getElementById('confirm-change').style.display = 'none';
-                        document.getElementById('cancel-change').style.display = 'none';
-                        document.getElementById('change-password').style.display = 'block';
-                    }
-                })
-                .catch(error => {
-                    console.error('密码验证失败', error);
-                });
-        }
+    /*
+    * 实现当用户点击变更按钮时，弹出一个提示框，请输入当前密码，输入完确认后，密码发到后台服务器去和当刚才
+    * session对应的id的密码进行对比，如果相同，就跳转到左下角为确认，右下角为取消的HTML页面，用户把表的信息更改后，
+    * 点击确认按钮后，要求客户再次输入刚才的新密码，如果两次输入的一致，就把所有信息打包发送给后台保存
+    *
+    * */
+
+// 弹出密码验证框
+function showPasswordPrompt() {
+    const currentPassword = prompt("元パスワードを入力してください:");
+    if (currentPassword) {
+        // 发送密码到后台验证
+        fetch('/api/validatePassword', {
+            method: 'POST',
+            body: JSON.stringify({ currentPassword }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // 密码验证成功，继续在当前页面上执行后续操作
+                // 例如，显示“確認”和“キャンセル”按钮
+                document.getElementById('confirm-change').style.display = 'block';
+                document.getElementById('cancel-change').style.display = 'block';
+                document.getElementById('change-password').style.display = 'none';
+            } else {
+                alert('密码验证失败，请重试或联系支持。');
+            }
+        })
+        .catch(error => {
+            console.error('密码验证失败', error);
+        });
     }
+}
+
+// 用户点击变更按钮时触发
+document.getElementById('change-password').addEventListener('click', showPasswordPrompt);
+
+// 其他代码...
+function confirmChanges() {
+    // 获取新密码和新邮箱
+    const newPassword = document.getElementById('password').value;
+    const newEmail = document.getElementById('email').value;
+
+    // 弹出确认新密码输入框
+    const confirmedNewPassword = prompt("新しいパスワードを再入力してください:");
+    if (confirmedNewPassword === newPassword) {
+        // 密码一致，发送更改信息到服务器
+        fetch('/api/updateUserInfo', {
+            method: 'POST',
+            body: JSON.stringify({ newPassword, newEmail }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('信息更改成功。');
+                // 信息更改成功后，可以更新H2部位的用户名等信息
+                 // 将用户名填充到 <h2> 元素中
+                document.querySelector('h2').textContent = data.username + "様";
+                // 将其他用户信息填充到表单字段
+                document.getElementById('user-id').value = data.id;
+                document.getElementById('email').value = data.email;
+            } else {
+                alert('個人情報を変更しました。');
+            }
+        })
+        .catch(error => {
+            console.error('信息更改失败', error);
+        });
+    } else {
+        alert('新しいパスワードが一致しません。情報は変更されませんでした。');
+    }
+}
 
 
-    // 用户点击变更按钮时触发
-    document.getElementById('change-password').addEventListener('click', showPasswordPrompt);
+
 
     function showChangePasswordForm() {
         document.getElementById('password').disabled = false;
@@ -258,42 +306,14 @@
         // 如果验证通过，提交更改。
         // 如果未通过，显示错误消息或进行必要的处理。
         // 然后隐藏密码更改表单并显示原始的“Change Password”按钮。
-        const newPassword1 = document.getElementById('password').value;
-        const newEmail = document.getElementById('email').value;
-
-        // 弹出确认新密码输入框
-        const confirmedNewPassword = prompt("新しいパスワードを再入力してください:");
-        if (confirmedNewPassword === newPassword1) {
-            // 密码一致，发送更改信息到服务器
-            fetch('/api/updateUserInfo', {
-                method: 'POST',
-                body: JSON.stringify({newPassword1, newEmail}),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
-
-                    console.log("到底是啥" + data.success)
-                    if (data.success) {
-
-                        // 在需要的地方调用 getUserInfo 函数
-                       window.onload();
-                        alert('個人情報を成功に変更しました。');
-                    }
-                })
-                .catch(error => {
-                    alert('息更改失败しました。');
-                    console.error('信息更改失败', error);
-                });
-        } else {
-            alert('新しいパスワードが一致しません。情報は変更されませんでした。');
-        }
+        document.getElementById('password').disabled = true;
+        document.getElementById('confirm-change').style.display = 'none';
+        document.getElementById('cancel-change').style.display = 'none';
+        document.getElementById('change-password').style.display = 'block';
     }
 
     function cancelChanges() {
-        // 重置表单并隐藏密码更改表单
+        // 重置表单并隐藏密码更改表单。
         document.getElementById('password').value = '';
         document.getElementById('password').disabled = true;
         document.getElementById('confirm-change').style.display = 'none';

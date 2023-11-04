@@ -79,6 +79,7 @@ def login_user(index):
     conn = connect_to_database()
     cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
     cursor.execute("SELECT * FROM admin ")
+    # cursor.execute("SELECT * FROM user_list ")
     user_data = cursor.fetchall()
     print(user_data)
     user_info = None
@@ -91,6 +92,8 @@ def login_user(index):
         stored_password = user_info['password']
         if bcrypt.checkpw(login_password.encode('utf-8'), stored_password.encode('utf-8')):
             # 密码验证成功，允许用户登录
+            # 假设你已经验证了用户，验证成功后保存用户信息到会话中
+            session['user_id'] = user_info['id']  # 这里的123应该是用户的实际ID
             print("loginしました。")
             return redirect(f"/user_translation_page/{index}")
         else:
@@ -100,7 +103,7 @@ def login_user(index):
     else:
         # 用户名不存在，拒绝登录
         print("ユーザ名が不存在")
-        return redirect(f"/login{index}")
+        return redirect(f"/login/{index}")
 
     close_database_connection(conn, cursor)
 
@@ -112,7 +115,6 @@ def login_user(index):
 '''
 # 存储密码重置令牌的字典
 reset_tokens = {}
-
 
 def generate_reset_token():
     token_length = 64
@@ -195,6 +197,7 @@ def password_forgot(index):
 
 def password_reset_get(index):
     token = request.args.get("token")
+
     session["reset_token"] = token  # 存储 token 到会话中
     # print("GET请求中的token值：", token)
     return render_template(f"password_reset{index}.html")

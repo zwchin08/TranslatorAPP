@@ -23,18 +23,18 @@
             text-align: left;
             -webkit-text-size-adjust: 100%;
             -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-            overflow-y: scroll;
+            overflow-x: hidden;/* 之后再这个地方添加侧面导航栏，移动页面显现右侧导航栏的功能 */
+            overflow: auto; /* 将 overflow-y: scroll; 改为 overflow: auto; */
             font-size: 1.5rem;
         }
 
         /* 遮罩层 */
         .overlay {
             position: absolute;
-            top: 50px; /* 距离顶部的高度，根据您的导航栏高度调整 */
+            top: 58px; /* 距离顶部的高度，根据您的导航栏高度调整 */
             left: 0;
             width: 100%;
-            height: calc(100% - 50px); /* 高度减去导航栏的高度 */
+            height: calc(100% - 58px); /* 高度减去导航栏的高度 */
             background-color: rgba(0, 0, 0, 0.6);
             z-index: 1;
         }
