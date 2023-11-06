@@ -10,6 +10,7 @@
         .navbar {
             border-radius: 0;
         }
+
         .navbar-brand img {
             position: relative;
             bottom: 12px;
@@ -34,7 +35,7 @@
             text-align: left;
             -webkit-text-size-adjust: 100%;
             -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;/* 之后再这个地方添加侧面导航栏，移动页面显现右侧导航栏的功能 */
+            overflow-x: hidden; /* 之后再这个地方添加侧面导航栏，移动页面显现右侧导航栏的功能 */
             overflow: auto; /* 将 overflow-y: scroll; 改为 overflow: auto; */
             font-size: 1.5rem;
         }
@@ -89,8 +90,9 @@
 <body>
 <nav class="navbar navbar-default">
     <div class="container">
+
         <div class="navbar-header">
-            <a class="navbar-brand" href="/top/1"> <img width="160px" src="/static/img/logola.png"></a>
+            <a class="navbar-brand" href="/top/1"> <img width="160px" src="/static/img/logomimilast.png"></a>
 
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -102,11 +104,11 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/index/4">Translation Interface</a></li>
+                <li><a href="/user_translation_page/0">翻訳画面</a></li>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">Language Selection<span class="caret"></span></a>
+                           aria-expanded="false">言語選択<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="/top/1">日本語</a></li>
                             <li><a href="/top/2">English</a></li>
@@ -127,9 +129,9 @@
                        aria-expanded="false"> <img width="25" height="25"
                                                    src="/static/img/icon-user.jpg"><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/login/2">log in</a></li>
+                        <li><a href="/login/1">ログイン</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="/add_user/2">sign up</a></li>
+                        <li><a href="/add_user/1">新規登録</a></li>
                     </ul>
                 </li>
             </ul>
@@ -141,27 +143,29 @@
 <br>
 <br>
 <div class="hero-header">
-     <br>
     <br>
-    <img  width="280px" src="/static/img/logola.png">
-    <!--<h1>This is an app form YoshidaGakuen students!</h1>-->
-    <p class="br-t"><span>Use the translation</span><span>・ feature to create ・</span><span>your own vocabulary notebook!!</span>
+    <br>
+    <img  width="280px" src="/static/img/logomimi5.png">
+
+    <!--<h1>吉田学園学生のAPPです！！</h1>-->
+    <p class="br-t"><span>翻訳機能を使って</span><span>・自分だけの単語帳・</span><span>を作ってみよう！！</span>
     </p>
-    <p class="br-t-s"><span>When you log in to your account, the translated text is saved,</span><span>and you can review it from the history screen.</span></p>
-    <p><span>In the history screen, you can also perform filtered searches, making it easy to find previously translated words.</span></p>
-    <p><span>Furthermore, there is a 'like' function, </span><span>so let's create your own vocabulary notebook!</span></p>
+    <p class="br-t-s"><span>自分のアカウントにログインすると翻訳した文字が保存され、</span><span>履歴画面から見返す事ができます。</span></p>
+    <p><span>過去に翻訳履歴画面では絞り込み検索もでき、した単語が直ぐに見つけられます。</span></p>
+    <p><span>更にいいね機能も搭載されているので</span><span>自分だけの単語帳を作りましょう！</span></p>
     <br>
     <p class="br-t">
-        <a href="https://kiite.jp/about">About this website</a>
+        <a href="https://kiite.jp/about">このサイトについて</a>
     </p>
 
-    <p class="br-t" style="margin-bottom:5px">
-        <span><a href="https://cafe.kiite.jp/intro">About C-Team</a></span></p>
+    <p class="br-t" id="about_C_team" style="margin-bottom:5px">
+        <span><a href="https://cafe.kiite.jp/intro">C チ－ムについて</a></span></p>
+        <!--<span><a href="https://cafe.kiite.jp/intro"><img width="150px"  src="/static/img/logo.png"></a></span></p>-->
     <br>
     <p class="br-t">
-        <a href="https://kiite.jp/about#mobile-mode">Development history</a>
-        <a href="https://kiite.jp/history">・About the future・</a>
-        <a href="https://github.com/zwchin08/TranslatorAPP" target="_blank">Development documentation</a>
+        <a href="https://www.facebook.com/profile.php?id=100071946044718&sk=friends">開発履歴</a>
+        <a href="https://kiite.jp/history">・今後について・</a>
+        <a href="https://github.com/zwchin08/TranslatorAPP" target="_blank">開発の資料</a>
     </p>
 </div>
 </div>

@@ -39,6 +39,11 @@ def close_database_connection(conn, cursor):
 def user_info(index):
     return render_template(f"user_info{index}.html")
 
+@user_bp.route("/logout/<int:index>", methods=["GET"])
+def logout(index):
+    session['user_id'] = None
+    return render_template(f"top_page{index}.html")
+
 
 # 获取用户信息的API
 @user_bp.route('/api/getUserInfo', methods=['GET'])

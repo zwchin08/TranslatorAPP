@@ -130,7 +130,25 @@ def send_signup_email(index, email):
     msg['From'] = 'chinseii@126.com'
     msg['To'] = email
     msg['Subject'] = 'Password Reset'
-    body = f'おめでとうございます、翻訳アプリのアカウントが作成されました。ログインするためにリンクをクリックしてください。: {signup_link}'
+    # body = f'おめでとうございます、翻訳アプリのアカウントが作成されました。ログインするためにリンクをクリックしてください。: {signup_link}'
+    signup_link = f"http://127.0.0.1:5000/login/{index}"
+    body = f'''
+    C-Teamへのユーザー登録をお申し込みいただきありがとうございます。
+    登録手続きを完了するには、こちらのURLにアクセスしてください:
+
+    {signup_link}
+
+    なお、このURLは送信より12時間有効です。
+    有効期限切れの場合は最初から手続きをやり直してください。
+
+    ※このメールに心当たりのない方は破棄してください。
+    ※このメールは送信専用です。ご返信いただいても対応できません。
+
+    ------------------------------
+    C-Team(C-チーム)
+    https://chenzhengwei-website2.netlify.app/
+    '''
+
     msg.attach(MIMEText(body, 'plain'))
     try:
         server = smtplib.SMTP_SSL('smtp.126.com', 465)
@@ -151,7 +169,18 @@ def send_reset_email(index, email, reset_token):
     msg['To'] = email
     msg['Subject'] = 'Password Reset'
     # 邮件正文
-    body = f'Click the following link to reset your password: {reset_link}'
+    body = f'''Click the following link to reset your password: {reset_link}
+    
+    なお、このURLは送信より12時間有効です。
+    有効期限切れの場合は最初から手続きをやり直してください。
+
+    ※このメールに心当たりのない方は破棄してください。
+    ※このメールは送信専用です。ご返信いただいても対応できません。
+
+    ------------------------------
+    C-Team(C-チーム)
+    https://chenzhengwei-website2.netlify.app/
+        '''
     msg.attach(MIMEText(body, 'plain'))
     try:
         # 连接到邮件服务器并发送电子邮件（使用SSL加密）

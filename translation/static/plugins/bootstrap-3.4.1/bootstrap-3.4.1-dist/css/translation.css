@@ -4,6 +4,16 @@
     gap: 10px; /* 可选，按钮之间的间距 */
 }
 
+.navbar {
+    border-radius: 0;
+}
+
+.navbar-brand img {
+    position: relative;
+    bottom: 12px;
+    background: #808080;
+}
+
 .account {
     width: 400px;
     border: 1px solid #dddddd;

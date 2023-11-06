@@ -17,6 +17,15 @@
             border: 0;
             outline: none;
         }
+          .navbar {
+            border-radius: 0;
+        }
+
+        .navbar-brand img {
+            position: relative;
+            bottom: 12px;
+            background: #808080;
+        }
 
 
         body {

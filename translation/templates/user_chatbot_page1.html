@@ -106,8 +106,56 @@
 </nav>
 <div class="overlay"></div>
 <div class="container">
+    <div class="container">
+    <div style="margin-bottom: 10px">
+        <a class="btn btn-success" href="/depart/add/">
+            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>{{ title }}</a>
+    </div>
+    <div class="bs-example" data-example-id="bordered-table">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading"><span class="glyphicon glyphicon-th" aria-hidden="true"></span> Translate
+                List
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                <tr class="active">
+                    <th>ID</th>
+                    <th>C-Chatbot</th>
+                    <th>自分</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in data_list %}
+                    <tr class="{% if loop.index is even %}success{% else %}active{% endif %}">
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.input }}</td>
+                        <td>{{ item.output }}</td>
+                        <td>
+                            <div class="btn-container">
+                                <form method="POST" action="/update_translation_item"> <!-- 替换成处理更新的路由 -->
+                                <input type="hidden" name="nid" value="{{ item.id }}">
+                                <button type="submit" class="btn btn-primary btn-xs">更新</button>
+                                </form>
+                                <form method="POST" action="/delete_translation_list">
+                                    <input type="hidden" name="nid" value="{{ item.id }}">
+                                    <button type="submit" class="btn btn-danger btn-xs">删除</button>
+                                </form>
+                            </div>
+
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
     <div>
-        <form action="/user_translation_page/1" method="post">
+        <form action="/user_chatbot_page/1" method="post">
             <label for="inputLanguage">入力言語：</label>
             <select name="inputLanguage" id="inputLanguage">
                 <option value="">入力したい言語</option>

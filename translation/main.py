@@ -8,11 +8,10 @@ import chatgpt_robot
 import top_page
 import user
 
-
-
 app = Flask(__name__)
 
 app.secret_key = 'my_secret_key_123'
+
 
 # 配置数据库连接信息
 DB_CONFIG = {
@@ -33,6 +32,14 @@ def close_database_connection(conn, cursor):
     cursor.close()
     conn.close()
 
+# 导入 user_routes.py 并注册 Blueprint
+from user_info import user_bp
+
+app.register_blueprint(user_bp)
+
+from chatbot import chat_bp
+app.register_blueprint(chat_bp)
+
 
 '''
 ホームページにアクセス
@@ -41,6 +48,7 @@ def close_database_connection(conn, cursor):
 
 @app.route("/top/<int:index>")
 def top(index):
+    session['user_id'] = None
     return top_page.top_page(index)
 
 
@@ -65,6 +73,9 @@ def login(index):
         return render_template(f"login{index}.html")
 
     return user.login_user(index)
+
+
+
 
 
 '''
@@ -102,9 +113,7 @@ def insert_translation(text, result):
     close_database_connection(conn, cursor)
 
 
-# 导入 user_routes.py 并注册 Blueprint
-from user_info import user_bp
-app.register_blueprint(user_bp)
+
 
 
 @app.route("/user_translation_page/<int:index>", methods=["GET", "POST"])
@@ -122,8 +131,6 @@ def input_translate_output(index):
         if index != 0:
             insert_translation(text, result)
         return render_template(f"user_translation_page{index}.html", result=result)
-
-
 
 
 @app.route("/show_translation_list")
