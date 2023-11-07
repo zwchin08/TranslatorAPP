@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translate Tool</title>
+    <link rel="stylesheet" href="/static/plugins/bootstrap-3.4.1/bootstrap-3.4.1-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/plugins/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+    <style>
+        .navbar {
+            border-radius: 0;
+        }
+
+        .navbar-brand img {
+            position: relative;
+            bottom: 9px;
+            background: #808080;
+        }
+
+        .navbar-brand {
+            line-height: 32px; /* 与图标高度一致，根据需要进行调整 */
+        }
+
+        .navbar-nav > li > a {
+            line-height: 32px; /* 与图标高度一致，根据需要进行调整 */
+        }
+
+        div ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            padding: 0;
+        }
+
+        div li {
+            margin-right: 20px;
+            font-weight: bold;
+        }
+        body{
+            background: #EDEDE8;
+        }
+
+
+        .container {
+            max-width: 80%;
+            margin: 0 auto;
+            background-color: #fff;
+        }
+
+        select, input {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .favorite-button {
+            background-color: transparent;
+            border: none;
+            color: #ff0000;
+            cursor: pointer;
+        }
+
+        #pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            padding: 0;
+        }
+
+        li {
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/top/1"> <img width="160px" src="/static/img/logola.png"></a>
+
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="/user_translation_page/1">翻訳画面</a></li>
+                <li><a href="/show_translation_list">履歴画面</a></li>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false">言語選択<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/user_translation_page/1">日本語</a></li>
+                            <li><a href="/user_translation_page/2">English</a></li>
+                            <li><a href="/user_translation_page/3">中文</a></li>
+                            <li><a href="/user_translation_page/4">မြန်မာဘာသာ</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <li><a href="#">Link</a></li>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false">他のAPP<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/user_translation_page/1">チャットボット</a></li>
+                            <li><a href="/user_translation_page/2">データー分析</a></li>
+                            <li><a href="/user_translation_page/3">巡回ボード</a></li>
+                            <li><a href="/user_translation_page/4">管理システム</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"> <img width="32px" src="/static/img/user1.jpg"><span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/user_info/1">個人情報</a></li>
+                        <li><a href="#">パスワード変更</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/logout/1">LogOut</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div>
+        <ul>
+            <li>输入语言: <select id="inputLanguageSelector"></select></li>
+            <li>输出语言: <select id="outputLanguageSelector"></select></li>
+            <li>开始时间: <input type="date" id="startDate"></li>
+            <li>结束时间: <input type="date" id="endDate"></li>
+        </ul>
+        <ul>
+            <li>
+                <button id="ascendingOrderButton">升序</button>
+                <button id="descendingOrderButton">降序</button>
+            </li>
+            <li>
+                <button id="showFavoritesButton">显示收藏</button>
+            </li>
+            <li>关键字查询: <input type="text" id="searchInput"></li>
+            <li>
+                <button id="resetButton">重新设定</button>
+            </li>
+        </ul>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>输入语言</th>
+            <th>输入内容</th>
+            <th>输出语言</th>
+            <th>输出内容</th>
+            <th>收藏</th>
+            <th>删除</th>
+        </tr>
+        </thead>
+        <tbody id="tableBody">
+        <!-- 数据将以表格行的形式显示在这里 -->
+        </tbody>
+    </table>
+    <div id="pagination">
+        <button id="prevPage">上一页</button>
+        <button id="nextPage">下一页</button>
+        <input type="number" id="pageInput" placeholder="跳转到页">
+        <button id="goToPage">跳转</button>
+    </div>
+
+</div>
+<div class="container">
+    <div style="margin-bottom: 10px">
+        <a class="btn btn-success" href="/depart/add/">
+            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>{{ title }}</a>
+    </div>
+    <div class="bs-example" data-example-id="bordered-table">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading"><span class="glyphicon glyphicon-th" aria-hidden="true"></span> Translate
+                List
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                <tr class="active">
+                    <th>ID</th>
+                    <th>输入语言</th>
+                    <th>知りたい単語</th>
+                    <th>输出语言</th>
+                    <th>翻訳した単語</th>
+                    <th>收藏</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in data_list %}
+                    <tr class="{% if loop.index is even %}success{% else %}active{% endif %}">
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.inputlanguage }}</td>
+                         <td>{{ item.inputtext }}</td>
+                        <td>{{ item.outputlanguage }}</td>
+                         <td>{{ item.outputtext }}</td>
+                        <td>
+                            <div class="btn-container">
+                                <form method="POST" action="/update_translation_item"> <!-- 替换成处理更新的路由 -->
+                                <input type="hidden" name="nid" value="{{ item.id }}">
+                                <button type="submit" class="btn btn-primary btn-xs">更新</button>
+                                </form>
+                                <form method="POST" action="/delete_translation_list">
+                                    <input type="hidden" name="nid" value="{{ item.id }}">
+                                    <button type="submit" class="btn btn-danger btn-xs">删除</button>
+                                </form>
+                            </div>
+
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+<script>
+    // 模拟数据，您应该从后端获取实际数据
+    const data = [
+        {
+            id: 1,
+            inputLanguage: 'English',
+            inputContent: 'Hello',
+            outputLanguage: 'Spanish',
+            outputContent: 'Hola',
+            favorite: false
+        },
+        {
+            id: 2,
+            inputLanguage: 'French',
+            inputContent: 'Bonjour',
+            outputLanguage: 'German',
+            outputContent: 'Guten Tag',
+            favorite: true
+        },
+        // 添加更多数据
+    ];
+
+    // 获取DOM元素
+    const inputLanguageSelector = document.getElementById('inputLanguageSelector');
+    const outputLanguageSelector = document.getElementById('outputLanguageSelector');
+    const startDateInput = document.getElementById('startDate');
+    const endDateInput = document.getElementById('endDate');
+    const ascendingOrderButton = document.getElementById('ascendingOrderButton');
+    const descendingOrderButton = document.getElementById('descendingOrderButton');
+    const showFavoritesButton = document.getElementById('showFavoritesButton');
+    const searchInput = document.getElementById('searchInput');
+    const resetButton = document.getElementById('resetButton');
+    const tableBody = document.getElementById('tableBody');
+    const prevPage = document.getElementById('prevPage');
+    const nextPage = document.getElementById('nextPage');
+    const pageInput = document.getElementById('pageInput');
+    const goToPage = document.getElementById('goToPage');
+    let currentPage = 1;
+    const itemsPerPage = 10;
+
+    // 初始化页面
+    function initPage() {
+        currentPage = 1;
+        renderData();
+    }
+
+    // 渲染数据
+    function renderData() {
+        tableBody.innerHTML = '';
+
+        // 过滤、排序数据
+        const filteredData = filterAndSortData(data);
+
+        // 分页数据
+        const start = (currentPage - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const paginatedData = filteredData.slice(start, end);
+
+        paginatedData.forEach(item => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                    <td>${item.id}</td>
+                    <td>${item.inputLanguage}</td>
+                    <td>${item.inputContent}</td>
+                    <td>${item.outputLanguage}</td>
+                    <td>${item.outputContent}</td>
+                    <td><button class="favorite-button" data-id="${item.id}">${item.favorite ? '❤️' : '🤍'}</button></td>
+                    <td><button class="delete-button" data-id="${item.id}">删除</button></td>
+                `;
+            tableBody.appendChild(row);
+        });
+
+        // 添加点击事件处理程序
+        addEventListenersToButtons();
+    }
+
+    // 过滤和排序数据
+    function filterAndSortData(data) {
+        const inputLanguage = inputLanguageSelector.value;
+        const outputLanguage = outputLanguageSelector.value;
+        const startDate = startDateInput.value;
+        const endDate = endDateInput.value;
+        const isAscending = ascendingOrderButton.classList.contains('active');
+        const isDescending = descendingOrderButton.classList.contains('active');
+        const showFavorites = showFavoritesButton.classList.contains('active');
+        const keyword = searchInput.value.toLowerCase();
+
+        return data.filter(item => {
+            return (!inputLanguage || item.inputLanguage === inputLanguage) &&
+                (!outputLanguage || item.outputLanguage === outputLanguage) &&
+                (!startDate || item.startDate >= startDate) &&
+                (!endDate || item.endDate <= endDate) &&
+                (!showFavorites || item.favorite) &&
+                (!keyword || item.inputContent.toLowerCase().includes(keyword) || item.outputContent.toLowerCase().includes(keyword));
+        }).sort((a, b) => {
+            if (isAscending) {
+                return a.id - b.id;
+            } else if (isDescending) {
+                return b.id - a.id;
+            } else {
+                return 0;
+            }
+        });
+    }
+
+    // 添加点击事件处理程序
+    function addEventListenersToButtons() {
+        const favoriteButtons = document.querySelectorAll('.favorite-button');
+        favoriteButtons.forEach(button => {
+            button.addEventListener('click', toggleFavorite);
+        });
+
+        const deleteButtons = document.querySelectorAll('.delete-button');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', deleteItem);
+        });
+    }
+
+    // 切换收藏状态
+    function toggleFavorite(event) {
+        const id = parseInt(event.target.getAttribute('data-id'));
+        const item = data.find(d => d.id === id);
+
+        if (item) {
+            item.favorite = !item.favorite;
+            renderData();
+        }
+    }
+
+    // 删除项目
+    function deleteItem(event) {
+        const id = parseInt(event.target.getAttribute('data-id'));
+        const index = data.findIndex(d => d.id === id);
+
+        if (index !== -1) {
+            data.splice(index, 1);
+            renderData();
+        }
+    }
+
+    // 添加排序按钮的点击事件处理程序
+    ascendingOrderButton.addEventListener('click', () => {
+        ascendingOrderButton.classList.add('active');
+        descendingOrderButton.classList.remove('active');
+        renderData();
+    });
+
+    descendingOrderButton.addEventListener('click', () => {
+        descendingOrderButton.classList.add('active');
+        ascendingOrderButton.classList.remove('active');
+        renderData();
+    });
+
+    // 添加显示收藏按钮的点击事件处理程序
+    showFavoritesButton.addEventListener('click', () => {
+        if (showFavoritesButton.classList.contains('active')) {
+            showFavoritesButton.classList.remove('active');
+        } else {
+            showFavoritesButton.classList.add('active');
+        }
+        renderData();
+    });
+
+    // 重新设定按钮的点击事件处理程序
+    resetButton.addEventListener('click', () => {
+        inputLanguageSelector.value = '';
+        outputLanguageSelector.value = '';
+        startDateInput.value = '';
+        endDateInput.value = '';
+        ascendingOrderButton.classList.remove('active');
+        descendingOrderButton.classList.remove('active');
+        showFavoritesButton.classList.remove('active');
+        searchInput.value = '';
+        currentPage = 1;
+        renderData();
+    });
+
+
+    // 分页操作
+    prevPage.addEventListener('click', () => {
+        if (currentPage > 1) {
+            currentPage--;
+            renderData();
+        }
+    });
+
+    nextPage.addEventListener('click', () => {
+        if (currentPage < Math.ceil(data.length / itemsPerPage)) {
+            currentPage++;
+            renderData();
+        }
+    });
+
+    goToPage.addEventListener('click', () => {
+        const pageNumber = parseInt(pageInput.value);
+        if (pageNumber >= 1 && pageNumber <= Math.ceil(data.length / itemsPerPage)) {
+            currentPage = pageNumber;
+            renderData();
+        }
+    });
+
+    // 初始页面加载
+    initPage();
+</script>
+<script src="/static/index.js"></script>
+<script src="/static/plugins/jquery-3.6.0.min.js"></script>
+<script src="/static/plugins/bootstrap-3.4.1/bootstrap-3.4.1-dist/js/bootstrap.js"></script>
+
+
+</body>
+
+</html>
