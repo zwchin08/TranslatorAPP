@@ -1,5 +1,5 @@
-import os
-import openai
+# import os
+# import openai
 from getpass import getpass
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -33,7 +33,7 @@ def close_database_connection(conn, cursor):
     conn.close()
 
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+# openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 # 返回用户个人信息页
@@ -57,26 +57,26 @@ def user_chatbot_page(index):
 def chatgpt_robot(theInputLanguage, theOutputLanguage, text):
     inputLanguage = theInputLanguage
     outputLanguage = theOutputLanguage
-    systemContent = "You will be given a question" + inputLanguage + ", and your task is to answer that question " + outputLanguage
-    userContent = text
-    print(systemContent)
-    completion = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
+    # systemContent = "You will be given a question" + inputLanguage + ", and your task is to answer that question " + outputLanguage
+    # userContent = text
+    # print(systemContent)
+    # # completion = openai.ChatCompletion.create(
+    #     model="gpt-3.5-turbo",
+    #
+    #     messages=[
+    #         {"role": "system", "content": systemContent},
+    #         {"role": "user", "content": userContent}
+    #     ],
+    #     temperature=0.1,
+    #     top_p=0.1
+    # )
+    #
+    # print(completion.choices[0].message.content)
+    #
+    # result = completion.choices[0].message.content
+    #
+    # return result
 
-        messages=[
-            {"role": "system", "content": systemContent},
-            {"role": "user", "content": userContent}
-        ],
-        temperature=0.1,
-        top_p=0.1
-    )
 
-    print(completion.choices[0].message.content)
-
-    result = completion.choices[0].message.content
-
-    return result
-
-
-openai.api_key = os.getenv("OPENAI_API_KEY")
-print(openai.api_key)
+# openai.api_key = os.getenv("OPENAI_API_KEY")
+# print(openai.api_key)

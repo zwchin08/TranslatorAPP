@@ -27,8 +27,8 @@ def chatgpt_robot(theInputLanguage, theOutputLanguage, text):
 
     return result
 
-
-openai.api_key = os.getenv("OPENAI_API_KEY")
+#
+# openai.api_key = os.getenv("OPENAI_API_KEY")
 print(openai.api_key)
 
 

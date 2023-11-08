@@ -7,11 +7,11 @@ from flask import Flask, render_template, request, redirect, jsonify, session
 import chatgpt_robot
 import top_page
 import user
+from datetime import datetime
 
 app = Flask(__name__)
 
 app.secret_key = 'my_secret_key_123'
-
 
 # 配置数据库连接信息
 DB_CONFIG = {
@@ -32,14 +32,22 @@ def close_database_connection(conn, cursor):
     cursor.close()
     conn.close()
 
+
 # 导入 user_routes.py 并注册 Blueprint
 from user_info import user_bp
 
 app.register_blueprint(user_bp)
 
 from chatbot import chat_bp
+
 app.register_blueprint(chat_bp)
 
+'''
+履歴route作る
+'''
+from user_translate_history import history_bp
+
+app.register_blueprint(history_bp)
 
 '''
 ホームページにアクセス
@@ -63,7 +71,6 @@ def add_user(index):
         error_messages = user.log_up(index)
         if not error_messages:
             return redirect(f"/login/{index}")
-            # 渲染注册页面并传递错误消息
         return render_template(f"signup{index}.html", error_messages=error_messages)
 
 
@@ -73,9 +80,6 @@ def login(index):
         return render_template(f"login{index}.html")
 
     return user.login_user(index)
-
-
-
 
 
 '''
@@ -104,14 +108,45 @@ def password_reset_post(index):
     return user.password_reset_post(index)
 
 
-def insert_translation(text, result):
+# def insert_translation(text, result):
+#     conn = connect_to_database()
+#     cursor = conn.cursor()
+#     insert_query = 'INSERT INTO tb_01 (input, output) VALUES (%s, %s)'
+#     cursor.execute(insert_query, (text, result))
+#     conn.commit()
+#     close_database_connection(conn, cursor)
+
+
+def insert_translation(input_language, input_text, output_language, output_text):
     conn = connect_to_database()
     cursor = conn.cursor()
-    insert_query = 'INSERT INTO tb_01 (input, output) VALUES (%s, %s)'
-    cursor.execute(insert_query, (text, result))
+    user_id = session['user_id']
+    create_time = datetime.now()
+    update_time = create_time
+    collect = 0  # 默认值为0
+
+    # 使用字典或条件语句将前端字符串值映射为整数值
+    language_mapping = {
+        'japanese': 1,
+        'english': 2,
+        'chinese': 3,
+        'Burmese': 4,
+        # 在这里继续添加其他语言的映射
+    }
+    input_language_id = language_mapping.get(input_language, 0)  # 默认值为0
+    output_language_id = language_mapping.get(output_language, 0)  # 默认值为0
+
+    # print(f"Input Language from Form: {input_language}")
+    # print(f"Output Language from Form: {output_language}")
+    #
+    # print(f"Input Language: {input_language}, Mapped ID: {input_language_id}")
+    # print(f"Output Language: {output_language}, Mapped ID: {output_language_id}")
+
+    # 在插入数据库时使用整数值
+    insert_query = 'INSERT INTO history_list(input_language, input_text, output_language, output_text, collect, user_id, create_time, update_time) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)'
+    cursor.execute(insert_query, (input_language_id, input_text, output_language_id, output_text, collect, user_id, create_time, update_time))
     conn.commit()
     close_database_connection(conn, cursor)
-
 
 
 
@@ -124,13 +159,33 @@ def input_translate_output(index):
         else:
             return "Invalid index"
     if request.method == "POST":
-        input_Language = request.form.get("inputLanguage")
+        input_language = request.form.get("inputLanguage").strip()
+        output_language = request.form.get("outputLanguage").strip()
+
+        # input_Language = request.form.get("inputLanguage")
         text = request.form.get("textToTranslate")
-        output_language = request.form.get("outputLanguage")
-        result = chatgpt_robot.chatgpt_robot(input_Language, output_language, text)
+        # output_language = request.form.get("outputLanguage")
+        result = chatgpt_robot.chatgpt_robot(input_language, output_language, text)
         if index != 0:
-            insert_translation(text, result)
+            insert_translation(input_language, text, output_language, result)
         return render_template(f"user_translation_page{index}.html", result=result)
+
+
+# @app.route("/user_translation_page/<int:index>", methods=["GET", "POST"])
+# def input_translate_output(index):
+#     if request.method == "GET":
+#         if index in range(0, 5):
+#             return render_template(f"user_translation_page{index}.html")
+#         else:
+#             return "Invalid index"
+#     if request.method == "POST":
+#         input_Language = request.form.get("inputLanguage")
+#         text = request.form.get("textToTranslate")
+#         output_language = request.form.get("outputLanguage")
+#         result = chatgpt_robot.chatgpt_robot(input_Language, output_language, text)
+#         if index != 0:
+#             insert_translation(text, result)
+#         return render_template(f"user_translation_page{index}.html", result=result)
 
 
 @app.route("/show_translation_list")
