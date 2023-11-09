@@ -64,6 +64,20 @@
             margin-top: 20px;
         }
     </style>
+
+    <!-- ... 其他头部内容 ... -->
+    <script>
+        // 语言映射字典
+        const languageMapping = {
+            '日本語': 1,
+            'English': 2,
+            '中文': 3,
+            'န်မာဘာသာ': 4,
+            // 添加其他语言映射
+        };
+    </script>
+
+
 </head>
 
 <body>
@@ -84,7 +98,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="/user_translation_page/1">翻訳画面</a></li>
-                <li><a href="/show_translation_list">履歴画面</a></li>
+                <li><a href="/user_translate_history">履歴画面</a></li>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -142,46 +156,47 @@
             <ul>
                 <li>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-success" id="inputLanguageButton">输入语言</button>
+                        <button type="button" class="btn btn-info" id="inputLanguageButton">入力言語</button>
                         <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu" id="inputLanguageDropdown">
-                            <li><a href="#">英语</a></li>
-                            <li><a href="#">日语</a></li>
+                            <li><a href="#">日本語</a></li>
+                            <li><a href="#">English</a></li>
                             <li><a href="#">中文</a></li>
-                            <li><a href="#">缅甸语</a></li>
+                            <li><a href="#">မြန်မာဘာသာ</a></li>
                         </ul>
                     </div>
                 </li>
                 <li>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-info" id="outputLanguageButton">输出语言</button>
+                        <button type="button" class="btn btn-info" id="outputLanguageButton">出力言語</button>
                         <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu" id="outputLanguageDropdown">
-                            <li><a href="#">英语</a></li>
-                            <li><a href="#">日语</a></li>
+                            <li><a href="#">日本語</a></li>
+                            <li><a href="#">English</a></li>
                             <li><a href="#">中文</a></li>
-                            <li><a href="#">缅甸语</a></li>
+                            <li><a href="#">န်မာဘာသာ</a></li>
                         </ul>
                     </div>
                 </li>
-                <li>から:<input class="btn-success" type="date" id="startDate"></li>
-                <li>:まで<input class="btn-success" type="date" id="endDate"></li>
+                <li>か ら: <input class="btn-info" type="date" id="startDate"></li>
+                <li>ま で: <input class="btn-info" type="date" id="endDate"></li>
             </ul>
             <ul>
                 <li>
-                    <button id="ascendingOrderButton">升序</button>
-                    <button id="descendingOrderButton">降序</button>
+                    <button type="button" class="btn btn-info" id="ascendingOrderButton">升序</button>
+                    <button type="button" class="btn btn-info" id="descendingOrderButton">降序</button>
+
                 </li>
                 <li>
-                    <button id="showFavoritesButton" value="0">显示收藏</button>
+                    <button type="button" class="btn btn-info" id="showFavoritesButton" value="0">显示收藏</button>
                 </li>
                 <li>
                     <div class="row">
@@ -189,12 +204,12 @@
                             <input type="text" class="form-control" id="searchInput" placeholder="Search for...">
                             <span class="input-group-btn">
                                     <button class="btn btn-default" type="button" id="searchButton">Go!</button>
-                                </span>
+                            </span>
                         </div>
                     </div>
                 </li>
                 <li>
-                    <button id="resetButton">重新设定</button>
+                    <button type="button" class="btn btn-danger" id="resetButton">重新设定</button>
                 </li>
             </ul>
         </div>
@@ -207,7 +222,6 @@
     </div>
     <div class="bs-example" data-example-id="bordered-table">
         <div class="panel panel-default">
-            <!-- Default panel contents -->
             <div class="panel-heading"><span class="glyphicon glyphicon-th" aria-hidden="true"> </span>
                 History List
             </div>
@@ -215,7 +229,7 @@
             <table class="table table-bordered">
                 <thead>
                 <tr class="active">
-                    <th>保存時間</th>
+                    <th>ID</th>
                     <th>输入言語</th>
                     <th>知りたい単語</th>
                     <th>输出言語</th>
@@ -240,7 +254,6 @@
                                 <form method="POST" action="/delete_translation_list">
                                     <input type="hidden" name="nid" value="{{ item.id }}">
                                     <button type="submit" class="btn btn-danger btn-xs">删除</button>
-
                                 </form>
                             </div>
 
@@ -253,28 +266,15 @@
 
         </div>
         <nav aria-label="Page navigation">
-            <ul class="pagination">
-                <li>
-                    <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li>
-                    <a href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
+            <ul class="pagination" id="pagination">
+                <!-- 分页按钮将在这里动态生成 -->
             </ul>
         </nav>
+
     </div>
+
+
 </div>
-
-
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         // 初始化变量用于存储用户的选择
@@ -283,8 +283,12 @@
         let selectedStartDate = null;
         let selectedEndDate = null;
         let sortOrder = 0; // 默认是升序
-        let searchKeyword = "Search for..."; // 初始化变量
+        let searchKeyword = ""; // 初始化变量
         let showFavoritesValue = "0"; // 初始化为 "0"
+        // 假设这些是从后端获取的数据，根据实际情况修改
+        const totalDataCount = 100; // 替换成实际的总数据量
+        const itemsPerPage = 10; // 替换成实际的每页显示的数据量
+
 
         // 获取下拉菜单元素
         const inputLanguageDropdown = document.getElementById("inputLanguageDropdown");
@@ -345,15 +349,142 @@
             // 其他操作...
         });
 
+        //重置按钮的机能
+        // 获取重置按钮元素
+        const resetButton = document.getElementById("resetButton");
+
+// 添加重置按钮点击事件监听器
+        resetButton.addEventListener("click", function () {
+            // 将所有选项恢复为默认状态
+            selectedInputLanguage = null;
+            selectedOutputLanguage = null;
+            selectedStartDate = null;
+            selectedEndDate = null;
+            sortOrder = 0; // 恢复为升序
+            showFavoritesValue = "0"; // 恢复为不显示
+            searchKeyword = ""; // 恢复搜索关键词为默认值
+
+            // 清空下拉菜单选择
+            inputLanguageDropdown.querySelectorAll("a").forEach((item) => {
+                item.classList.remove("selected");
+            });
+            outputLanguageDropdown.querySelectorAll("a").forEach((item) => {
+                item.classList.remove("selected");
+            });
+
+            // 清空日期选择
+            startDate.value = "";
+            endDate.value = "";
+
+            // 恢复排序按钮状态
+            ascendingOrderButton.classList.remove("selected");
+            descendingOrderButton.classList.remove("selected");
+
+            // 清空搜索输入框
+            searchInput.value = searchKeyword;
+
+            // 更新显示收藏按钮状态
+            showFavoritesButton.value = "0";
+        });
+        // 获取分页栏元素
+        const pagination = document.getElementById("pagination");
+
+        // 假设这里有一个变量 totalPages 包含了后端返回的总页数
+        const totalPages = Math.ceil(totalDataCount / itemsPerPage);
+
+
+// 清空分页栏
+        pagination.innerHTML = '';
+
+// 动态生成分页按钮
+        for (let page = 1; page <= totalPages; page++) {
+            const pageButton = document.createElement("li");
+            pageButton.innerHTML = `<a href="#">${page}</a>`;
+            pagination.appendChild(pageButton);
+        }
+
+
         // 获取提交按钮元素
         const submitButton = document.getElementById("submitButton");
 
-        // 添加提交按钮点击事件监听器
+
+        // 首先确保文档已加载完毕
+        document.addEventListener('DOMContentLoaded', function () {
+            // 这里添加你的代码
+
+            // 当用户选择输入语言后触发的事件处理程序
+            document.getElementById('inputLanguageSelect').addEventListener('change', function () {
+                const selectedInputLanguage = this.value; // 获取用户选择的输入语言
+                const inputLanguageId = languageMapping[selectedInputLanguage]; // 映射为数字值
+                // 将 inputLanguageId 发送到后端，可以使用 AJAX 或 Fetch API
+            });
+
+            // 当用户选择输出语言后触发的事件处理程序
+            document.getElementById('outputLanguageSelect').addEventListener('change', function () {
+                const selectedOutputLanguage = this.value; // 获取用户选择的输出语言
+                const outputLanguageId = languageMapping[selectedOutputLanguage]; // 映射为数字值
+                // 将 outputLanguageId 发送到后端，可以使用 AJAX 或 Fetch API
+            });
+        });
+
+        /* // 在提交按钮点击事件处理程序中添加获取数据的逻辑
+         submitButton.addEventListener("click", function () {
+             // 构建数据对象
+             const requestData = {
+                 input_language: languageMapping[selectedInputLanguage],
+                 output_language: languageMapping[selectedOutputLanguage],
+                 start_date: selectedStartDate,
+                 end_date: selectedEndDate,
+                 sort_order: sortOrder,
+                 favoritesValue: showFavoritesValue,
+                 search_keyword: searchKeyword,
+             };
+
+             // 使用fetch将数据对象发送到后端
+             fetch("/user_translate_history", {
+                 method: "POST",
+                 headers: {
+                     "Content-Type": "application/json",
+                 },
+                 body: JSON.stringify(requestData),
+             })
+                 .then((response) => {
+                     // 在这里处理后端的响应
+                     if (response.status === 200) {
+                         return response.json();
+                     }
+                 })
+                 .then((data) => {
+                     // 在这里处理从后端获取的数据
+                     if (data.translation !== null) {
+                         // 处理翻译结果
+                         console.log("翻译结果:", data.translation);
+
+                         // 这里可以将数据显示在页面上，例如更新表格内容
+                         updateTableWithData(data);
+                     } else {
+                         console.log("未找到有效的翻译结果。");
+                     }
+                 })
+                 .catch((error) => {
+                     console.error(error);
+                 });
+         });
+
+ // 新增一个函数用于更新表格内容
+         function updateTableWithData(data) {
+             // 在这里根据后端返回的数据更新表格内容
+             // 你可能需要获取表格元素，然后更新其中的 <tbody> 部分
+         }
+
+         */
+
+        // 修改提交按钮的点击事件监听器
         submitButton.addEventListener("click", function () {
             // 构建数据对象
             const requestData = {
-                input_language: selectedInputLanguage,
-                output_language: selectedOutputLanguage,
+                input_language: languageMapping[selectedInputLanguage],
+                output_language: languageMapping[selectedOutputLanguage],
                 start_date: selectedStartDate,
                 end_date: selectedEndDate,
                 sort_order: sortOrder,
@@ -361,40 +492,73 @@
                 search_keyword: searchKeyword,
             };
 
-            // 在控制台中打印 requestData
-            console.log("发送到后端的数据:", requestData);
-
             // 使用fetch将数据对象发送到后端
-            fetch("/your_backend_endpoint", {
+            fetch("/user_translate_history", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(requestData),
             })
-                .then((response) => {
-                    // 在这里处理后端的响应
-                    if (response.status === 200) {
-                        return response.json();
-                    }
-                })
+                .then((response) => response.json())
                 .then((data) => {
-                    if (data.translation !== null) {
-                        // 处理翻译结果
-                        console.log("翻译结果:", data.translation);
-                    } else {
-                        console.log("未找到有效的翻译结果。");
-                    }
+                    // 处理后端返回的数据
+                    console.log(data.data_list)
+                    updateTableWithData(data.data_list);
                 })
                 .catch((error) => {
                     console.error(error);
                 });
         });
+        // 分页按钮点击事件监听器
+        pagination.addEventListener("click", function (event) {
+            if (event.target.tagName === "A") {
+                const selectedPage = event.target.dataset.page;
+
+                // 更新当前页数
+                currentPage = parseInt(selectedPage);
+
+                // 构建数据对象
+                const requestData = {
+                    input_language: languageMapping[selectedInputLanguage],
+                    output_language: languageMapping[selectedOutputLanguage],
+                    start_date: selectedStartDate,
+                    end_date: selectedEndDate,
+                    sort_order: sortOrder,
+                    favoritesValue: showFavoritesValue,
+                    search_keyword: searchKeyword,
+                    page: currentPage,  // 添加当前页数到请求数据中
+                };
+
+                // 发送请求，获取指定页的数据
+                fetch("/user_translate_history", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(requestData),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        // 处理后端返回的数据
+                        updateTableWithData(data.data_list);
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
+            }
+        });
+
+        // 新增一个函数用于更新表格内容
+        function updateTableWithData(data) {
+            // 在这里根据后端返回的数据更新表格内容
+            // 你可能需要获取表格元素，然后更新其中的 <tbody> 部分
+        }
+
     });
+
+
 </script>
-
-
-
 <script src="/static/plugins/jquery-3.6.0.min.js"></script>
 <script src="/static/plugins/bootstrap-3.4.1/bootstrap-3.4.1-dist/js/bootstrap.js"></script>
 </body>

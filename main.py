@@ -124,7 +124,6 @@ def insert_translation(input_language, input_text, output_language, output_text)
     create_time = datetime.now()
     update_time = create_time
     collect = 0  # 默认值为0
-
     # 使用字典或条件语句将前端字符串值映射为整数值
     language_mapping = {
         'japanese': 1,
@@ -196,6 +195,27 @@ def show_translation_list():
     data_list = cursor.fetchall()
     close_database_connection(conn, cursor)
     return render_template("translation_list.html", title="翻訳したリスト", data_list=data_list)
+
+
+
+import logging
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    logging.error('发生内部服务器错误：%s', e)
+    return jsonify(error='内部服务器错误'), 500
+
+from flask import jsonify
+
+# 在某处定义错误处理程序
+@app.errorhandler(500)
+def internal_server_error(error):
+    response = jsonify({'error': 'Internal Server Error'})
+    response.status_code = 500
+    return response
+
+
+
 
 
 @app.route("/delete_translation_list", methods=['POST'])

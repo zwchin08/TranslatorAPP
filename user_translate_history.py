@@ -1,11 +1,5 @@
-from getpass import getpass
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-from collections import OrderedDict
 import pymysql, bcrypt, random, datetime, hashlib, string, smtplib
 from flask import Flask, render_template, request, redirect, jsonify, session
-import chatgpt_robot
-import top_page
 from flask import Blueprint, request, jsonify
 
 history_bp = Blueprint('history', __name__)
@@ -30,39 +24,10 @@ def close_database_connection(conn, cursor):
     conn.close()
 
 
-# # 返回用户个人信息页
-# @history_bp.route("/your_backend_endpoint", methods=["GET", "POST"])
-# def your_backend_endpoint():
-#     if request.method == "GET":
-#         return render_template("user_translate_history888.html")
-#     if request.method == "POST":
-#         # 获取前端发送的数据
-#         data = request.get_json()
-#         user_id = session['user_id']
-#         input_language = data.get("input_language")
-#         output_language = data.get("output_language")
-#         start_date = data.get("start_date")
-#         end_date = data.get("end_date")
-#         search_keyword = data.get("search_keyword")
-#         sort_order = data.get("sort_order")
-#
-#         print(data)
-#         print(user_id)
-#         print(input_language)
-#         print(output_language)
-#
-#         # 在这里执行需要的操作，比如查询数据库
-#         # 这里使用示例数据来构建响应
-#
-#
-#         # 返回结果给前端
-#         return jsonify(data)
-
-
-@history_bp.route("/your_backend_endpoint", methods=["GET", "POST"])
-def your_backend_endpoint():
+@history_bp.route("/user_translate_history", methods=["GET", "POST"])
+def user_translate_history():
     if request.method == "GET":
-        return render_template("user_translate_history888.html")
+        return render_template("user_translate_history1.html")
     if request.method == "POST":
         data = request.get_json()
         print(data)
@@ -73,29 +38,95 @@ def your_backend_endpoint():
         end_date = data.get("end_date")
         search_keyword = data.get("search_keyword")
         sort_order = data.get("sort_order")
+        page = data.get("page", 1)  # 默认为第一页
 
         # 连接到数据库
         conn = connect_to_database()
         cursor = conn.cursor()
 
-        # 构建SQL查询
-        # 构建查询SQL语句
-        query = (
-            "SELECT * FROM history_list "
-            "WHERE user_id = %s AND input_language = %s AND output_language = %s "
-            "AND create_time BETWEEN %s AND %s AND input_text LIKE %s "
-            "ORDER BY update_time DESC"
-        )
+        # 初始化查询条件
+        sql_query = "SELECT * FROM history_list WHERE user_id = %s"
+        params = [user_id]
+
+        if input_language:
+            sql_query += " AND input_language = %s"
+            params.append(input_language)
+
+        if output_language:
+            sql_query += " AND output_language = %s"
+            params.append(output_language)
+
+        if start_date and end_date:
+            sql_query += " AND create_time BETWEEN %s AND %s"
+            params.extend([start_date, end_date])
+
+        if search_keyword:
+            sql_query += " AND input_text LIKE %s"
+            params.append(f"%{search_keyword}%")
+
+        if sort_order == 0:
+            sql_query += " ORDER BY update_time ASC"
+        else:
+            sql_query += " ORDER BY update_time DESC"
 
         # 执行查询
-        cursor.execute(query, (8, input_language, output_language, start_date, end_date, f"%{search_keyword}%"))
+        cursor.execute(sql_query, params)
 
-        # 获取结果
-        results = cursor.fetchall()
-        print(results)
+        # 获取所有结果
+        all_results = cursor.fetchall()
+        data_list = cursor.fetchall()
+        print(all_results)
+
+        # 计算分页信息
+        total_results = len(all_results)
+        items_per_page = 10  # 假设每页显示10条记录
+        total_pages = (total_results + items_per_page - 1) // items_per_page
+
+        if page is None or items_per_page is None:
+            # 处理缺少参数的情况，可以返回错误响应
+            return jsonify({'error': 'Missing page or items_per_page'}), 400
+
+        # 根据分页信息截取结果
+        start_index = (page - 1) * items_per_page
+        end_index = start_index + items_per_page
+        paginated_results = all_results[start_index:end_index]
 
         # 关闭数据库连接
-        cursor.close()
-        conn.close()
+        close_database_connection(conn, cursor)
 
-        return jsonify(results)
+        # 返回包含分页信息的 JSON 数据
+        # return jsonify({
+        #     "data_list": paginated_results,
+        #     "total_pages": total_pages,
+        #     "current_page": page
+        # })
+        print(type(data_list))
+        return jsonify(data_list)
+
+
+
+
+
+# # 在后端路由中处理更新请求
+# @history_bp.route("/update_translation_item", methods=["POST"])
+# def update_translation_item():
+#     if request.method == "POST":
+#         # 获取前端发送的数据
+#         nid = request.form.get("nid")
+#
+#         # 更新数据库中对应行的 collect 字段为1
+#         conn = connect_to_database()
+#         cursor = conn.cursor()
+#
+#         # 假设数据库表为 translation_items，你需要替换成实际的表名
+#         update_query = "UPDATE history_list SET collect = 1 WHERE id = %s"
+#         params = [nid]
+#
+#         cursor.execute(update_query, params)
+#         conn.commit()
+#
+#         cursor.close()
+#         conn.close()
+#
+#         return redirect("/user_translate_history")
+

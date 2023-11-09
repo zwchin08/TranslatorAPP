@@ -10,13 +10,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
 
     <style>
-          .navbar {
+        .navbar {
             border-radius: 0;
         }
 
         .navbar-brand img {
             position: relative;
-            bottom:9px;
+            bottom: 9px;
             background: #808080;
         }
 
@@ -45,7 +45,7 @@
 <body>
 <nav class="navbar navbar-default">
     <div class="container">
-       <div class="navbar-header">
+        <div class="navbar-header">
             <a class="navbar-brand" href="/top/1"> <img width="160px" src="/static/img/logola.png"></a>
 
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -60,7 +60,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="/user_translation_page/1">翻訳画面</a></li>
                 <li><a href="/show_translation_list">履歴画面</a></li>
-                 <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                            aria-haspopup="true" aria-expanded="false">言語選択<span class="caret"></span></a>
@@ -75,12 +75,12 @@
 
                 <li><a href="#">Link</a></li>
 
-                 <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                            aria-haspopup="true" aria-expanded="false">他のAPP<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="/user_translation_page/1">チャットボット</a></li>
+                            <li><a href="/user_chatbot_page/1">チャットボット</a></li>
                             <li><a href="/user_translation_page/2">データー分析</a></li>
                             <li><a href="/user_translation_page/3">巡回ボード</a></li>
                             <li><a href="/user_translation_page/4">管理システム</a></li>
@@ -104,96 +104,36 @@
         </div>
     </div>
 </nav>
-<div class="overlay"></div>
 <div class="container">
-    <div class="container">
-    <div style="margin-bottom: 10px">
-        <a class="btn btn-success" href="/depart/add/">
-            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>{{ title }}</a>
-    </div>
-    <div class="bs-example" data-example-id="bordered-table">
-        <div class="panel panel-default">
-            <!-- Default panel contents -->
-            <div class="panel-heading"><span class="glyphicon glyphicon-th" aria-hidden="true"></span> Translate
-                List
-            </div>
-            <table class="table table-bordered">
-                <thead>
-                <tr class="active">
-                    <th>ID</th>
-                    <th>C-Chatbot</th>
-                    <th>自分</th>
-                    <th>操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for item in data_list %}
-                    <tr class="{% if loop.index is even %}success{% else %}active{% endif %}">
-                        <td>{{ item.id }}</td>
-                        <td>{{ item.input }}</td>
-                        <td>{{ item.output }}</td>
-                        <td>
-                            <div class="btn-container">
-                                <form method="POST" action="/update_translation_item"> <!-- 替换成处理更新的路由 -->
-                                <input type="hidden" name="nid" value="{{ item.id }}">
-                                <button type="submit" class="btn btn-primary btn-xs">更新</button>
-                                </form>
-                                <form method="POST" action="/delete_translation_list">
-                                    <input type="hidden" name="nid" value="{{ item.id }}">
-                                    <button type="submit" class="btn btn-danger btn-xs">删除</button>
-                                </form>
-                            </div>
-
-                        </td>
-                    </tr>
-                {% endfor %}
-
-                </tbody>
-            </table>
-        </div>
-
-    </div>
-</div>
     <div>
+        <ol class="breadcrumb">
+            <!-- 面包屑导航 -->
+            <li><a href="/top/1">C-Tream-APP</a></li>
+            <li><a href="#">他のAPP</a></li>
+            <li class="active">チャットボット</li>
+        </ol>
         <form action="/user_chatbot_page/1" method="post">
-            <label for="inputLanguage">入力言語：</label>
-            <select name="inputLanguage" id="inputLanguage">
-                <option value="">入力したい言語</option>
-                <option value="english">英語</option>
-                <option value="japanese">日本語</option>
-                <option value="chinese">中国語</option>
-                <option value="Burmese">ミャンマー語</option>
-            </select>
+            <label for="textToTranslate">質問を入力してください：</label>
             <br>
-            <label for="textToTranslate">翻訳されたい文章：</label>
-            <br>
-            <textarea class="form-control" name="textToTranslate" id="textToTranslate" rows="10" style="background: #DBDDDA;"
+            <textarea class="form-control" name="textToTranslate" id="textToTranslate" rows="10"
+                      style="background: #DBDDDA;"
                       placeholder="文章を入力してください"></textarea>
             <br>
-            <label for="outputLanguage">出力言語：</label>
-            <select name="outputLanguage" id="outputLanguage">
-                <option value="">翻訳されたい言語</option>
-                <option value="english">英語</option>
-                <option value="japanese">日本語</option>
-                <option value="chinese">中国語</option>
-                <option value="Burmese">ミャンマー語</option>
-            </select>
-            <div style="margin-bottom: 10px">
-                <input type="submit" name="" id="" value="翻訳">
+            <div style="margin-bottom: 10px ; " >
+                <input style="" type="submit" name="" id="" value="送信">
             </div>
         </form>
-        <a class="btn btn-primary btn-xs" href="/depart/20/edit/">翻訳結果</a>
+        <a class="btn btn-primary btn-xs" href="/depart/20/edit/">答え結果</a>
         <!-- 処理した結果ここの<div>に表示する -->
         <div id="result" name="result" style="position: relative; background: #F7F7F9;">
             <button class="copy-button" id="copy-button" data-clipboard-target="#text-to-copy"
                     style="background-color: dimgrey; color: #fff; padding: 1px; float: right; border: none;">
                 Copy code
             </button>
-            <textarea id="text-to-copy" class="form-control" rows="10"
+            <textarea id="text-to-copy" class="form-control" rows="12"
                       style="background: #DBDDDA;">{{ result }}</textarea>
             <div class="copy-bar"></div>
         </div>
-
 
     </div>
 </div>
