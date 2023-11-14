@@ -39,18 +39,23 @@ def user_translate_history():
         search_keyword = data.get("search_keyword")
         sort_order = data.get("sort_order")
         page = data.get("page", 1)  # 默认为第一页
-
+        favoritesValue = data.get("favoritesValue")
+        print(favoritesValue)
         # 连接到数据库
         conn = connect_to_database()
         cursor = conn.cursor()
 
         # 初始化查询条件
-        sql_query = "SELECT * FROM history_list WHERE user_id = %s"
+        sql_query = "SELECT id,input_text,output_text,update_time FROM history_list WHERE user_id = %s"
         params = [user_id]
 
         if input_language:
             sql_query += " AND input_language = %s"
             params.append(input_language)
+
+        if  favoritesValue:
+            sql_query += " AND collect = %s"
+            params.append(favoritesValue)
 
         if output_language:
             sql_query += " AND output_language = %s"
@@ -74,7 +79,6 @@ def user_translate_history():
 
         # 获取所有结果
         all_results = cursor.fetchall()
-        data_list = cursor.fetchall()
         print(all_results)
 
         # 计算分页信息
@@ -94,39 +98,42 @@ def user_translate_history():
         # 关闭数据库连接
         close_database_connection(conn, cursor)
 
-        # 返回包含分页信息的 JSON 数据
-        # return jsonify({
-        #     "data_list": paginated_results,
-        #     "total_pages": total_pages,
-        #     "current_page": page
-        # })
-        print(type(data_list))
-        return jsonify(data_list)
+        #返回包含分页信息的 JSON 数据
+        return jsonify({
+            "data_list": paginated_results,
+            "total_pages": total_pages,
+            "current_page": page
+        })
 
 
 
 
 
-# # 在后端路由中处理更新请求
-# @history_bp.route("/update_translation_item", methods=["POST"])
-# def update_translation_item():
-#     if request.method == "POST":
-#         # 获取前端发送的数据
-#         nid = request.form.get("nid")
-#
-#         # 更新数据库中对应行的 collect 字段为1
-#         conn = connect_to_database()
-#         cursor = conn.cursor()
-#
-#         # 假设数据库表为 translation_items，你需要替换成实际的表名
-#         update_query = "UPDATE history_list SET collect = 1 WHERE id = %s"
-#         params = [nid]
-#
-#         cursor.execute(update_query, params)
-#         conn.commit()
-#
-#         cursor.close()
-#         conn.close()
-#
-#         return redirect("/user_translate_history")
+# 在后端路由中处理更新请求
+@history_bp.route("/mark_item_updated", methods=["POST"])
+def update_translation_item():
+    if request.method == "POST":
+        # 获取前端发送的数据
+        data = request.json
+        get_id = data.get("id")
+        print(get_id)
+
+        if get_id is not None:
+            # 更新数据库中对应行的 collect 字段为1
+            conn = connect_to_database()
+            cursor = conn.cursor()
+
+            # 假设数据库表为 translation_items，你需要替换成实际的表名
+            update_query = "UPDATE history_list SET collect = 1 WHERE id = %s"
+            params = [get_id]
+
+            cursor.execute(update_query, params)
+            conn.commit()
+
+            cursor.close()
+            conn.close()
+
+            return jsonify({"success": True, "message": "Item updated successfully"})
+        else:
+            return jsonify({"success": False, "message": "Invalid request"})
 

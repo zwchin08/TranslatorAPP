@@ -170,22 +170,6 @@ def input_translate_output(index):
         return render_template(f"user_translation_page{index}.html", result=result)
 
 
-# @app.route("/user_translation_page/<int:index>", methods=["GET", "POST"])
-# def input_translate_output(index):
-#     if request.method == "GET":
-#         if index in range(0, 5):
-#             return render_template(f"user_translation_page{index}.html")
-#         else:
-#             return "Invalid index"
-#     if request.method == "POST":
-#         input_Language = request.form.get("inputLanguage")
-#         text = request.form.get("textToTranslate")
-#         output_language = request.form.get("outputLanguage")
-#         result = chatgpt_robot.chatgpt_robot(input_Language, output_language, text)
-#         if index != 0:
-#             insert_translation(text, result)
-#         return render_template(f"user_translation_page{index}.html", result=result)
-
 
 @app.route("/show_translation_list")
 def show_translation_list():

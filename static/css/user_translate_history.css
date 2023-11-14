@@ -1,0 +1,54 @@
+.navbar {
+    border-radius: 0;
+}
+
+.navbar-brand img {
+    position: relative;
+    bottom: 9px;
+    background: #808080;
+}
+
+.navbar-brand {
+    line-height: 32px;
+}
+
+.navbar-nav > li > a {
+    line-height: 32px;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+}
+
+li {
+    margin-right: 20px;
+    font-weight: bold;
+}
+
+select, input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 6px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+th, td {
+    padding: 8px;
+    text-align: center;
+}
+
+#pagination {
+    text-align: center;
+    margin-top: 20px;
+}

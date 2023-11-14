@@ -203,7 +203,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control" id="searchInput" placeholder="Search for...">
                             <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button" id="searchButton">Go!</button>
+                                    <button class="btn btn-default" type="button" id="searchButton">確認</button>
                             </span>
                         </div>
                     </div>
@@ -230,10 +230,9 @@
                 <thead>
                 <tr class="active">
                     <th>ID</th>
-                    <th>输入言語</th>
                     <th>知りたい単語</th>
-                    <th>输出言語</th>
                     <th>翻訳した単語</th>
+                    <th>最終クエリ時間</th>
                     <th>操作</th>
                 </tr>
                 </thead>
@@ -258,6 +257,7 @@
                             </div>
 
                         </td>
+                        <td>{{ item.updatetime }}</td>
                     </tr>
                 {% endfor %}
 
@@ -283,7 +283,7 @@
         let selectedStartDate = null;
         let selectedEndDate = null;
         let sortOrder = 0; // 默认是升序
-        let searchKeyword = "Search for..."; // 初始化变量
+        let searchKeyword = ""; // 初始化变量
         let showFavoritesValue = "0"; // 初始化为 "0"
         // 假设这些是从后端获取的数据，根据实际情况修改
         const totalDataCount = 100; // 替换成实际的总数据量
@@ -353,7 +353,7 @@
         // 获取重置按钮元素
         const resetButton = document.getElementById("resetButton");
 
-// 添加重置按钮点击事件监听器
+        // 添加重置按钮点击事件监听器
         resetButton.addEventListener("click", function () {
             // 将所有选项恢复为默认状态
             selectedInputLanguage = null;
@@ -362,7 +362,7 @@
             selectedEndDate = null;
             sortOrder = 0; // 恢复为升序
             showFavoritesValue = "0"; // 恢复为不显示
-            searchKeyword = "Search for..."; // 恢复搜索关键词为默认值
+            searchKeyword = ""; // 恢复搜索关键词为默认值
 
             // 清空下拉菜单选择
             inputLanguageDropdown.querySelectorAll("a").forEach((item) => {
@@ -389,11 +389,14 @@
         // 获取分页栏元素
         const pagination = document.getElementById("pagination");
 
+        // 假设这里有一个变量 totalPages 包含了后端返回的总页数
+        const totalPages = Math.ceil(totalDataCount / itemsPerPage);
 
-// 清空分页栏
+
+        // 清空分页栏
         pagination.innerHTML = '';
 
-// 动态生成分页按钮
+        // 动态生成分页按钮
         for (let page = 1; page <= totalPages; page++) {
             const pageButton = document.createElement("li");
             pageButton.innerHTML = `<a href="#">${page}</a>`;
@@ -424,7 +427,7 @@
             });
         });
 
-        // 添加提交按钮点击事件监听器
+        // 在提交按钮点击事件处理程序中添加获取数据的逻辑
         submitButton.addEventListener("click", function () {
             // 构建数据对象
             const requestData = {
@@ -436,9 +439,6 @@
                 favoritesValue: showFavoritesValue,
                 search_keyword: searchKeyword,
             };
-
-            // 在控制台中打印 requestData
-            console.log("发送到后端的数据:", requestData);
 
             // 使用fetch将数据对象发送到后端
             fetch("/user_translate_history", {
@@ -454,42 +454,154 @@
                         return response.json();
                     }
                 })
+                // 在提交按钮点击事件处理程序中的fetch成功后的处理中
                 .then((data) => {
-                    if (data.translation !== null) {
-                        // 处理翻译结果
-                        console.log("翻译结果:", data.translation);
+                    // 在这里处理从后端获取的数据
+                    if (data.data_list !== null) {
+                        // 处理数据列表
+                        console.log("数据列表:", data.data_list);
+
+                        // 这里可以将数据显示在页面上，例如更新表格内容
+                        updateTableWithData(data.data_list, data.total_pages, data.current_page);
+
+                        // 更新分页信息
+                        updatePagination(data.total_pages, data.current_page);
                     } else {
-                        console.log("未找到有效的翻译结果。");
+                        console.log("未找到有效的数据列表。");
                     }
                 })
-                .catch((error) => {
-                    console.error(error);
-                });
+
+
         });
 
-        // 假设这里有一个变量 totalPages 包含了后端返回的总页数
-        const totalPages = Math.ceil(totalDataCount / itemsPerPage);
+        function updateTableWithData(dataList, totalPages, currentPage) {
+            // 在这里根据后端返回的数据列表更新表格内容
+            const tableBody = document.querySelector("table tbody");
+            tableBody.innerHTML = "";  // 清空表格内容
 
-        // 清空分页栏
-        pagination.innerHTML = '';
+            dataList.forEach((item, index) => {
+                const tableRow = document.createElement("tr");
+                tableRow.className = index % 2 === 0 ? "success" : "active";
 
-        // 动态生成分页按钮
-        for (let page = 1; page <= totalPages; page++) {
-            const pageButton = document.createElement("li");
-            pageButton.innerHTML = `<a href="#" data-page="${page}">${page}</a>`;
-            pagination.appendChild(pageButton);
+                // 根据需要显示的列创建对应的 <td> 元素
+                const columnsToShow = [0, 1, 2, 3]; // 选择要显示的列的索引
+                columnsToShow.forEach(colIndex => {
+                    const tableData = document.createElement("td");
+                    tableData.textContent = item[colIndex];
+                    tableRow.appendChild(tableData);
+                });
+
+                // 添加操作列
+                const operationCell = document.createElement("td");
+                const btnContainer = document.createElement("div");
+                btnContainer.className = "btn-container";
+
+                const updateForm = document.createElement("form");
+                updateForm.method = "POST";
+                updateForm.action = "/update_translation_item";
+                const updateButton = createButton("更新", "btn btn-primary btn-xs");
+
+                const deleteForm = document.createElement("form");
+                deleteForm.method = "POST";
+                deleteForm.action = "/delete_translation_list";
+                const deleteButton = createButton("删除", "btn btn-danger btn-xs");
+
+                const hiddenInput = document.createElement("input");
+                hiddenInput.type = "hidden";
+                hiddenInput.name = "nid";
+                hiddenInput.value = item[0];
+
+                updateForm.appendChild(hiddenInput);
+                deleteForm.appendChild(hiddenInput.cloneNode());
+
+                btnContainer.appendChild(updateForm);
+                btnContainer.appendChild(deleteForm);
+                btnContainer.appendChild(updateButton);
+                btnContainer.appendChild(deleteButton);
+
+                operationCell.appendChild(btnContainer);
+                tableRow.appendChild(operationCell);
+
+                tableBody.appendChild(tableRow);
+            });
+
+            // 更新分页信息
+            updatePagination(totalPages, currentPage);
         }
 
-        // 分页按钮点击事件监听器
-        pagination.addEventListener("click", function (event) {
-            if (event.target.tagName === "A") {
-                const selectedPage = event.target.dataset.page;
-                // 发送请求，获取指定页的数据
-                // 更新显示的数据...
-            }
-        });
-    });
+// 新增一个函数用于创建按钮元素
+        function createButton(text, className) {
+            const button = document.createElement("button");
+            button.type = "submit";
+            button.className = className;
+            button.textContent = text;
+            return button;
+        }
 
+// 新增一个函数用于更新分页信息
+        function updatePagination(totalPages, currentPage) {
+            const pagination = document.getElementById("pagination");
+            pagination.innerHTML = "";
+            for (let i = 1; i <= totalPages; i++) {
+                const li = document.createElement("li");
+                li.className = i === currentPage ? "active" : "";
+                const link = document.createElement("a");
+                link.href = "#"; // 可以添加你的分页处理逻辑
+                link.textContent = i;
+                link.addEventListener("click", () => handlePageClick(i)); // 添加点击事件处理逻辑
+
+                li.appendChild(link);
+                pagination.appendChild(li);
+            }
+        }
+
+// 新增一个函数用于处理分页按钮点击事件
+        function handlePageClick(pageNumber) {
+            // 在这里可以处理点击分页按钮的逻辑
+            // 例如，可以发起后端请求获取对应页的数据，然后调用 updateTableWithData 更新表格内容
+            console.log("Clicked on page", pageNumber);
+
+            // 构建数据对象
+            const requestData = {
+                input_language: selectedInputLanguage,
+                output_language: selectedOutputLanguage,
+                start_date: selectedStartDate,
+                end_date: selectedEndDate,
+                sort_order: sortOrder,
+                favoritesValue: showFavoritesValue,
+                search_keyword: searchKeyword,
+                page: pageNumber, // 将点击的页码传递到后端
+            };
+
+            // 使用 fetch 将数据对象发送到后端
+            fetch("/user_translate_history", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(requestData),
+            })
+                .then((response) => {
+                    // 在这里处理后端的响应
+                    if (response.status === 200) {
+                        return response.json();
+                    }
+                })
+                // 在 fetch 成功后的处理中
+                .then((data) => {
+                    // 在这里处理从后端获取的数据
+                    if (data.data_list !== null) {
+                        // 处理数据列表
+                        console.log("数据列表:", data.data_list);
+
+                        // 这里可以将数据显示在页面上，例如更新表格内容
+                        updateTableWithData(data.data_list, data.total_pages, data.current_page);
+                    } else {
+                        console.log("未找到有效的数据列表。");
+                    }
+                })
+        }
+    });
 
 </script>
 <script src="/static/plugins/jquery-3.6.0.min.js"></script>

@@ -82,67 +82,6 @@
 
 <body>
 <!-- 导航栏内容 -->
-<nav class="navbar navbar-default">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/top/1"> <img width="160px" src="/static/img/logola.png"></a>
-
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li><a href="/user_translation_page/1">翻訳画面</a></li>
-                <li><a href="/user_translate_history">履歴画面</a></li>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-haspopup="true" aria-expanded="false">言語選択<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/user_translation_page/1">日本語</a></li>
-                            <li><a href="/user_translation_page/2">English</a></li>
-                            <li><a href="/user_translation_page/3">中文</a></li>
-                            <li><a href="/user_translation_page/4">မြန်မာဘာသာ</a></li>
-                        </ul>
-                    </li>
-                </ul>
-
-                <li><a href="#">Link</a></li>
-
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-haspopup="true" aria-expanded="false">他のAPP<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/user_translation_page/1">チャットボット</a></li>
-                            <li><a href="/user_translation_page/2">データー分析</a></li>
-                            <li><a href="/user_translation_page/3">巡回ボード</a></li>
-                            <li><a href="/user_translation_page/4">管理システム</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false"> <img width="32px" src="/static/img/user1.jpg"><span
-                            class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/user_info/1">個人情報</a></li>
-                        <li><a href="#">パスワード変更</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="/logout/1">LogOut</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
 <div class="container">
     <div class="container">
         <ol class="breadcrumb">
@@ -196,14 +135,14 @@
 
                 </li>
                 <li>
-                    <button type="button" class="btn btn-info" id="showFavoritesButton" value="0">显示收藏</button>
+                    <button type="button" class="btn btn-info" id="showFavoritesButton" value="0">♥いいね♥</button>
                 </li>
                 <li>
                     <div class="row">
                         <div class="input-group">
                             <input type="text" class="form-control" id="searchInput" placeholder="Search for...">
                             <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button" id="searchButton">Go!</button>
+                                    <button class="btn btn-default" type="button" id="searchButton">確認</button>
                             </span>
                         </div>
                     </div>
@@ -230,10 +169,9 @@
                 <thead>
                 <tr class="active">
                     <th>ID</th>
-                    <th>输入言語</th>
                     <th>知りたい単語</th>
-                    <th>输出言語</th>
                     <th>翻訳した単語</th>
+                    <th>最終クエリ時間</th>
                     <th>操作</th>
                 </tr>
                 </thead>
@@ -249,7 +187,7 @@
                             <div class="btn-container">
                                 <form method="POST" action="/update_translation_item"> <!-- 替换成处理更新的路由 -->
                                     <input type="hidden" name="nid" value="{{ item.id }}">
-                                    <button type="submit" class="btn btn-primary btn-xs">更新</button>
+                                    <button type="submit" class="btn btn-primary btn-xs">🤍</button>
                                 </form>
                                 <form method="POST" action="/delete_translation_list">
                                     <input type="hidden" name="nid" value="{{ item.id }}">
@@ -258,6 +196,7 @@
                             </div>
 
                         </td>
+                        <td>{{ item.updatetime }}</td>
                     </tr>
                 {% endfor %}
 
@@ -353,7 +292,7 @@
         // 获取重置按钮元素
         const resetButton = document.getElementById("resetButton");
 
-// 添加重置按钮点击事件监听器
+        // 添加重置按钮点击事件监听器
         resetButton.addEventListener("click", function () {
             // 将所有选项恢复为默认状态
             selectedInputLanguage = null;
@@ -393,10 +332,10 @@
         const totalPages = Math.ceil(totalDataCount / itemsPerPage);
 
 
-// 清空分页栏
+        // 清空分页栏
         pagination.innerHTML = '';
 
-// 动态生成分页按钮
+        // 动态生成分页按钮
         for (let page = 1; page <= totalPages; page++) {
             const pageButton = document.createElement("li");
             pageButton.innerHTML = `<a href="#">${page}</a>`;
@@ -427,59 +366,7 @@
             });
         });
 
-        /* // 在提交按钮点击事件处理程序中添加获取数据的逻辑
-         submitButton.addEventListener("click", function () {
-             // 构建数据对象
-             const requestData = {
-                 input_language: languageMapping[selectedInputLanguage],
-                 output_language: languageMapping[selectedOutputLanguage],
-                 start_date: selectedStartDate,
-                 end_date: selectedEndDate,
-                 sort_order: sortOrder,
-                 favoritesValue: showFavoritesValue,
-                 search_keyword: searchKeyword,
-             };
-
-             // 使用fetch将数据对象发送到后端
-             fetch("/user_translate_history", {
-                 method: "POST",
-                 headers: {
-                     "Content-Type": "application/json",
-                 },
-                 body: JSON.stringify(requestData),
-             })
-                 .then((response) => {
-                     // 在这里处理后端的响应
-                     if (response.status === 200) {
-                         return response.json();
-                     }
-                 })
-                 .then((data) => {
-                     // 在这里处理从后端获取的数据
-                     if (data.translation !== null) {
-                         // 处理翻译结果
-                         console.log("翻译结果:", data.translation);
-
-                         // 这里可以将数据显示在页面上，例如更新表格内容
-                         updateTableWithData(data);
-                     } else {
-                         console.log("未找到有效的翻译结果。");
-                     }
-                 })
-                 .catch((error) => {
-                     console.error(error);
-                 });
-         });
-
- // 新增一个函数用于更新表格内容
-         function updateTableWithData(data) {
-             // 在这里根据后端返回的数据更新表格内容
-             // 你可能需要获取表格元素，然后更新其中的 <tbody> 部分
-         }
-
-         */
-
-        // 修改提交按钮的点击事件监听器
+        // 在提交按钮点击事件处理程序中添加获取数据的逻辑
         submitButton.addEventListener("click", function () {
             // 构建数据对象
             const requestData = {
@@ -500,63 +387,221 @@
                 },
                 body: JSON.stringify(requestData),
             })
-                .then((response) => response.json())
+                .then((response) => {
+                    // 在这里处理后端的响应
+                    if (response.status === 200) {
+                        return response.json();
+                    }
+                })
+                // 在提交按钮点击事件处理程序中的fetch成功后的处理中
                 .then((data) => {
-                    // 处理后端返回的数据
-                    console.log(data.data_list)
-                    updateTableWithData(data.data_list);
+                    // 在这里处理从后端获取的数据
+                    if (data.data_list !== null) {
+                        // 处理数据列表
+                        console.log("数据列表:", data.data_list);
+
+                        // 这里可以将数据显示在页面上，例如更新表格内容
+                        updateTableWithData(data.data_list, data.total_pages, data.current_page);
+
+                        // 更新分页信息
+                        updatePagination(data.total_pages, data.current_page);
+                    } else {
+                        console.log("未找到有效的数据列表。");
+                    }
                 })
-                .catch((error) => {
-                    console.error(error);
-                });
+
+
         });
-        // 分页按钮点击事件监听器
-        pagination.addEventListener("click", function (event) {
-            if (event.target.tagName === "A") {
-                const selectedPage = event.target.dataset.page;
 
-                // 更新当前页数
-                currentPage = parseInt(selectedPage);
+        function updateTableWithData(dataList, totalPages, currentPage) {
+            // 在这里根据后端返回的数据列表更新表格内容
+            const tableBody = document.querySelector("table tbody");
+            tableBody.innerHTML = "";  // 清空表格内容
 
-                // 构建数据对象
-                const requestData = {
-                    input_language: languageMapping[selectedInputLanguage],
-                    output_language: languageMapping[selectedOutputLanguage],
-                    start_date: selectedStartDate,
-                    end_date: selectedEndDate,
-                    sort_order: sortOrder,
-                    favoritesValue: showFavoritesValue,
-                    search_keyword: searchKeyword,
-                    page: currentPage,  // 添加当前页数到请求数据中
-                };
+            dataList.forEach((item, index) => {
+                const tableRow = document.createElement("tr");
+                tableRow.className = index % 2 === 0 ? "success" : "active";
 
-                // 发送请求，获取指定页的数据
-                fetch("/user_translate_history", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(requestData),
-                })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        // 处理后端返回的数据
-                        updateTableWithData(data.data_list);
+                // 根据需要显示的列创建对应的 <td> 元素
+                const columnsToShow = [0, 1, 2, 3]; // 选择要显示的列的索引
+                columnsToShow.forEach(colIndex => {
+                    const tableData = document.createElement("td");
+                    tableData.textContent = item[colIndex];
+                    tableRow.appendChild(tableData);
+                });
+
+                // 添加操作列
+                const operationCell = document.createElement("td");
+                const btnContainer = document.createElement("div");
+                btnContainer.className = "btn-container";
+
+                const updateForm = document.createElement("form");
+                updateForm.method = "POST";
+                updateForm.action = "/update_translation_item";
+                const updateButton = createButton("🤍", "btn btn-primary btn-xs");
+
+                const deleteForm = document.createElement("form");
+                deleteForm.method = "POST";
+                deleteForm.action = "/delete_translation_list";
+                const deleteButton = createButton("删除", "btn btn-danger btn-xs");
+
+                const hiddenInput = document.createElement("input");
+                hiddenInput.type = "hidden";
+                hiddenInput.name = "nid";
+                hiddenInput.value = item[0];
+
+                updateForm.appendChild(hiddenInput);
+                deleteForm.appendChild(hiddenInput.cloneNode());
+
+                btnContainer.appendChild(updateForm);
+                btnContainer.appendChild(deleteForm);
+                btnContainer.appendChild(updateButton);
+                btnContainer.appendChild(deleteButton);
+
+                operationCell.appendChild(btnContainer);
+                tableRow.appendChild(operationCell);
+
+                tableBody.appendChild(tableRow);
+            });
+
+            // 更新分页信息
+            updatePagination(totalPages, currentPage);
+        }
+
+// 新增一个函数用于创建按钮元素
+        function createButton(text, className) {
+            const button = document.createElement("button");
+            button.type = "submit";
+            button.className = className;
+            button.textContent = text;
+            return button;
+        }
+
+        // 为更新按钮和删除按钮添加事件监听器
+        const tableBody = document.querySelector("table tbody");
+
+        tableBody.addEventListener("click", function (event) {
+            const target = event.target;
+
+            // 确保点击的是按钮
+            if (target.tagName === "BUTTON") {
+                const row = target.closest("tr"); // 获取所在行
+                const itemId = row.querySelector("input[name='nid']").value; // 获取行的ID
+                console.log("id是" + itemId)
+
+                if (target.classList.contains("btn-primary")) {
+                    // 点击了更新按钮
+                    // 在这里添加将行标记为已变更并向后台发送ID的逻辑
+                    target.textContent = "♥いいね♥";
+                    target.disabled = true;
+
+                    // 向后台发送请求，可以使用 fetch 或其他适当的方法
+                    // 例如：
+                    fetch("/mark_item_updated", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({id: itemId}), // 使用正确的字段名
                     })
-                    .catch((error) => {
-                        console.error(error);
-                    });
+                        .then(response => {
+                            if (response.status === 200) {
+                                console.log("行标记为已变更");
+                            }
+                        })
+                        .catch(error => {
+                            console.error("发生错误:", error);
+                        });
+                } else if (target.classList.contains("btn-danger")) {
+                    // 点击了删除按钮
+                    // 在这里添加删除行的逻辑
+                    row.remove(); // 删除当前行
+
+                    // 向后台发送请求，可以使用 fetch 或其他适当的方法
+                    // 例如：
+                    fetch("/delete_item", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({id: itemId}), // 使用正确的字段名
+                    })
+                        .then(response => {
+                            if (response.status === 200) {
+                                console.log("行已删除");
+                            }
+                        })
+                        .catch(error => {
+                            console.error("发生错误:", error);
+                        });
+                }
             }
         });
 
-        // 新增一个函数用于更新表格内容
-        function updateTableWithData(data) {
-            // 在这里根据后端返回的数据更新表格内容
-            // 你可能需要获取表格元素，然后更新其中的 <tbody> 部分
+// 新增一个函数用于更新分页信息
+        function updatePagination(totalPages, currentPage) {
+            const pagination = document.getElementById("pagination");
+            pagination.innerHTML = "";
+            for (let i = 1; i <= totalPages; i++) {
+                const li = document.createElement("li");
+                li.className = i === currentPage ? "active" : "";
+                const link = document.createElement("a");
+                link.href = "#"; // 可以添加你的分页处理逻辑
+                link.textContent = i;
+                link.addEventListener("click", () => handlePageClick(i)); // 添加点击事件处理逻辑
+
+                li.appendChild(link);
+                pagination.appendChild(li);
+            }
         }
 
-    });
+// 新增一个函数用于处理分页按钮点击事件
+        function handlePageClick(pageNumber) {
+            // 在这里可以处理点击分页按钮的逻辑
+            // 例如，可以发起后端请求获取对应页的数据，然后调用 updateTableWithData 更新表格内容
+            console.log("Clicked on page", pageNumber);
 
+            // 构建数据对象
+            const requestData = {
+                input_language: selectedInputLanguage,
+                output_language: selectedOutputLanguage,
+                start_date: selectedStartDate,
+                end_date: selectedEndDate,
+                sort_order: sortOrder,
+                favoritesValue: showFavoritesValue,
+                search_keyword: searchKeyword,
+                page: pageNumber, // 将点击的页码传递到后端
+            };
+
+            // 使用 fetch 将数据对象发送到后端
+            fetch("/user_translate_history", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(requestData),
+            })
+                .then((response) => {
+                    // 在这里处理后端的响应
+                    if (response.status === 200) {
+                        return response.json();
+                    }
+                })
+                // 在 fetch 成功后的处理中
+                .then((data) => {
+                    // 在这里处理从后端获取的数据
+                    if (data.data_list !== null) {
+                        // 处理数据列表
+                        console.log("数据列表:", data.data_list);
+
+                        // 这里可以将数据显示在页面上，例如更新表格内容
+                        updateTableWithData(data.data_list, data.total_pages, data.current_page);
+                    } else {
+                        console.log("未找到有效的数据列表。");
+                    }
+                })
+        }
+    });
 
 </script>
 <script src="/static/plugins/jquery-3.6.0.min.js"></script>

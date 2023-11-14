@@ -169,8 +169,9 @@ def send_reset_email(index, email, reset_token):
     msg['To'] = email
     msg['Subject'] = 'Password Reset'
     # 邮件正文
-    body = f'''Click the following link to reset your password: {reset_link}
-    
+    body = f'''
+    以下のリンクをクリックしてパスワードをリセットしてください： 
+    {reset_link}
     なお、このURLは送信より12時間有効です。
     有効期限切れの場合は最初から手続きをやり直してください。
 
@@ -180,7 +181,7 @@ def send_reset_email(index, email, reset_token):
     ------------------------------
     C-Team(C-チーム)
     https://chenzhengwei-website2.netlify.app/
-        '''
+    '''
     msg.attach(MIMEText(body, 'plain'))
     try:
         # 连接到邮件服务器并发送电子邮件（使用SSL加密）

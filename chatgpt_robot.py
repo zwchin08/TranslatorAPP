@@ -49,4 +49,4 @@ def chatbot(text):
     return result
 
 
-# print(openai.api_key)
+print(openai.api_key)
