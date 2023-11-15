@@ -1,15 +1,9 @@
-from getpass import getpass
-from flask import session
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from collections import OrderedDict
 import pymysql, bcrypt, random, datetime, hashlib, string, smtplib
 from flask import Flask, render_template, request, redirect, jsonify, session
-import chatgpt_robot
-import top_page
-import user
 
-# 配置数据库连接信息
+
 DB_CONFIG = {
     "host": "localhost",
     "port": 3306,
@@ -30,9 +24,9 @@ def close_database_connection(conn, cursor):
 
 
 """
-1.本函数用于创建新用户
-2.创建成功后会自动跳转到登陆页面
-3.给用户发送Email通知
+1.この関数は新しいユーザーを作成するために使用されます。
+2.作成が成功すると、自動的にログインページにリダイレクトされます。
+3.ユーザーに対してEメール通知が送信されます。
 """
 
 
@@ -61,14 +55,16 @@ def log_up(index):
         cursor.execute(sql, [username, email, hashed_password])
         conn.commit()
         close_database_connection(conn, cursor)
-        return []  # 注册成功时返回空的错误消息列表
+        return []  #登録成功時にはエラーメッセージのリストを空で返します
 
     return error_messages  # 返回错误消息列表
 
 
 """
-1.该方法用于用户登录
-2.登陆后会跳转到该用户的登录画面
+
+1.このメソッドはユーザーのログインに使用されます。
+2.ログイン後、そのユーザーのログイン画面にリダイレクトされます。
+
 """
 
 
@@ -88,20 +84,16 @@ def login_user(index):
             user_info = user
             break
     if user_info:
-        # 找到用户信息，验证密码
         stored_password = user_info['password']
         if bcrypt.checkpw(login_password.encode('utf-8'), stored_password.encode('utf-8')):
-            # 密码验证成功，允许用户登录
-            # 假设你已经验证了用户，验证成功后保存用户信息到会话中
-            session['user_id'] = user_info['id']  # 这里的123应该是用户的实际ID
+            # ユーザー情報をセッションに保存します
+            session['user_id'] = user_info['id']
             print("loginしました。")
             return redirect(f"/user_translation_page/{index}")
         else:
-            # 密码验证失败，拒绝登录
             print("login失败しました。")
             return redirect(f"/login/{index}")
     else:
-        # 用户名不存在，拒绝登录
         print("ユーザ名が不存在")
         return redirect(f"/login/{index}")
 
@@ -109,11 +101,11 @@ def login_user(index):
 
 
 '''
-1.当用户忘记密码时会通过邮箱进行重新设定
-2.为了安全起见，使用了相关的加密处理
-3.流程为:  忘记密码 ——》2.邮箱--》3.重置密码
+1.ユーザーがパスワードを忘れた場合、メールを使用して再設定します。
+2.セキュリティのため、関連する暗号化処理が使用されています。
+3.手順: パスワードを忘れる ——》2.メール ——》3.パスワードのリセット
 '''
-# 存储密码重置令牌的字典
+# パスワードリセットトークンを格納する辞書
 reset_tokens = {}
 
 def generate_reset_token():
@@ -125,7 +117,7 @@ def generate_reset_token():
 
 def send_signup_email(index, email):
     signup_link = f"http://127.0.0.1:5000/login/{index}"
-    # 创建电子邮件对象
+    #電子メールオブジェクトの作成
     msg = MIMEMultipart()
     msg['From'] = 'chinseii@126.com'
     msg['To'] = email
@@ -184,21 +176,20 @@ def send_reset_email(index, email, reset_token):
     '''
     msg.attach(MIMEText(body, 'plain'))
     try:
-        # 连接到邮件服务器并发送电子邮件（使用SSL加密）
+        # メールサーバーに接続して電子メールを送信する（SSL暗号化を使用)
         server = smtplib.SMTP_SSL('smtp.126.com', 465)
         server.login('chinseii@126.com', 'XLZQTRYNSEZDBQTW')
         text = msg.as_string()
         server.sendmail('chinseii@126.com', email, text)
         server.quit()
-        return "邮件成功发送"
+        return "メールの送信が成功しました"
     except smtplib.SMTPException as e:
-        return f"邮件发送失败: {str(e)}"
+        return f"メールの送信に失敗しました: {str(e)}"
 
 
 def password_forgot(index):
     if request.method == "POST":
         email = request.form.get("email")
-        # 检查用户是否存在，如果存在，生成重置令牌并发送邮件
         conn = connect_to_database()
         cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
         cursor.execute("SELECT * FROM admin WHERE email = %s", (email,))
@@ -207,7 +198,7 @@ def password_forgot(index):
         if user_data:
             user_id = user_data['id']
             reset_token = generate_reset_token()
-            expires_at = datetime.datetime.now() + datetime.timedelta(hours=15)  # 令牌的有效期为1小时
+            expires_at = datetime.datetime.now() + datetime.timedelta(hours=1)  # トークンの有効期間は1時間です
             cursor.execute("INSERT INTO password_reset_tokens (user_id, token, expires_at) VALUES (%s, %s, %s)",
                            (user_id, reset_token, expires_at))
             conn.commit()
@@ -227,18 +218,18 @@ def password_forgot(index):
 
 def password_reset_get(index):
     token = request.args.get("token")
-
-    session["reset_token"] = token  # 存储 token 到会话中
+    # トークンをセッションに保存する
+    session["reset_token"] = token
     # print("GET请求中的token值：", token)
     return render_template(f"password_reset{index}.html")
 
 
 def password_reset_post(index):
-    token = session.get("reset_token")  # 从会话中获取 token
+    token = session.get("reset_token")
     # print("POST请求中的token值：", token)
     new_password = request.form.get("new_password1")
     # print("POST请求中的new_password值：", new_password)
-    # 查询数据库以验证令牌的有效性和过期性
+    # データベースを検索してトークンの有効性と期限切れを検証する
     conn = connect_to_database()
     cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
     cursor.execute("SELECT * FROM password_reset_tokens WHERE token = %s AND expires_at > NOW()", (token,))
@@ -246,9 +237,9 @@ def password_reset_post(index):
     # print("从数据库中获取的token_data值：", token_data)
 
     if token_data:
-        # 令牌有效，允许用户更新密码
+        # トークンが有効で、ユーザーはパスワードを更新することが許可されています
         user_id = token_data['user_id']
-        hashed_password = bcrypt.hashpw(new_password.encode('utf-8'), bcrypt.gensalt())  # 使用bcrypt进行密码哈希
+        hashed_password = bcrypt.hashpw(new_password.encode('utf-8'), bcrypt.gensalt())  #パスワードのハッシュ化にbcryptを使用する
         cursor.execute("UPDATE admin SET password = %s WHERE id = %s", (hashed_password, user_id))
         cursor.execute("DELETE FROM password_reset_tokens WHERE token = %s", (token,))
         conn.commit()
