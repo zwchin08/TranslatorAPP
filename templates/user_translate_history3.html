@@ -22,8 +22,9 @@
 <!-- ナビゲーションバー -->
 <nav class="navbar navbar-default">
     <div class="container">
-        <div class="navbar-header">
+      <div class="navbar-header">
             <a class="navbar-brand" href="/top/1"> <img width="160px" src="/static/img/logola.png"></a>
+
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
@@ -34,12 +35,12 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/user_translation_page/1">翻訳画面</a></li>
-                <li><a href="/user_translate_history">履歴画面</a></li>
-                <ul class="nav navbar-nav navbar-right">
+                <li><a href="/user_translation_page/1">翻译界面</a></li>
+                <li><a href="/show_translation_list">翻译记录</a></li>
+                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-haspopup="true" aria-expanded="false">言語選択<span class="caret"></span></a>
+                           aria-haspopup="true" aria-expanded="false">语言选择<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="/user_translation_page/1">日本語</a></li>
                             <li><a href="/user_translation_page/2">English</a></li>
@@ -48,15 +49,16 @@
                         </ul>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
+
+                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-haspopup="true" aria-expanded="false">他のAPP<span class="caret"></span></a>
+                           aria-haspopup="true" aria-expanded="false">其他产品APP<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="/user_translation_page/1">チャットボット</a></li>
-                            <li><a href="#">データー分析</a></li>
-                            <li><a href="#">巡回ボード</a></li>
-                            <li><a href="#">管理システム</a></li>
+                            <li><a href="/user_translation_page/1">聊天机器人</a></li>
+                            <li><a href="/user_translation_page/2">数据分析</a></li>
+                            <li><a href="/user_translation_page/3">小程序机器人</a></li>
+                            <li><a href="/user_translation_page/4">管理系统</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -67,10 +69,10 @@
                        aria-expanded="false"> <img width="32px" src="/static/img/user1.jpg"><span
                             class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/user_info/1">個人情報</a></li>
-                        <li><a href="#">パスワード変更</a></li>
+                        <li><a href="#">个人信息</a></li>
+                        <li><a href="#">密码变更</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="/logout/1"> <span class="glyphicon glyphicon-off" aria-hidden="true"></span>  ログアウト</a></li>
+                        <li><a href="/index1.html">注销登录</a></li>
                     </ul>
                 </li>
             </ul>
@@ -82,15 +84,15 @@
         <ol class="breadcrumb">
             <!-- 現在の画面の位置-->
             <li><a href="#">C-Tream-APP</a></li>
-            <li><a href="#">履歴画面</a></li>
-            <li class="active">SHOW</li>
+            <li><a href="#">翻译画面</a></li>
+            <li class="active">当前所在位置</li>
         </ol>
 
         <div class="select">
             <ul>
                 <li>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-info" id="inputLanguageButton">入力言語</button>
+                        <button type="button" class="btn btn-info" id="inputLanguageButton">输入语言</button>
                         <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                             <span class="caret"></span>
@@ -106,7 +108,7 @@
                 </li>
                 <li>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-info" id="outputLanguageButton">出力言語</button>
+                        <button type="button" class="btn btn-info" id="outputLanguageButton">输出语言</button>
                         <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                             <span class="caret"></span>
@@ -120,18 +122,18 @@
                         </ul>
                     </div>
                 </li>
-                <li>か ら: <input class="btn-info" type="date" id="startDate"></li>
-                <li>ま で: <input class="btn-info" type="date" id="endDate"></li>
+                <li>开始日期: <input class="btn-info" type="date" id="startDate"></li>
+                <li>结束日期: <input class="btn-info" type="date" id="endDate"></li>
             </ul>
             <ul>
                 <li>
-                    <button type="button"class="btn btn-info" id="ascendingOrderButton"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> 昇順</button>
-                    <button type="button"class="btn btn-info" id="descendingOrderButton">  <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> 降順</button>
+                    <button type="button"class="btn btn-info" id="ascendingOrderButton"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> 升序</button>
+                    <button type="button"class="btn btn-info" id="descendingOrderButton">  <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> 降序</button>
 
                 </li>
                 <li>
                     <button type="button" class="btn btn-info" id="showFavoritesButton" value="0">
-                         <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> いいね！<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                         <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> 收藏列表<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
                     </button>
                 </li>
                 <li>
@@ -139,36 +141,36 @@
                         <div class="input-group">
                             <input type="text" class="form-control" id="searchInput" placeholder="Search for...">
                             <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button" id="searchButton">確認</button>
+                                    <button class="btn btn-default" type="button" id="searchButton">确认</button>
                             </span>
                         </div>
                     </div>
                 </li>
                 <li>
-                    <button type="button"  class="btn-danger" id="resetButton"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>  リセット</button>
+                    <button type="button"  class="btn-danger" id="resetButton"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>  选项重置</button>
                 </li>
             </ul>
         </div>
         <div style="margin-bottom: 10px">
             <!-- 送信のブタン -->
             <button id="submitButton" class="btn btn-success">
-                <span class="glyphicon glyphicon-check" aria-hidden="true"></span> SUBMIT
+                <span class="glyphicon glyphicon-check" aria-hidden="true"></span> 提交
             </button>
         </div>
     </div>
     <div class="bs-example" data-example-id="bordered-table">
         <div class="panel panel-default">
             <div class="panel-heading" style="font-weight: bold;"><span class="glyphicon glyphicon-th" aria-hidden="true"> </span>
-                履歴リスト
+                翻译记录
             </div>
 
             <table class="table table-bordered">
                 <thead>
                 <tr class="active">
                     <th>  <span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> ID</th>
-                    <th><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> 知りたい単語</th>
-                    <th><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> 翻訳した単語</th>
-                    <th><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> 最終クエリ時間</th>
+                    <th><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> 翻译的词汇</th>
+                    <th><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> 翻译的结果</th>
+                    <th><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> 最后更新时间</th>
                     <th><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> 操作</th>
                 </tr>
                 </thead>

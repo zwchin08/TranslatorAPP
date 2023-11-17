@@ -7,30 +7,8 @@
     <title>Translate Tool</title>
     <link rel="stylesheet" href="/static/plugins/bootstrap-3.4.1/bootstrap-3.4.1-dist/css/bootstrap.css">
     <link rel="stylesheet" href="/static/plugins/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css">
+     <link rel="stylesheet" href="/static/css/userTranslateHistory.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
-
-    <style>
-        .navbar {
-            border-radius: 0px;
-        }
-
-         body {
-
-           /*background: #EDEDE8;*/
-
-        }
-        .copy-bar {
-            background-color: #f8f9fa;
-            /* ChatGPT 风格的灰色背景 */
-            height: 5px;
-            /* 条形框的高度 */
-            width: 100%;
-            /* 条形框的宽度，与父元素宽度相同 */
-            margin-top: 0px;
-            /* 上外边距，将条形框与输出框分隔开 */
-        }
-
-    </style>
 </head>
 
 <body>
@@ -86,6 +64,12 @@
 </nav>
 <div class="container">
     <div>
+         <ol class="breadcrumb">
+            <li><a href="/top/1">C-Tream-APP</a></li>
+             <li><a href="#">トップページ</a></li>
+            <li><a href="#">翻訳画面</a></li>
+            <li class="active">SHOW</li>
+        </ol>
         <form action="/user_translation_page/0" method="post">
             <label for="inputLanguage">入力言語：</label>
             <select name="inputLanguage" id="inputLanguage">
@@ -98,7 +82,7 @@
             <br>
             <label for="textToTranslate">翻訳されたい文章：</label>
             <br>
-            <textarea class="form-control" name="textToTranslate" id="textToTranslate" rows="10" style="background: #DBDDDA;"
+            <textarea class="form-control" name="textToTranslate" id="textToTranslate" rows="9" style="background: #DBDDDA;"
                       placeholder="文章を入力してください"></textarea>
             <br>
             <label for="outputLanguage">出力言語：</label>
@@ -120,11 +104,10 @@
                     style="background-color: dimgrey; color: #fff; padding: 1px; float: right; border: none;">
                 Copy code
             </button>
-            <textarea id="text-to-copy" class="form-control" rows="10"
+            <textarea id="text-to-copy" class="form-control" rows="9"
                       style="background: #DBDDDA;">{{ result }}</textarea>
             <div class="copy-bar"></div>
         </div>
-
 
     </div>
 </div>
@@ -133,28 +116,6 @@
 <script src="/static/index.js"></script>
 <script src="/static/plugins/jquery-3.6.0.min.js"></script>
 <script src="/static/plugins/bootstrap-3.4.1/bootstrap-3.4.1-dist/js/bootstrap.js"></script>
-<script>
-    var clipboard = new ClipboardJS('#copy-button');
-
-    clipboard.on('success', function (e) {
-        var copyButton = document.getElementById('copy-button');
-        copyButton.textContent = 'Copied!';
-        copyButton.classList.add('clicked');
-        var copyBar = document.querySelector('.copy-bar');
-        copyBar.style.display = 'block';
-        setTimeout(function () {
-            copyButton.textContent = 'Copy code';
-            copyButton.classList.remove('clicked');
-            copyBar.style.display = 'none';
-        }, 2000); // 2秒后恢复按钮文本和隐藏条形框
-    });
-
-    clipboard.on('error', function (e) {
-        alert('复制失败，请手动复制文本');
-    });
-
-</script>
-
+<script src="/static/js/selef_js/userTranslationPage.js"></script>
 </body>
-
 </html>

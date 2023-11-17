@@ -108,15 +108,6 @@ def password_reset_post(index):
     return user.password_reset_post(index)
 
 
-# def insert_translation(text, result):
-#     conn = connect_to_database()
-#     cursor = conn.cursor()
-#     insert_query = 'INSERT INTO tb_01 (input, output) VALUES (%s, %s)'
-#     cursor.execute(insert_query, (text, result))
-#     conn.commit()
-#     close_database_connection(conn, cursor)
-
-
 def insert_translation(input_language, input_text, output_language, output_text):
     conn = connect_to_database()
     cursor = conn.cursor()
@@ -143,11 +134,10 @@ def insert_translation(input_language, input_text, output_language, output_text)
 
     # 在插入数据库时使用整数值
     insert_query = 'INSERT INTO history_list(input_language, input_text, output_language, output_text, collect, user_id, create_time, update_time) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)'
-    cursor.execute(insert_query, (input_language_id, input_text, output_language_id, output_text, collect, user_id, create_time, update_time))
+    cursor.execute(insert_query, (
+        input_language_id, input_text, output_language_id, output_text, collect, user_id, create_time, update_time))
     conn.commit()
     close_database_connection(conn, cursor)
-
-
 
 
 @app.route("/user_translation_page/<int:index>", methods=["GET", "POST"])
@@ -170,7 +160,6 @@ def input_translate_output(index):
         return render_template(f"user_translation_page{index}.html", result=result)
 
 
-
 @app.route("/show_translation_list")
 def show_translation_list():
     conn = connect_to_database()
@@ -181,15 +170,17 @@ def show_translation_list():
     return render_template("translation_list.html", title="翻訳したリスト", data_list=data_list)
 
 
-
 import logging
+
 
 @app.errorhandler(500)
 def internal_server_error(e):
     logging.error('发生内部服务器错误：%s', e)
     return jsonify(error='内部服务器错误'), 500
 
+
 from flask import jsonify
+
 
 # 在某处定义错误处理程序
 @app.errorhandler(500)
@@ -197,9 +188,6 @@ def internal_server_error(error):
     response = jsonify({'error': 'Internal Server Error'})
     response.status_code = 500
     return response
-
-
-
 
 
 @app.route("/delete_translation_list", methods=['POST'])

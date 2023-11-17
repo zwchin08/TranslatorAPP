@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const deleteForm = document.createElement("form");
             deleteForm.method = "POST";
             deleteForm.action = "/delete_translation_list";
-            const deleteButton = createButton("削除", "btn btn-danger btn-xs");
+            const deleteButton = createButton(" 削除", "btn btn-danger btn-xs" );
 
             const hiddenInput = document.createElement("input");
             hiddenInput.type = "hidden";
