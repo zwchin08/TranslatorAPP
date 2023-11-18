@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -84,27 +85,22 @@
             <li class="active">SHOW</li>
         </ol>
         <form action="/user_translation_page/1" method="post">
+            <span class="glyphicon glyphicon-open-file" aria-hidden="true"></span> <label
+                for="inputLanguage">入力言語：</label>
 
-            <div style="display: flex; align-items: center; justify-content: space-between;">
-                <!-- 入力言語部分 -->
-                <div style="position: relative; top: 2px;">
-                   <span class="glyphicon glyphicon-save-file" aria-hidden="true"></span> <label for="inputLanguage">入力言語：</label>
-                    <select name="inputLanguage" id="inputLanguage">
-                        <option value="">入力したい言語</option>
-                        <option value="en-US">英語</option>
-                        <option value="ja-JP">日本語</option>
-                        <option value="zh-CN">中国語</option>
-                        <option value="my-MM">ミャンマー語</option>
-                    </select>
-                       <button type="button" style="background:white; margin-left: 10px;" id="voiceButton">
-                        <img width="15px" src="/static/img/mc.jpg" alt="话筒图标">
-                    </button>
-                </div>
-                <div  style="display: flex; align-items: center; margin-left: 10%;">
-                    <input type="file" id="imageInput" accept="image/*" style="margin-left: 340px;">
-                    <button class="btn-info" type="button" id="imageButton" style="margin-left: 10px;">画像認識</button>
-                </div>
-            </div>
+            <select name="inputLanguage" id="inputLanguage">
+                <option value="">入力したい言語</option>
+                <option value="en-US">英語</option>
+                <option value="ja-JP">日本語</option>
+                <option value="zh-CN">中国語</option>
+                <option value="my-MM">ミャンマー語</option>
+            </select>
+            {#            这是语音输入#}
+            <button type="button" style="background:white" id="voiceButton">
+                <img width="15px" src="/static/img/mc.jpg" alt="话筒图标">
+            </button>
+            
+
             <br>
             <label for="textToTranslate">翻訳されたい文章：</label>
             <br>
@@ -142,5 +138,46 @@
 <script src="/static/plugins/bootstrap-3.4.1/bootstrap-3.4.1-dist/js/bootstrap.js"></script>
 <script src="/static/js/selef_js/userTranslationPage.js"></script>
 <script src="/static/index.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.lang = document.getElementById('inputLanguage').value;
+
+        document.getElementById('inputLanguage').addEventListener('change', function () {
+            recognition.lang = this.value;
+        });
+
+        let isListening = false;
+
+        document.getElementById('voiceButton').addEventListener('click', function (event) {
+            event.preventDefault(); // 阻止默认的提交行为
+            isListening = !isListening;
+
+            if (isListening) {
+                recognition.start();
+            } else {
+                recognition.stop();
+            }
+        });
+
+        recognition.onresult = function (event) {
+            const transcript = event.results[0][0].transcript;
+            if (isListening) {
+                document.getElementById('textToTranslate').value += transcript;
+            }
+        };
+
+        recognition.onend = function () {
+            if (isListening) {
+                recognition.start();
+            }
+        };
+    } else {
+        document.getElementById('textToTranslate').value = '抱歉，你的浏览器不支持语音识别功能。';
+    }
+});
+</script>
 </body>
+
 </html>

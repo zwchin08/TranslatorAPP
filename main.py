@@ -116,11 +116,18 @@ def insert_translation(input_language, input_text, output_language, output_text)
     update_time = create_time
     collect = 0  # 默认值为0
     # 使用字典或条件语句将前端字符串值映射为整数值
+    # language_mapping = {
+    #     'japanese': 1,
+    #     'english': 2,
+    #     'chinese': 3,
+    #     'Burmese': 4,
+    #     # 在这里继续添加其他语言的映射
+    # }
     language_mapping = {
-        'japanese': 1,
-        'english': 2,
-        'chinese': 3,
-        'Burmese': 4,
+        'ja-JP': 1,
+        'en-US': 2,
+        'zh-CN': 3,
+        'my-MM': 4,
         # 在这里继续添加其他语言的映射
     }
     input_language_id = language_mapping.get(input_language, 0)  # 默认值为0

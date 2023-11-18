@@ -1,49 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>多语言语音识别示例</title>
+    <title>文字识别工具</title>
+    <!-- 引入 Tesseract.js -->
+    <script src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js'></script>
 </head>
+
 <body>
+    <input type="file" id="imageInput" accept="image/*">
+    <button type="button" id="imageButton">开始文字识别</button>
 
-<h1>多语言语音识别示例</h1>
+    <br>
 
-<label for="languageSelect">选择语言：</label>
-<select id="languageSelect">
-    <option value="en-US">英语</option>
-    <option value="ja-JP">日语</option>
-    <option value="zh-CN">中文（简体）</option>
-    <!-- 添加其他语言选项 -->
-</select>
+   <textarea class="form-control" name="textToTranslate" id="textToTranslate" rows="90"
+    style="background: #DBDDDA; width: 80%;" placeholder="上传图片进行文字识别"></textarea>
 
-<button id="startButton">开始语音识别</button>
-<p id="output"></p>
 
-<script>
-    if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
-        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // 获取页面元素
+            const imageInput = document.getElementById('imageInput');
+            const textToTranslate = document.getElementById('textToTranslate');
+            const imageButton = document.getElementById('imageButton');
 
-        // 初始语言设置
-        recognition.lang = document.getElementById('languageSelect').value;
+            // 监听图像按钮的点击事件
+            imageButton.addEventListener('click', function () {
+                // 获取用户选择的图像文件
+                const file = imageInput.files[0];
 
-        // 当选择框的值变化时更新语言设置
-        document.getElementById('languageSelect').addEventListener('change', function() {
-            recognition.lang = this.value;
+                if (file) {
+                    // 使用 FileReader 读取图像文件
+                    const reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        // 获取图像数据
+                        const imageData = e.target.result;
+
+                        // 使用 Tesseract.js 进行图像识别
+                        Tesseract.recognize(
+                            imageData,
+                            'eng+jpn+chi_sim+mya', // 语言设置，可以根据需要调整
+                            {
+                                logger: info => console.log(info)
+                            }
+                        ).then(({ data: { text } }) => {
+                            // 将图像识别的文本添加到 textToTranslate 元素中
+                            textToTranslate.value = text;
+                        }).catch(error => {
+                            console.error(error);
+                        });
+                    };
+
+                    // 读取图像文件
+                    reader.readAsDataURL(file);
+                }
+            });
         });
-
-        recognition.onresult = function(event) {
-            const transcript = event.results[0][0].transcript;
-            document.getElementById('output').textContent = transcript;
-        };
-
-        document.getElementById('startButton').addEventListener('click', function() {
-            recognition.start();
-        });
-    } else {
-        document.getElementById('output').textContent = '抱歉，你的浏览器不支持语音识别功能。';
-    }
-</script>
-
+    </script>
 </body>
+
 </html>
