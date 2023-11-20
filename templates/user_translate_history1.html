@@ -70,7 +70,8 @@
                         <li><a href="/user_info/1">個人情報</a></li>
                         <li><a href="#">パスワード変更</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="/logout/1"> <span class="glyphicon glyphicon-off" aria-hidden="true"></span>  ログアウト</a></li>
+                        <li><a href="/logout/1"> <span class="glyphicon glyphicon-off" aria-hidden="true"></span> ログアウト</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -90,34 +91,50 @@
             <ul>
                 <li>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-info" id="inputLanguageButton">入力言語</button>
-                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu" id="inputLanguageDropdown">
-                            <li><a href="#">日本語</a></li>
-                            <li><a href="#">English</a></li>
-                            <li><a href="#">中文</a></li>
-                            <li><a href="#">မြန်မာဘာသာ</a></li>
-                        </ul>
+                        <select class="btn btn-info" id="inputLanguageDropdown">
+                            <option value="">(入力言語を選んでください)</option>
+                            <option value="en-US">英語</option>
+                            <option value="ja-JP">日本語</option>
+                            <option value="zh-CN">中国語</option>
+                            <option value="my-MM">ミャンマー語</option>
+                        </select>
+{#                        <button type="button" class="btn btn-info" id="inputLanguageButton">入力言語</button>#}
+{#                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"#}
+{#                                aria-haspopup="true" aria-expanded="false">#}
+{#                            <span class="caret"></span>#}
+{#                            <span class="sr-only">Toggle Dropdown</span>#}
+{#                        </button>#}
+{#                        <ul class="dropdown-menu" id="inputLanguageDropdown">#}
+{#                            <li><a href="#">日本語</a></li>#}
+{#                            <li><a href="#">English</a></li>#}
+{#                            <li><a href="#">中文</a></li>#}
+{#                            <li><a href="#">မြန်မာဘာသာ</a></li>#}
+{#                        </ul>#}
                     </div>
                 </li>
                 <li>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-info" id="outputLanguageButton">出力言語</button>
-                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu" id="outputLanguageDropdown">
-                            <li><a href="#">日本語</a></li>
-                            <li><a href="#">English</a></li>
-                            <li><a href="#">中文</a></li>
-                            <li><a href="#">န်မာဘာသာ</a></li>
-                        </ul>
+                        <label ></label>
+                         <select class="btn btn-info" id="outputLanguageDropdown">
+                            <option value="">(出力言語を選んでください)</option>
+                            <option value="en-US">英語</option>
+                            <option value="ja-JP">日本語</option>
+                            <option value="zh-CN">中国語</option>
+                            <option value="my-MM">ミャンマー語</option>
+                        </select>
+
+{#                        <button type="button" class="btn btn-info" id="outputLanguageButton">出力言語</button>#}
+{#                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"#}
+{#                                aria-haspopup="true" aria-expanded="false">#}
+{#                            <span class="caret"></span>#}
+{#                            <span class="sr-only">Toggle Dropdown</span>#}
+{#                        </button>#}
+{#                        <ul class="dropdown-menu" id="outputLanguageDropdown">#}
+{#                            <li><a href="#">日本語</a></li>#}
+{#                            <li><a href="#">English</a></li>#}
+{#                            <li><a href="#">中文</a></li>#}
+{#                            <li><a href="#">န်မာဘာသာ</a></li>#}
+{#                        </ul>#}
                     </div>
                 </li>
                 <li>か ら: <input class="btn-info" type="date" id="startDate"></li>
@@ -125,13 +142,18 @@
             </ul>
             <ul>
                 <li>
-                    <button type="button"class="btn btn-info" id="ascendingOrderButton"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> 昇順</button>
-                    <button type="button"class="btn btn-info" id="descendingOrderButton">  <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> 降順</button>
+                    <button type="button" class="btn btn-info" id="ascendingOrderButton"><span
+                            class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> 昇順
+                    </button>
+                    <button type="button" class="btn btn-info" id="descendingOrderButton"><span
+                            class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> 降順
+                    </button>
 
                 </li>
                 <li>
                     <button type="button" class="btn btn-info" id="showFavoritesButton" value="0">
-                         <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> いいね！<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> いいね！<span
+                            class="glyphicon glyphicon-heart" aria-hidden="true"></span>
                     </button>
                 </li>
                 <li>
@@ -145,7 +167,9 @@
                     </div>
                 </li>
                 <li>
-                    <button type="button"  class="btn-danger" id="resetButton"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>  リセット</button>
+                    <button type="button" class="btn-danger" id="resetButton"><span class="glyphicon glyphicon-repeat"
+                                                                                    aria-hidden="true"></span> リセット
+                    </button>
                 </li>
             </ul>
         </div>
@@ -158,14 +182,15 @@
     </div>
     <div class="bs-example" data-example-id="bordered-table">
         <div class="panel panel-default">
-            <div class="panel-heading" style="font-weight: bold;"><span class="glyphicon glyphicon-th" aria-hidden="true"> </span>
+            <div class="panel-heading" style="font-weight: bold;"><span class="glyphicon glyphicon-th"
+                                                                        aria-hidden="true"> </span>
                 履歴リスト
             </div>
 
             <table class="table table-bordered">
                 <thead>
                 <tr class="active">
-                    <th>  <span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> ID</th>
+                    <th><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> ID</th>
                     <th><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> 知りたい単語</th>
                     <th><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> 翻訳した単語</th>
                     <th><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> 最終クエリ時間</th>
@@ -189,7 +214,8 @@
                                 <form method="POST" action="/delete_translation_list">
                                     <input type="hidden" name="nid" value="{{ item.id }}">
                                     <button type="submit" class="btn btn-danger btn-xs">
-                                        <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> 削除</button>
+                                        <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> 削除
+                                    </button>
                                 </form>
                             </div>
 
