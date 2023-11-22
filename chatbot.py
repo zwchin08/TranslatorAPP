@@ -5,7 +5,6 @@ import chatgpt_robot
 
 chat_bp = Blueprint('chat_bp', __name__)
 
-# 配置数据库连接信息
 DB_CONFIG = {
     "host": "localhost",
     "port": 3306,

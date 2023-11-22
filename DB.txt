@@ -1,0 +1,59 @@
+MySqlを使って
+
+1.DBを作る
+
+-- auto-generated definition
+create schema translationapp collate utf8mb4_general_ci;
+
+
+2.table を作る
+
+--ユーザーのtable
+
+-- auto-generated definition
+create table admin
+(
+    id       int auto_increment
+        primary key,
+    username varchar(16)  not null,
+    email    varchar(40)  not null,
+    password varchar(128) not null
+);
+
+
+--履歴のページのtable
+
+
+-- auto-generated definition
+create table history_list
+(
+    id              int unsigned auto_increment comment '履歴のID'
+        primary key,
+    input_language  tinyint unsigned           not null comment '入力言語, 说明: 1 日语, 2 英语 3 中文 4 缅甸语',
+    input_text      varchar(300)               null comment '入力内容',
+    output_language tinyint unsigned           not null comment '出力言語, 说明: 1 日语, 2 英语 3 中文 4 缅甸语',
+    output_text     varchar(300)               null comment '出力内容',
+    collect         tinyint unsigned default 0 null comment 'いいね！, 说明: 1 いいね！,2 良くない',
+    user_id         int unsigned               null comment 'ユーザID',
+    create_time     date                       not null comment '作成時間',
+    update_time     date                       not null comment '更新時間'
+)
+    comment '履歴';
+
+
+
+--パスワード変更のtaken記録
+
+
+-- auto-generated definition
+create table password_reset_tokens
+(
+    id         int auto_increment
+        primary key,
+    user_id    int                                 null,
+    token      varchar(64)                         null,
+    created_at timestamp default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP,
+    expires_at timestamp default CURRENT_TIMESTAMP not null
+);
+
+

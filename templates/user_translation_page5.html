@@ -25,13 +25,13 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/user_translation_page/4">Translation Interface</a></li>
+                <li><a href="/user_translation_page/0">翻译画面</a></li>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">Language Selection<span class="caret"></span></a>
+                           aria-expanded="false">语言选择<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="/user_translation_page/0">日本語</a></li>
+                             <li><a href="/user_translation_page/0">日本語</a></li>
                             <li><a href="/user_translation_page/4">English</a></li>
                             <li><a href="/user_translation_page/5">中文</a></li>
 {#                            <li><a href="/top/4">မြန်မာဘာသာ</a></li>#}
@@ -50,9 +50,9 @@
                        aria-expanded="false"> <img width="25" height="25"
                                                    src="/static/img/icon-user.jpg"><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/login/1">log in</a></li>
+                        <li><a href="/login/1">登录</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="/add_user/1">sign up</a></li>
+                        <li><a href="/add_user/1">注册</a></li>
                     </ul>
                 </li>
             </ul>
@@ -64,26 +64,26 @@
     <div>
          <ol class="breadcrumb">
             <li><a href="/top/1">C-Tream-APP</a></li>
-             <li><a href="/top/2">Top page</a></li>
-            <li><a href="#">To translate</a></li>
+             <li><a href="/top/2">主页</a></li>
+            <li><a href="#">翻译页</a></li>
             <li class="active">SHOW</li>
         </ol>
-        <form action="/user_translation_page/4" method="post">
-            <label for="inputLanguage">Input language：</label>
-          	<input type="text"  name="inputLanguage" id="inputLanguage" placeholder=" input your language"  required>
+        <form action="/user_translation_page/5" method="post">
+            <label for="inputLanguage">输入言語：</label>
+          	<input type="text"  name="inputLanguage" id="inputLanguage" placeholder="输入您想要输入的语言"  required>
             <br>
-            <label for="textToTranslate">The text you want to be translated：</label>
+            <label for="textToTranslate">您想翻译的文章：</label>
             <br>
             <textarea class="form-control" name="textToTranslate" id="textToTranslate" rows="9" style="background: #DBDDDA;"
-                      placeholder="Please enter the text."></textarea>
+                      placeholder="文章を入力してください"></textarea>
             <br>
-            <label for="outputLanguage">Output language：</label>
-            <input type="text" name="outputLanguage" id="outputLanguage" placeholder="input your language"  required>
+            <label for="outputLanguage">输出语言：</label>
+            <input type="text" name="outputLanguage" id="outputLanguage" placeholder="输入您想输出的语言"  required>
             <div style="margin-bottom: 10px">
-                <input type="submit" name="" id="" value="翻訳">
+                <input type="submit" name="" id="" value="翻译">
             </div>
         </form>
-        <a class="btn btn-primary btn-xs" href="#">Translation result</a>
+        <a class="btn btn-primary btn-xs" href="#">翻译結果</a>
         <!-- 処理した結果ここの<div>に表示する -->
         <div id="result" name="result" style="position: relative; background: #F7F7F9;">
             <button class="copy-button" id="copy-button" data-clipboard-target="#text-to-copy"

@@ -23,10 +23,10 @@ def close_database_connection(conn, cursor):
     conn.close()
 
 
-@history_bp.route("/user_translate_history", methods=["GET", "POST"])
-def user_translate_history():
+@history_bp.route("/user_translate_history/<int:index>", methods=["GET", "POST"])
+def user_translate_history(index):
     if request.method == "GET":
-        return render_template("user_translate_history1.html")
+        return render_template(f"user_translate_history{index}.html")
     if request.method == "POST":
         data = request.get_json()
         print(data)
@@ -104,8 +104,8 @@ def user_translate_history():
         })
 
 
-@history_bp.route("/mark_item_updated", methods=["POST"])
-def update_translation_item():
+@history_bp.route("/mark_item_updated/<int:index>", methods=["POST"])
+def update_translation_item(index):
     if request.method == "POST":
         data = request.json
         get_id = data.get("id")
@@ -131,17 +131,17 @@ def update_translation_item():
             cursor.close()
             conn.close()
 
-            return render_template("user_translate_history1.html")
+            return render_template(f"user_translate_history{index}.html")
         else:
             return jsonify({"success": False, "message": "Invalid request"})
 
 
-@history_bp.route("/delete_item", methods=['POST'])
-def delete_translation_list():
+@history_bp.route("/delete_item/<int:index>", methods=['POST'])
+def delete_translation_list(index):
     nid = request.json.get('id')
     conn = connect_to_database()
     cursor = conn.cursor()
     cursor.execute("DELETE FROM  history_list WHERE id = %s", (nid,))
     conn.commit()
     close_database_connection(conn, cursor)
-    return redirect('/user_translate_history')
+    return redirect(f'/user_translate_history/<int:{index}>')

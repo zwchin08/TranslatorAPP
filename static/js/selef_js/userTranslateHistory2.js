@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
         // fetch を使用してデータオブジェクトをバックエンドに送信する
-        fetch("/user_translate_history/1", {
+        fetch("/user_translate_history/2", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -180,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const updateForm = document.createElement("form");
             updateForm.method = "POST";
-            updateForm.action = "/update_translation_item/1";
+            updateForm.action = "/update_translation_item/2";
             let updateButton = createButton("🤍", "btn btn-primary btn-xs");
             console.log(item[4]);
             if (item[4] == 0) {
@@ -191,8 +191,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const deleteForm = document.createElement("form");
             deleteForm.method = "POST";
-            deleteForm.action = "/delete_translation_list/1";
-            const deleteButton = createButton(" 削除", "btn btn-danger btn-xs" );
+            deleteForm.action = "/delete_translation_list/2";
+            const deleteButton = createButton("Delete", "btn btn-danger btn-xs" );
 
             const hiddenInput = document.createElement("input");
             hiddenInput.type = "hidden";
@@ -234,12 +234,12 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log("id是" + itemId);
 
             if (target.classList.contains("btn-primary")) {
-                if (target.textContent === "♥いいね♥") {
+                if (target.textContent === "♥I like it♥") {
                     // すでに表示されている ♥いいね♥、テキストを ♥ に変更
                     target.textContent = "🤍";
                     sendFavToBackend(itemId, 0);
                 } else {
-                    target.textContent = "♥いいね♥";
+                    target.textContent = "♥I like it♥";
                     sendFavToBackend(itemId, 1);
                 }
             } else if (target.classList.contains("btn-danger")) {
@@ -252,7 +252,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //ファヴの値をバックエンドに送信するための新しい関数を追加
     function sendFavToBackend(itemId, favValue) {
-        fetch("/mark_item_updated/1", {
+        fetch("/mark_item_updated/2", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -271,7 +271,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     function sendDeleteRequest(itemId) {
-        fetch("/delete_item/1", {
+        fetch("/delete_item/2", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -320,7 +320,7 @@ document.addEventListener("DOMContentLoaded", function () {
             page: pageNumber,
         };
 
-        fetch("/user_translate_history/1", {
+        fetch("/user_translate_history/2", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -33,7 +33,7 @@ def close_database_connection(conn, cursor):
     conn.close()
 
 
-# 导入 user_routes.py 并注册 Blueprint
+# 「user_routes.py」をインポートし、Blueprintに登録
 from user_info import user_bp
 
 app.register_blueprint(user_bp)
@@ -48,6 +48,26 @@ app.register_blueprint(chat_bp)
 from user_translate_history import history_bp
 
 app.register_blueprint(history_bp)
+
+'''
+Connect Phone
+'''
+
+from flask_socketio import SocketIO
+
+socketio = SocketIO(app)
+
+
+@app.route('/index')
+def index():
+    return render_template('phone.html')
+
+
+@socketio.on('message')
+def handle_message(message):
+    if 'type' in message and message['type'] == 'computerInput':
+        socketio.emit('message', message)
+
 
 '''
 ホームページにアクセス
@@ -83,7 +103,7 @@ def login(index):
 
 
 '''
-1.忘记密码 ——》2.邮箱--》3.重置密码
+1.パスワードを忘れる ⟶ 2. メールボックス ⟶ 3. パスワードをリセット
 '''
 
 
@@ -128,18 +148,16 @@ def insert_translation(input_language, input_text, output_language, output_text)
         'en-US': 2,
         'zh-CN': 3,
         'my-MM': 4,
-        # 在这里继续添加其他语言的映射
     }
-    input_language_id = language_mapping.get(input_language, 0)  # 默认值为0
-    output_language_id = language_mapping.get(output_language, 0)  # 默认值为0
-
+    input_language_id = language_mapping.get(input_language, 0)  # Default value is 0
+    output_language_id = language_mapping.get(output_language, 0)  # Default value is 0
     # print(f"Input Language from Form: {input_language}")
     # print(f"Output Language from Form: {output_language}")
     #
     # print(f"Input Language: {input_language}, Mapped ID: {input_language_id}")
     # print(f"Output Language: {output_language}, Mapped ID: {output_language_id}")
 
-    # 在插入数据库时使用整数值
+    # データベースに挿入する際に整数値を使用します
     insert_query = 'INSERT INTO history_list(input_language, input_text, output_language, output_text, collect, user_id, create_time, update_time) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)'
     cursor.execute(insert_query, (
         input_language_id, input_text, output_language_id, output_text, collect, user_id, create_time, update_time))
@@ -150,7 +168,7 @@ def insert_translation(input_language, input_text, output_language, output_text)
 @app.route("/user_translation_page/<int:index>", methods=["GET", "POST"])
 def input_translate_output(index):
     if request.method == "GET":
-        if index in range(0, 5):
+        if index in range(0, 6):
             return render_template(f"user_translation_page{index}.html")
         else:
             return "Invalid index"
@@ -268,5 +286,7 @@ def yemian():
     return render_template("depart_add.html")
 
 
+# if __name__ == '__main__':
+#     app.run()
 if __name__ == '__main__':
-    app.run()
+    socketio.run(app, host='0.0.0.0', port=5000, debug=True)

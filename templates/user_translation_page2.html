@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Translate Tool</title>
     <link rel="stylesheet" href="/static/plugins/bootstrap-3.4.1/bootstrap-3.4.1-dist/css/bootstrap.css">
     <link rel="stylesheet" href="/static/plugins/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css">
-     <link rel="stylesheet" href="/static/css/userTranslateHistory.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+    <link rel="stylesheet" href="/static/css/userTranslateHistory.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
+    <!-- v5 -->
+    <script src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js'></script>
 
 </head>
 
@@ -27,93 +29,108 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/user_translation_page/2">To translate </a></li>
-                <li><a href="/show_translation_list">History screen</a></li>
-                 <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-haspopup="true" aria-expanded="false">Language selection<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/user_translation_page/1">日本語</a></li>
-                            <li><a href="/user_translation_page/2">English</a></li>
-                            <li><a href="/user_translation_page/3">中文</a></li>
-                            <li><a href="/user_translation_page/4">မြန်မာဘာသာ</a></li>
-                        </ul>
-                    </li>
-                </ul>
-
-                <li><a href="#">Link</a></li>
-
-                 <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true" aria-expanded="false">Other apps<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                                <li><a href="/user_translation_page/1">Chatbot</a></li>
-                            <li><a href="/user_translation_page/2">Data analysis</a></li>
-                            <li><a href="/user_translation_page/3">PatrolBot</a></li>
-                            <li><a href="/user_translation_page/4">Management system</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                <li><a href="/user_translation_page/2">Translation Interface</a></li>
+                <li><a href="/user_translate_history/2">Translated List</a></li>
             </ul>
+            <ul class="nav navbar-nav ">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false">Language select<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/user_translation_page/1">日本語</a></li>
+                        <li><a href="/user_translation_page/2">English</a></li>
+                        <li><a href="/user_translation_page/3">中文</a></li>
+{#                        <li><a href="/user_translation_page/4">မြန်မာဘာသာ</a></li>#}
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav ">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false">Other Apps<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/user_chatbot_page/2">Chat Bot</a></li>
+                        <li><a href="#">Data Analysis</a></li>
+                        <li><a href="#">Patrol Robot</a></li>
+                        <li><a href="#">Management System</a></li>
+                    </ul>
+                </li>
+            </ul>
+
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false"> <img width="32px" src="/static/img/user1.jpg"><span
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false"> <img width="32px" src="/static/img/user1.jpg"><span
                             class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Personal information</a></li>
-                        <li><a href="#">Password change</a></li>
+                        <li><a href="/user_info/1">Personal Information</a></li>
+                        <li><a href="#">Change Password</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="/index1.html">LogOut</a></li>
+                        <li><a href="/logout/1"> <span class="glyphicon glyphicon-off" aria-hidden="true"></span> Log Out</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
-<div class="overlay"></div>
 <div class="container">
     <div>
-         <ol class="breadcrumb">
+        <ol class="breadcrumb">
+            <!-- 面包屑导航 -->
             <li><a href="/top/1">C-Tream-APP</a></li>
-            <li><a href="#">To translate</a></li>
+            <li><a href="#">Translation Interface</a></li>
             <li class="active">SHOW</li>
         </ol>
-        <form action="/user_translation_page/1" method="post">
-            <label for="inputLanguage">Input language：</label>
-            <select name="inputLanguage" id="inputLanguage">
-                <option value="">language selection</option>
-                <option value="english">English</option>
-                <option value="japanese">日本語</option>
-                <option value="chinese">中文</option>
-                <option value="Burmese">န်မာဘာသာ</option>
-            </select>
+        <form action="/user_translation_page/2" method="post">
+
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <!-- 入力言語部分 -->
+                <div style="position: relative; top: 2px;">
+                    <span class="glyphicon glyphicon-open-file" aria-hidden="true"></span> <label for="inputLanguage">Input Language：</label>
+                    <select name="inputLanguage" id="inputLanguage">
+                        <option value="">Desired Input Language.</option>
+                        <option value="en-US">英語</option>
+                        <option value="ja-JP">日本語</option>
+                        <option value="zh-CN">中国語</option>
+                        <option value="my-MM">ミャンマー語</option>
+                    </select>
+                    <button type="button" style="background:white; margin-left: 10px;" id="voiceButton">
+                        <img width="15px" src="/static/img/mc.jpg" alt="话筒图标">
+                    </button>
+                </div>
+                <div style="display: flex; align-items: center; margin-left: 10%;">
+                    <input type="file" id="imageInput" accept="image/*" style="margin-left: 340px;">
+                    <button class="btn-info" type="button" id="imageButton" style="margin-left: 10px;">Image Recognition</button>
+                </div>
+            </div>
             <br>
-            <label for="textToTranslate">The text you want to be translated：</label>
+            <label for="textToTranslate">Text to be translated:</label>
             <br>
-            <textarea class="form-control" name="textToTranslate" id="textToTranslate" rows="10" style="background: #DBDDDA;"
-                      placeholder="Please enter the text."></textarea>
+            <textarea class="form-control" name="textToTranslate" id="textToTranslate" rows="10"
+                      style="background: #DBDDDA;"
+                      placeholder="Please enter the text to be translated."></textarea>
             <br>
-            <label for="outputLanguage">Output language：</label>
+            <span class="glyphicon glyphicon-save-file" aria-hidden="true"></span> <label
+                for="outputLanguage">Output Language:</label>
             <select name="outputLanguage" id="outputLanguage">
-                <option value="">language selection</option>
-               <option value="english">English</option>
-                <option value="japanese">日本語</option>
-                <option value="chinese">中文</option>
-                <option value="Burmese">န်မာဘာသာ</option>
+                <option value="">Target Language</option>
+                <option value="en-US">英語</option>
+                <option value="ja-JP">日本語</option>
+                <option value="zh-CN">中国語</option>
+                <option value="my-MM">ミャンマー語</option>
             </select>
             <div style="margin-bottom: 10px">
-                <input type="submit" name="" id="" value="Translation">
+                <input type="submit" name="" id="" value="Translate">
             </div>
         </form>
-        <a class="btn btn-primary btn-xs" href="/depart/20/edit/">Translation result</a>
+        <a class="btn btn-primary btn-xs" href="#">Translate Result </a>
         <!-- 処理した結果ここの<div>に表示する -->
         <div id="result" name="result" style="position: relative; background: #F7F7F9;">
             <button class="copy-button" id="copy-button" data-clipboard-target="#text-to-copy"
                     style="background-color: dimgrey; color: #fff; padding: 1px; float: right; border: none;">
-                Copy code
+               <span class="glyphicon glyphicon-copy" aria-hidden="true"></span> Copy code
             </button>
             <textarea id="text-to-copy" class="form-control" rows="10"
                       style="background: #DBDDDA;">{{ result }}</textarea>
@@ -121,13 +138,9 @@
         </div>
     </div>
 </div>
-</div>
-</div>
-<script src="/static/index.js"></script>
 <script src="/static/plugins/jquery-3.6.0.min.js"></script>
 <script src="/static/plugins/bootstrap-3.4.1/bootstrap-3.4.1-dist/js/bootstrap.js"></script>
 <script src="/static/js/selef_js/userTranslationPage.js"></script>
-
+<script src="/static/index.js"></script>
 </body>
-
 </html>

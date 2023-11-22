@@ -35,16 +35,16 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="/user_translation_page/1">翻訳画面</a></li>
-                <li><a href="/user_translate_history">履歴画面</a></li>
+                <li><a href="/user_translate_history/1">履歴画面</a></li>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                            aria-haspopup="true" aria-expanded="false">言語選択<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="/user_translation_page/1">日本語</a></li>
-                            <li><a href="/user_translation_page/2">English</a></li>
-                            <li><a href="/user_translation_page/3">中文</a></li>
-                            <li><a href="/user_translation_page/4">မြန်မာဘာသာ</a></li>
+                            <li><a href="/user_translate_history/1">日本語</a></li>
+                            <li><a href="/user_translate_history/2">English</a></li>
+                            <li><a href="/user_translate_history/3">中文</a></li>
+{#                            <li><a href="/user_translation_page/4">မြန်မာဘာသာ</a></li>#}
                         </ul>
                     </li>
                 </ul>
@@ -90,51 +90,54 @@
         <div class="select">
             <ul>
                 <li>
+{#                    <label>入力言語:</label>#}
                     <div class="btn-group">
-                        <select class="btn btn-info" id="inputLanguageDropdown">
-                            <option value="">(入力言語を選んでください)</option>
-                            <option value="en-US">英語</option>
-                            <option value="ja-JP">日本語</option>
-                            <option value="zh-CN">中国語</option>
-                            <option value="my-MM">ミャンマー語</option>
-                        </select>
-{#                        <button type="button" class="btn btn-info" id="inputLanguageButton">入力言語</button>#}
-{#                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"#}
-{#                                aria-haspopup="true" aria-expanded="false">#}
-{#                            <span class="caret"></span>#}
-{#                            <span class="sr-only">Toggle Dropdown</span>#}
-{#                        </button>#}
-{#                        <ul class="dropdown-menu" id="inputLanguageDropdown">#}
-{#                            <li><a href="#">日本語</a></li>#}
-{#                            <li><a href="#">English</a></li>#}
-{#                            <li><a href="#">中文</a></li>#}
-{#                            <li><a href="#">မြန်မာဘာသာ</a></li>#}
-{#                        </ul>#}
+{##}
+{#                        <select class="btn btn-info" id="inputLanguageDropdown">#}
+{#                            <option value="">(選んでください)</option>#}
+{#                            <option value="en-US">英語</option>#}
+{#                            <option value="ja-JP">日本語</option>#}
+{#                            <option value="zh-CN">中国語</option>#}
+{#                            <option value="my-MM">ミャンマー語</option>#}
+{#                        </select>#}
+                        <button type="button" class="btn btn-info" id="inputLanguageButton">入力言語</button>
+                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" id="inputLanguageDropdown">
+                            <li><a href="#">日本語</a></li>
+                            <li><a href="#">English</a></li>
+                            <li><a href="#">中文</a></li>
+                            <li><a href="#">မြန်မာဘာသာ</a></li>
+                        </ul>
                     </div>
                 </li>
                 <li>
+{#                     <label >出力言語:</label>#}
                     <div class="btn-group">
-                        <label ></label>
-                         <select class="btn btn-info" id="outputLanguageDropdown">
-                            <option value="">(出力言語を選んでください)</option>
-                            <option value="en-US">英語</option>
-                            <option value="ja-JP">日本語</option>
-                            <option value="zh-CN">中国語</option>
-                            <option value="my-MM">ミャンマー語</option>
-                        </select>
+{##}
+{#                         <select class="btn btn-info" id="outputLanguageDropdown">#}
+{#                            <option value="">(選んでください)</option>#}
+{#                            <option value="en-US">英語</option>#}
+{#                            <option value="ja-JP">日本語</option>#}
+{#                            <option value="zh-CN">中国語</option>#}
+{#                            <option value="my-MM">ミャンマー語</option>#}
+{#                        </select>#}
 
-{#                        <button type="button" class="btn btn-info" id="outputLanguageButton">出力言語</button>#}
-{#                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"#}
-{#                                aria-haspopup="true" aria-expanded="false">#}
-{#                            <span class="caret"></span>#}
-{#                            <span class="sr-only">Toggle Dropdown</span>#}
-{#                        </button>#}
-{#                        <ul class="dropdown-menu" id="outputLanguageDropdown">#}
-{#                            <li><a href="#">日本語</a></li>#}
-{#                            <li><a href="#">English</a></li>#}
-{#                            <li><a href="#">中文</a></li>#}
-{#                            <li><a href="#">န်မာဘာသာ</a></li>#}
-{#                        </ul>#}
+                        <button type="button" class="btn btn-info" id="outputLanguageButton">出力言語</button>
+                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" id="outputLanguageDropdown">
+                            <li><a href="#">日本語</a></li>
+                            <li><a href="#">English</a></li>
+                            <li><a href="#">中文</a></li>
+                            <li><a href="#">န်မာဘာသာ</a></li>
+                        </ul>
                     </div>
                 </li>
                 <li>か ら: <input class="btn-info" type="date" id="startDate"></li>
@@ -182,7 +185,7 @@
     </div>
     <div class="bs-example" data-example-id="bordered-table">
         <div class="panel panel-default">
-            <div class="panel-heading" style="font-weight: bold;"><span class="glyphicon glyphicon-th"
+            <div class="panel-heading" style="font-weight: bold;"><span class="glyphicon glyphicon-list-alt"
                                                                         aria-hidden="true"> </span>
                 履歴リスト
             </div>
@@ -207,11 +210,11 @@
                         <td>{{ item.outputtext }}</td>
                         <td>
                             <div class="btn-container">
-                                <form method="POST" action="/update_translation_item">
+                                <form method="POST" action="/update_translation_item/1">
                                     <input type="hidden" name="nid" value="{{ item.id }}">
                                     <button type="submit" name="Fav" class="btn btn-primary btn-xs">🤍</button>
                                 </form>
-                                <form method="POST" action="/delete_translation_list">
+                                <form method="POST" action="/delete_translation_list/1">
                                     <input type="hidden" name="nid" value="{{ item.id }}">
                                     <button type="submit" class="btn btn-danger btn-xs">
                                         <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> 削除
