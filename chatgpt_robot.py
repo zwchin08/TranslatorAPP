@@ -22,9 +22,7 @@ def chatgpt_robot(theInputLanguage, theOutputLanguage, text):
     )
 
     print(completion.choices[0].message.content)
-
     result = completion.choices[0].message.content
-
     return result
 
 
@@ -45,7 +43,6 @@ def chatbot(text):
     )
 
     result = completion.choices[0].message.content
-
     return result
 
 

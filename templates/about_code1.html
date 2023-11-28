@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translate Tool</title>
+    <link rel="stylesheet" href="/static/plugins/bootstrap-3.4.1/bootstrap-3.4.1-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/plugins/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/userTranslateHistory.css">
+    <script src="/static/plugins/jquery-3.6.0.min.js"></script>
+    <style>
+        .navbar {
+            border-radius: 0px;
+        }
+
+        .navbar-brand {
+            line-height: 32px;
+        }
+
+        .navbar-nav > li > a {
+            line-height: 32px;
+        }
+
+
+        h1 {
+            text-align: center;
+            font-weight: bolder;
+            margin-top: 60px;
+            margin-bottom: 70px;
+        }
+
+        body {
+            background: #EDEDE8;
+        }
+
+        /* 页面容器样式 */
+        .page-container {
+            max-width: 75%; /* 设置最大宽度 */
+            margin: 0 auto; /* 居中对齐 */
+            padding: 20px; /* 添加内边距 */
+        }
+
+        /* 面包屑导航样式 */
+        .breadcrumb {
+            background-color: #f8f9fa; /* 设置背景颜色 */
+            padding: 8px 15px; /* 添加内边距 */
+            border-radius: 4px; /* 设置边框圆角 */
+        }
+
+        .breadcrumb li {
+            display: inline; /* 横向排列 */
+            margin-right: 5px; /* 间距 */
+        }
+
+        /* 标题样式 */
+        h1 {
+            text-align: center;
+            font-weight: bolder;
+            margin-top: 60px;
+        }
+
+        /* 段落样式 */
+        p {
+            line-height: 1.6; /* 设置行高 */
+            text-indent: 1em;
+            font-family: "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic", "メイリオ", sans-serif;
+            margin-bottom: 20px;
+        }
+
+        /* 第一段的字体样式 */
+        p:first-of-type {
+            font-family: 'Font1', sans-serif; /* 用你喜欢的字体替代 'Font1' */
+        }
+
+        /* 最后一段的字体样式 */
+        p:last-of-type {
+            font-family: 'Font1', sans-serif; /* 用你喜欢的字体替代 'Font1' */
+        }
+
+        /* 强调文字样式 */
+        strong {
+            font-weight: bold; /* 设置文字加粗 */
+        }
+
+        /* 图片样式 */
+        img {
+            max-width: 100%; /* 图片宽度不超过其容器 */
+            height: auto; /* 图片高度自适应 */
+        }
+
+        /* 省略其他样式，保留页面容器的样式 */
+        .page-container {
+            max-width: 75%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #dddddd;
+            border-radius: 5px;
+            box-shadow: 5px 5px 20px #aaa;
+        }
+
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/top/1"> <img width="160px" src="/static/img/logola.png"></a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="/user_translation_page/1">翻訳画面</a></li>
+                <li><a href="/user_translate_history/1">履歴画面</a></li>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false">言語選択<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/user_translate_history/1">日本語</a></li>
+                            <li><a href="/user_translate_history/2">English</a></li>
+                            <li><a href="/user_translate_history/3">中文</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false">他のAPP<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/user_translation_page/1">チャットボット</a></li>
+                            <li><a href="#">データー分析</a></li>
+                            <li><a href="#">巡回ボード</a></li>
+                            <li><a href="#">管理システム</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"> <img width="32px" src="/static/img/user1.jpg"><span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/user_info/1">個人情報</a></li>
+                        <li><a href="#">パスワード変更</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/logout/1"> <span class="glyphicon glyphicon-off" aria-hidden="true"></span> ログアウト</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br>
+<br>
+<div class="page-container">
+    <ol class="breadcrumb">
+        <!-- 現在の画面の位置-->
+        <li><a href="#">C-Tream-APP</a></li>
+        <li><a href="#">このサイトについて</a></li>
+        <li class="active">SHOW</li>
+    </ol>
+    <h1>開発の資料について</h1>
+    <p style="margin-bottom: 40px">当ウェブサイトをご利用いただきありがとうございます。以下は、ウェブサイトの開発の資料についての重要な情報です。</p>
+    <h3>1. 開発進捗</h3>
+    <p>プロジェクトの開発進捗は、以下のリンクから確認できます：<a href="http://your-development-process-link">開発進捗</a></p>
+
+    <h3>2. 使用技術</h3>
+    <p>今回の開発で使用した技術：</p>
+        <p><strong>フロントエンド技術：</strong>HTML, CSS ,JavaScript ,jQuery ,Bootstrap ,Ajax</p>
+
+        <p> <strong>バックエンド技術：</strong>Python,Flask,MySQL</p>
+    <h3>3. 開発ツール</h3>
+    <p>開発プロセスで使用したツール：</p>
+        <li style="margin-left: 20px">開発環境：PyCharm</li>
+        <li style="margin-left: 20px">プログラミング言語：Python</li>
+
+
+    <h3>4. 技術とAPIのドキュメント</h3>
+    <p>具体的な技術とAPIの説明は、以下のリンクから確認できます：</p>
+
+        <li style="margin-left: 20px">技術ドキュメント：<a href="http://your-technical-documentation-link">技術ドキュメント</a></li>
+        <li style="margin-left: 20px">APIドキュメント：<a href="http://your-api-documentation-link">APIドキュメント</a></li>
+
+
+    <h3>5. 開発ソースコード</h3>
+    <p>プロジェクトのソースコードは、以下のリンクから確認できます：</p>
+        <li style="margin-left: 20px">ソースコード：<a href="http://your-source-code-link">ソースコード</a></li>
+
+
+    <P style="margin-top: 60px">
+        当サイトをご選択いただきありがとうございます。何か質問や提案があれば、いつでもサポートチームにお問い合わせください。学習とサービスのご利用を成功させることをお祈りしています。</P>
+
+    <div class="chen" style="text-align: center ">
+        <a class="about-link " href="/about_website"
+           style="width: 50%;">サイトの利用ガイド</a>
+        <span>|</span>
+        <a class="portfolio-link" href="/about_website2"
+           style="width: 50%;">お問い合わせ</a>
+    </div>
+
+
+
+</div>
+
+
+<script src="/static/plugins/jquery-3.6.0.min.js"></script>
+<script src="/static/plugins/bootstrap-3.4.1/bootstrap-3.4.1-dist/js/bootstrap.js"></script>
+</body>
+</html>

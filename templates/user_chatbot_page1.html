@@ -8,38 +8,7 @@
     <link rel="stylesheet" href="/static/plugins/bootstrap-3.4.1/bootstrap-3.4.1-dist/css/bootstrap.css">
     <link rel="stylesheet" href="/static/plugins/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
-
-    <style>
-        .navbar {
-            border-radius: 0;
-        }
-
-        .navbar-brand img {
-            position: relative;
-            bottom: 9px;
-            background: #808080;
-        }
-
-        .navbar-brand {
-            line-height: 32px; /* 与图标高度一致，根据需要进行调整 */
-        }
-
-        .navbar-nav > li > a {
-            line-height: 32px; /* 与图标高度一致，根据需要进行调整 */
-        }
-
-        .copy-bar {
-            background-color: #f8f9fa;
-            /* ChatGPT 风格的灰色背景 */
-            height: 5px;
-            /* 条形框的高度 */
-            width: 100%;
-            /* 条形框的宽度，与父元素宽度相同 */
-            margin-top: 0px;
-            /* 上外边距，将条形框与输出框分隔开 */
-        }
-
-    </style>
+     <link rel="stylesheet" href="/static/css/userTranslateHistory.css">
 </head>
 
 <body>
@@ -47,7 +16,6 @@
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="/top/1"> <img width="160px" src="/static/img/logola.png"></a>
-
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
@@ -59,45 +27,45 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="/user_translation_page/1">翻訳画面</a></li>
-                <li><a href="/show_translation_list">履歴画面</a></li>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-haspopup="true" aria-expanded="false">言語選択<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/user_translation_page/1">日本語</a></li>
-                            <li><a href="/user_translation_page/2">English</a></li>
-                            <li><a href="/user_translation_page/3">中文</a></li>
-                            <li><a href="/user_translation_page/4">မြန်မာဘာသာ</a></li>
-                        </ul>
-                    </li>
-                </ul>
-
-                <li><a href="#">Link</a></li>
-
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-haspopup="true" aria-expanded="false">他のAPP<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/user_chatbot_page/1">チャットボット</a></li>
-                            <li><a href="/user_translation_page/2">データー分析</a></li>
-                            <li><a href="/user_translation_page/3">巡回ボード</a></li>
-                            <li><a href="/user_translation_page/4">管理システム</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                <li><a href="/user_translate_history/1">履歴画面</a></li>
             </ul>
+{#            <ul class="nav navbar-nav ">#}
+{#                <li class="dropdown">#}
+{#                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"#}
+{#                       aria-haspopup="true" aria-expanded="false">言語選択<span class="caret"></span></a>#}
+{#                    <ul class="dropdown-menu">#}
+{#                        <li><a href="/user_translation_page/1">日本語</a></li>#}
+{#                        <li><a href="/user_translation_page/2">English</a></li>#}
+{#                        <li><a href="/user_translation_page/3">中文</a></li>#}
+{#                        <li><a href="/user_translation_page/4">မြန်မာဘာသာ</a></li>#}
+{#                    </ul>#}
+{#                </li>#}
+{#            </ul>#}
+
+            <ul class="nav navbar-nav ">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false">他のAPP<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/user_chatbot_page/1">チャットボット</a></li>
+                        <li><a href="/user_translation_page/2">データー分析</a></li>
+                        <li><a href="/user_translation_page/3">巡回ボード</a></li>
+                        <li><a href="/user_translation_page/4">管理システム</a></li>
+                    </ul>
+                </li>
+            </ul>
+
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false"> <img width="32px" src="/static/img/user1.jpg"><span
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false"> <img width="32px" src="/static/img/user1.jpg"><span
                             class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="/user_info/1">個人情報</a></li>
-                        <li><a href="#">パスワード変更</a></li>
+                        <li><a href="/user_info/1">パスワード変更</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="/logout/1">LogOut</a></li>
+                        <li><a href="/logout/1"> <span class="glyphicon glyphicon-off" aria-hidden="true"></span> ログアウト</a>
+                        </li>
                     </ul>
                 </li>
             </ul>

@@ -24,7 +24,6 @@ def close_database_connection(conn, cursor):
     conn.close()
 
 
-# 返回用户个人信息页
 @chat_bp.route("/user_chatbot_page/<int:index>", methods=["GET", "POST"])
 def user_chatbot_page(index):
     if request.method == "GET":
@@ -37,6 +36,3 @@ def user_chatbot_page(index):
         output_language = request.form.get("outputLanguage")
         result = chatgpt_robot.chatbot(text)
         return render_template(f"user_chatbot_page{index}.html", result=result)
-
-
-

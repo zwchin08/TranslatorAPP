@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translate Tool</title>
+    <link rel="stylesheet" href="/static/plugins/bootstrap-3.4.1/bootstrap-3.4.1-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/plugins/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/userTranslateHistory.css">
+    <style>
+        .navbar {
+            border-radius: 0px;
+        }
+        .navbar-brand {
+            line-height: 32px;
+        }
+
+        .navbar-nav > li > a {
+            line-height: 32px;
+        }
+
+        /* 新添加的样式 */
+        .page-container {
+            max-width: 75%;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #dddddd;
+            border-radius: 5px;
+            box-shadow: 5px 5px 20px #aaa;
+        }
+
+        h1 {
+            text-align: center;
+            font-weight: bolder;
+            margin-top: 60px;
+        }
+
+        h3 {
+            margin-top: 100px;
+        }
+
+        .ad {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+
+        body {
+            background: #EDEDE8;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 0px;
+        }
+
+        td {
+            border: 1px solid #ddd;
+            padding: 6px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            border: 1px solid #ddd;
+            padding: 1px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/top/1"> <img width="160px" src="/static/img/logola.png"></a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="/user_translation_page/1">翻訳画面</a></li>
+                <li><a href="/user_translate_history/1">履歴画面</a></li>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false">言語選択<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/user_translate_history/1">日本語</a></li>
+                            <li><a href="/user_translate_history/2">English</a></li>
+                            <li><a href="/user_translate_history/3">中文</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false">他のAPP<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/user_translation_page/1">チャットボット</a></li>
+                            <li><a href="#">データー分析</a></li>
+                            <li><a href="#">巡回ボード</a></li>
+                            <li><a href="#">管理システム</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"> <img width="32px" src="/static/img/user1.jpg"><span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/user_info/1">個人情報</a></li>
+                        <li><a href="#">パスワード変更</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/logout/1"> <span class="glyphicon glyphicon-off" aria-hidden="true"></span> ログアウト</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br>
+<br>
+<div class="page-container">
+    <ol class="breadcrumb">
+        <!-- 現在の画面の位置-->
+        <li><a href="#">C-Tream-APP</a></li>
+        <li><a href="#">このサイトについて</a></li>
+        <li class="active">SHOW</li>
+    </ol>
+    <h1>このサイトについて</h1>
+    <div class="item1">
+        <h3>1.ヘッダー・トップ画面 </h3>
+        <div class="ad">
+            <div class="left">
+                <img width="480px" src="/static/img/shuoming1.png">
+            </div>
+            <div class="right">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>NO.</th>
+                        <th>名前</th>
+                        <th>内容</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>サイトのロゴ</td>
+                        <td>トップページに戻ります</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>翻訳画面</td>
+                        <td>翻訳の画面に移動します</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>言語選択</td>
+                        <td>言語を日本語、英語などに表示変更できます</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>ユーザ</td>
+                        <td>ログイン・新規登録・パスワード変更できます</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>サイトの使い方</td>
+                        <td>サイトの使い方が載っています</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Cチームについて</td>
+                        <td>製作チームの情報が載っています</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>
+                            資料
+                        </td>
+                        <td>開発履歴・今後の活動・開発資料が載っています</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="item1">
+        <h3>2.翻訳画面(ログインなし) </h3>
+        <div class="ad">
+            <div class="left">
+                <img width="480px" src="/static/img/shuoming2.png">
+            </div>
+            <div class="right">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>NO.</th>
+                        <th>名前</th>
+                        <th>内容</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>入力言語</td>
+                        <td>入力言語を入力して指定できます</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>textボックス</td>
+                        <td>翻訳したい言語を指定します</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>出力言語</td>
+                        <td>出力言語を入力して指定できます</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>翻訳ボタン</td>
+                        <td>翻訳を開始します</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">※   ログインしないと履歴画面は使用できません</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="item1">
+        <h3>3.翻訳画面(ログインあり) </h3>
+        <div class="ad">
+            <div class="left">
+                <img width="480px" src="/static/img/shuoming3.png">
+            </div>
+            <div class="right">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>NO.</th>
+                        <th>名前</th>
+                        <th>内容</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>入力言語</td>
+                        <td>入力言語を指定できます</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>マイク</td>
+                        <td>音声で入力できます</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>ファイル選択ボタン</td>
+                        <td>ファイルを選択して文字を入力できます</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>textボックス</td>
+                        <td>翻訳したい言語を指定します</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>出力言語</td>
+                        <td>出力言語を指定できます</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>翻訳ボタン</td>
+                        <td>翻訳を開始します</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>翻訳結果</td>
+                        <td>翻訳の結果を表示します、コピーもできます</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="item1">
+        <h3>4.履歴検索画面 </h3>
+        <div class="ad">
+            <div class="left">
+                <img width="480px" src="/static/img/shuoming4.png">
+            </div>
+            <div class="right">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>NO.</th>
+                        <th>名前</th>
+                        <th>内容</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>入力・出力指定</td>
+                        <td>入力・出力言語を指定します</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>日付指定</td>
+                        <td>翻訳した日にちを指定します</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>昇順・降順</td>
+                        <td>新しい順・古い順に並べ替えします</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>いいね</td>
+                        <td>いいねした単語のみに絞り込みます</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>入力検索</td>
+                        <td>入力した単語のみに絞り込みます</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>設定破棄</td>
+                        <td>設定をリセットします</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td> 設定保存
+                        </td>
+                        <td>設定を保存・反映させます</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td> 履歴
+                        </td>
+                        <td>設定条件を満たした翻訳履歴が表示されます</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td> ページ
+                        </td>
+                        <td>表示しきれなかった翻訳履歴の次のページに移行できます</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="item1">
+        <h3>5.ユーザ画面 </h3>
+        <div class="ad">
+            <div class="left">
+                <img width="480px" src="/static/img/shuoming5.png">
+            </div>
+            <div class="right">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>NO.</th>
+                        <th>名前</th>
+                        <th>内容</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>ID</td>
+                        <td>ユーザのIDです		</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>パスワード</td>
+                        <td>ユーザのパスワードを表示します		</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>メアド</td>
+                        <td>ユーザのメールアドレスを表示します		</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>変更</td>
+                        <td>ユーザのパスワードを変更します		</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="item1">
+        <h3>6.ログイン関連画面   </h3>
+    </div>
+     <div class="item1" style="margin-top: 30px">
+        <h4>※ 新規登録とログイン</h4>
+    </div>
+     <div class="item1">
+        <div class="ad">
+            <div class="left">
+                <img width="660px" src="/static/img/shuoming6.png">
+            </div>
+            <div class="left">
+                <img width="460px" src="/static/img/shuoming7.png">
+            </div>
+        </div>
+          <div class="item1">
+        <h4>※ パスワード忘れたとログイン  </h4>
+    </div>
+         <div class="ad">
+            <div class="left">
+                <img width="660px" src="/static/img/shoming8.png">
+            </div>
+            <div class="left">
+                <img width="460px" src="/static/img/shuoming9.png">
+            </div>
+        </div>
+    </div>
+
+     <div class="item1">
+        <h3>3.翻訳画面(ログインあり) </h3>
+        <div class="ad">
+            <div class="left">
+                <img width="480px" src="/static/img/shuoming3.png">
+            </div>
+            <div class="right">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>NO.</th>
+                        <th>名前</th>
+                        <th>内容</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>入力言語</td>
+                        <td>入力言語を指定できます</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>マイク</td>
+                        <td>音声で入力できます</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>ファイル選択ボタン</td>
+                        <td>ファイルを選択して文字を入力できます</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>textボックス</td>
+                        <td>翻訳したい言語を指定します</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>出力言語</td>
+                        <td>出力言語を指定できます</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>翻訳ボタン</td>
+                        <td>翻訳を開始します</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>翻訳結果</td>
+                        <td>翻訳の結果を表示します、コピーもできます</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/static/plugins/jquery-3.6.0.min.js"></script>
+<script src="/static/plugins/bootstrap-3.4.1/bootstrap-3.4.1-dist/js/bootstrap.js"></script>
+</body>
+</html>

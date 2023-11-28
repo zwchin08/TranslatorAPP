@@ -135,14 +135,6 @@ def insert_translation(input_language, input_text, output_language, output_text)
     create_time = datetime.now()
     update_time = create_time
     collect = 0  # 默认值为0
-    # 使用字典或条件语句将前端字符串值映射为整数值
-    # language_mapping = {
-    #     'japanese': 1,
-    #     'english': 2,
-    #     'chinese': 3,
-    #     'Burmese': 4,
-    #     # 在这里继续添加其他语言的映射
-    # }
     language_mapping = {
         'ja-JP': 1,
         'en-US': 2,
@@ -204,9 +196,6 @@ def internal_server_error(e):
     return jsonify(error='内部服务器错误'), 500
 
 
-from flask import jsonify
-
-
 # 在某处定义错误处理程序
 @app.errorhandler(500)
 def internal_server_error(error):
@@ -262,6 +251,37 @@ def format_data(data):
         formatted_item["update_time"] = item["update_time"].strftime('%Y-%m-%d %H:%M:%S')
         formatted_data.append(formatted_item)
     return formatted_data
+
+
+@app.route("/about_website")
+def about_website():
+    return render_template("about_website.html")
+
+
+@app.route("/about_website1")
+def about_website1():
+    return render_template("about_website1.html")
+
+
+@app.route("/about_website2", methods=["GET", "POST"])
+def about_website2():
+    if request.method == "GET":
+        return render_template("about_website2.html")
+    elif request.method == "POST":
+        # 从 POST 请求中获取表单数据
+        name = request.form.get("name")
+        email = request.form.get("email")
+        message = request.form.get("message")
+        print(name, message)
+        # 连接数据库并执行插入操作
+        conn = connect_to_database()
+        cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
+        # language=sql
+        cursor.execute("INSERT INTO inquiries (name, email, message) VALUES (%s, %s, %s)",
+                       (name, email, message))
+        conn.commit()
+        close_database_connection(conn, cursor)
+        return "お問い合わせが送信されました。ありがとうございます！"
 
 
 @app.route("/getdatabase")

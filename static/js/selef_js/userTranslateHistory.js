@@ -123,6 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const requestData = {
             input_language: languageMapping[selectedInputLanguage],
             output_language: languageMapping[selectedOutputLanguage],
+
             start_date: selectedStartDate,
             end_date: selectedEndDate,
             sort_order: sortOrder,
