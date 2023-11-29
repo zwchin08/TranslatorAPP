@@ -29,11 +29,6 @@
             margin-top: 60px;
             margin-bottom: 70px;
         }
-
-        body {
-            background: #EDEDE8;
-        }
-
         /* 页面容器样式 */
         .page-container {
             max-width: 75%; /* 设置最大宽度 */
@@ -57,7 +52,6 @@
         h1 {
             text-align: center;
             font-weight: bolder;
-            margin-top: 60px;
         }
 
         /* 段落样式 */
@@ -89,20 +83,19 @@
             font-weight: bold; /* 设置文字加粗 */
         }
 
-        /* 图片样式 */
-        img {
-            max-width: 100%; /* 图片宽度不超过其容器 */
-            height: auto; /* 图片高度自适应 */
-        }
+
 
         /* 省略其他样式，保留页面容器的样式 */
         .page-container {
-            max-width: 75%;
+            max-width: 80%;
             margin: 0 auto;
             padding: 20px;
             border: 1px solid #dddddd;
             border-radius: 5px;
             box-shadow: 5px 5px 20px #aaa;
+            background: url('/static/img/logomimilast2.png') no-repeat center center fixed;
+            font-family: 'Arial', sans-serif;
+            background-size: 80% auto; /* 将高度调整为 auto */
         }
 
 
@@ -113,6 +106,87 @@
             align-items: center;
             margin-bottom: 20vh;
             font-size: 20px;
+        }
+
+         body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #EDEDE8;
+        }
+
+        header {
+            /*background-color: #2c3e50;*/
+            background-color: #3c3c3c;
+            color: #ecf0f1;
+            text-align: center;
+            display: flex;
+        }
+        header h1{
+            margin-top: 80px;
+            margin-bottom: 80px;
+        }
+        header img{
+            margin-top: 0px;
+            margin-right: 280px;
+        }
+
+        section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 2em;
+        }
+
+        .team-container {
+            max-width: 800px;
+            margin: 2em auto;
+            text-align: center;
+            padding: 1em;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #team-intro {
+            margin-bottom: 2em;
+        }
+
+        .member {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 1em;
+            padding: 1.5em;
+            text-align: center;
+            width: 300px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .member:hover {
+            transform: scale(1.05);
+        }
+
+        .member img {
+            border-radius: 50%;
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 1em;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 0.5em;
+        }
+
+        p {
+            color: #7f8c8d;
+            margin: 0.5em 0;
+        }
+
+        #team-logo {
+            max-width: 100px;
+            margin-bottom: 1em;
         }
 
 
@@ -179,27 +253,42 @@
 <br>
 <br>
 <div class="page-container">
+
     <ol class="breadcrumb">
         <!-- 現在の画面の位置-->
         <li><a href="#">C-Tream-APP</a></li>
-        <li><a href="#">このサイトについて</a></li>
+        <li><a href="#">C-チームについて</a></li>
         <li class="active">SHOW</li>
     </ol>
-    <h1>このサイトについて</h1>
-    <p style="margin-bottom: 40px">当ウェブサイトをご利用いただきありがとうございます。以下は、ウェブサイトの効果的な利用についての重要な情報です。</p>
-    <li>1. 言語のサポート</li>
-    <p>弊サイトは現在、英語、日本語、中国語の3つの言語をサポートしています。日本語が理解できなくても安心してご利用いただけます。</p>
-    <li>2. 登録とログイン</li>
-    <p><strong>登録は必須ではありません：</strong> 翻訳機能をご利用いただくためには、登録は必要ありません。ただし、登録およびログインすると、翻訳履歴や個人設定が保存され、どのデバイスでもご利用いただけます。</p>
-    <li>3. 早期入力</li>
-    <p><strong>音声入力：</strong> 音声入力機能を使用して、言いたいテキストを話すだけで簡単に翻訳できます。
-    </p>
-    <p><strong>画像認識：</strong> 画像をアップロードするか写真を撮ることで、画像中のテキストを素早く翻訳結果に変換します。</p>
-    <li>4. 語彙の記録と復習</li>
-    <p><strong>留学生や学習者向け：</strong> 当サイトは新しい単語の学習と語彙の記録をサポートしています。</p>
-    <p><strong>定期的な復習：</strong> 習得した単語を定期的に復習できる機能が提供されており、より良い記憶力の向上をサポートします。</p>
-    <li>5. チャットボットとの対話</li>
-    <p style="margin-bottom: 40px">ログイン後、当サイトのチャットボットと対話できます。言語学習のアドバイスだけでなく、疑問に答えるパートナーとして活用できます。</p>
+    <header>
+        <div><img width="160" src="/static/img/logo.png" alt=""></div>
+        <h1>C-チームについて</h1>
+    </header>
+
+    <section id="team">
+
+        <div id="team-intro" id="team-intro">
+            <h2>C-Team紹介</h2>
+            <p>当社のチームは、革新的なアプローチと協力により、さまざまなプロジェクトに成功裏に取り組んでいます。私たちは技術への情熱を共有し、ユーザーエクスペリエンスの向上に尽力しています。</p>
+        </div>
+
+        <div class="member">
+            <img src="member1.jpg" alt="メンバー1">
+            <h2>メンバー一</h2>
+            <p>職種: ソフトウェアエンジニア</p>
+            <p>紹介: フロントエンド開発に深い経験を持ち、革新的な技術に熱心です。</p>
+        </div>
+
+        <div class="member">
+            <img src="member2.jpg" alt="メンバー2">
+            <h2>メンバー二</h2>
+            <p>職種: デザイナー</p>
+            <p>紹介: ユーザーインターフェースデザインが得意で、美術と創造的なデザインを愛しています。</p>
+        </div>
+
+        <!-- 他のメンバーを追加... -->
+
+    </section>
     <P style="margin-bottom: 60px">
         当サイトをご選択いただきありがとうございます。何か質問や提案があれば、いつでもサポートチームにお問い合わせください。学習とサービスのご利用を成功させることをお祈りしています。</P>
 
@@ -213,11 +302,12 @@
 
     <div style="text-align: center;">
         <a class="portfolio-link"
-           style="width: 50%;">C-Team   <span>|</span>サイトの利用ガイド</a>
+           style="width: 50%;">C-Team <span>|</span>サイトの利用ガイド</a>
     </div>
 
 </div>
 <script>
+
     $(document).ready(function () {
         var timer; // 定义一个计时器
 

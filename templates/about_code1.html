@@ -52,15 +52,12 @@
             display: inline; /* 横向排列 */
             margin-right: 5px; /* 间距 */
         }
-
-        /* 标题样式 */
         h1 {
             text-align: center;
             font-weight: bolder;
             margin-top: 60px;
         }
 
-        /* 段落样式 */
         p {
             line-height: 1.6; /* 设置行高 */
             text-indent: 1em;
@@ -117,43 +114,17 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/user_translation_page/1">翻訳画面</a></li>
-                <li><a href="/user_translate_history/1">履歴画面</a></li>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-haspopup="true" aria-expanded="false">言語選択<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/user_translate_history/1">日本語</a></li>
-                            <li><a href="/user_translate_history/2">English</a></li>
-                            <li><a href="/user_translate_history/3">中文</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-haspopup="true" aria-expanded="false">他のAPP<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/user_translation_page/1">チャットボット</a></li>
-                            <li><a href="#">データー分析</a></li>
-                            <li><a href="#">巡回ボード</a></li>
-                            <li><a href="#">管理システム</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                <li><a href="/user_translation_page/0">翻訳画面</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false"> <img width="32px" src="/static/img/user1.jpg"><span
+                       aria-expanded="false"> <img width="32px" src="/static/img/icon-user.jpg"><span
                             class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/user_info/1">個人情報</a></li>
-                        <li><a href="#">パスワード変更</a></li>
+                     <ul class="dropdown-menu">
+                        <li><a href="/login/1">ログイン</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="/logout/1"> <span class="glyphicon glyphicon-off" aria-hidden="true"></span> ログアウト</a>
-                        </li>
+                        <li><a href="/add_user/1">新規登録</a></li>
                     </ul>
                 </li>
             </ul>
@@ -166,38 +137,34 @@
     <ol class="breadcrumb">
         <!-- 現在の画面の位置-->
         <li><a href="#">C-Tream-APP</a></li>
-        <li><a href="#">このサイトについて</a></li>
+        <li><a href="#">開発の資料について</a></li>
         <li class="active">SHOW</li>
     </ol>
-    <h1>開発の資料について</h1>
-    <p style="margin-bottom: 40px">当ウェブサイトをご利用いただきありがとうございます。以下は、ウェブサイトの開発の資料についての重要な情報です。</p>
+    <h1>開発について</h1>
+    <p style="margin-bottom: 40px">当ウェブサイトをご利用いただきありがとうございます。以下は、ウェブサイトの開発についての重要な情報です。</p>
     <h3>1. 開発進捗</h3>
-    <p>プロジェクトの開発進捗は、以下のリンクから確認できます：<a href="http://your-development-process-link">開発進捗</a></p>
-
+    <p>プロジェクトの開発進捗は、以下のリンクから確認できます：<a
+            href="https://docs.google.com/spreadsheets/d/1AyeoMmYo8rrUO7NvuJxPkIo3mtQn7OR_7BWKvpKeTsY/edit?pli=1#gid=251568323">開発進捗</a>
+    </p>
     <h3>2. 使用技術</h3>
     <p>今回の開発で使用した技術：</p>
-        <p><strong>フロントエンド技術：</strong>HTML, CSS ,JavaScript ,jQuery ,Bootstrap ,Ajax</p>
-
-        <p> <strong>バックエンド技術：</strong>Python,Flask,MySQL</p>
+    <p><strong>フロントエンド技術：</strong>HTML, CSS ,JavaScript ,jQuery ,Bootstrap ,Ajax</p>
+    <p><strong>バックエンド技術：</strong>Python,Flask,MySQL</p>
     <h3>3. 開発ツール</h3>
     <p>開発プロセスで使用したツール：</p>
-        <li style="margin-left: 20px">開発環境：PyCharm</li>
-        <li style="margin-left: 20px">プログラミング言語：Python</li>
-
-
+    <li style="margin-left: 20px">開発環境：PyCharm</li>
+    <li style="margin-left: 20px">プログラミング言語：Python</li>
     <h3>4. 技術とAPIのドキュメント</h3>
     <p>具体的な技術とAPIの説明は、以下のリンクから確認できます：</p>
-
-        <li style="margin-left: 20px">技術ドキュメント：<a href="http://your-technical-documentation-link">技術ドキュメント</a></li>
-        <li style="margin-left: 20px">APIドキュメント：<a href="http://your-api-documentation-link">APIドキュメント</a></li>
-
-
+    <li style="margin-left: 20px">技術ドキュメント：<a
+            href="https://drive.google.com/drive/folders/1ZRMslW6uapwvEZzsVG732EV7i5uIawjX">chin_technology.txt</a></li>
+    <li style="margin-left: 20px">APIドキュメント：<a
+            href="https://drive.google.com/drive/folders/1ZRMslW6uapwvEZzsVG732EV7i5uIawjX">陳のrequirements.txt</a></li>
     <h3>5. 開発ソースコード</h3>
     <p>プロジェクトのソースコードは、以下のリンクから確認できます：</p>
-        <li style="margin-left: 20px">ソースコード：<a href="http://your-source-code-link">ソースコード</a></li>
-
-
-    <P style="margin-top: 60px">
+    <li style="margin-left: 20px">ソースコード：<a href="https://github.com/zwchin08/TranslatorAPP" target="_blank">ソースコード</a>
+    </li>
+    <P style="margin-top: 60px" >
         当サイトをご選択いただきありがとうございます。何か質問や提案があれば、いつでもサポートチームにお問い合わせください。学習とサービスのご利用を成功させることをお祈りしています。</P>
 
     <div class="chen" style="text-align: center ">
@@ -207,12 +174,7 @@
         <a class="portfolio-link" href="/about_website2"
            style="width: 50%;">お問い合わせ</a>
     </div>
-
-
-
 </div>
-
-
 <script src="/static/plugins/jquery-3.6.0.min.js"></script>
 <script src="/static/plugins/bootstrap-3.4.1/bootstrap-3.4.1-dist/js/bootstrap.js"></script>
 </body>

@@ -284,6 +284,11 @@ def about_website2():
         return "お問い合わせが送信されました。ありがとうございます！"
 
 
+@app.route("/about_code")
+def about_code():
+    return render_template("about_code1.html")
+
+
 @app.route("/getdatabase")
 def user_list():
     conn = connect_to_database()
