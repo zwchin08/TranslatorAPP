@@ -12,6 +12,7 @@
         .navbar {
             border-radius: 0px;
         }
+
         .navbar-brand {
             line-height: 32px;
         }
@@ -20,24 +21,65 @@
             line-height: 32px;
         }
 
-        /* 新添加的样式 */
+
+        /* 面包屑导航样式 */
+        .breadcrumb {
+            background-color: #f8f9fa; /* 设置背景颜色 */
+            padding: 8px 15px; /* 添加内边距 */
+            border-radius: 4px; /* 设置边框圆角 */
+        }
+
+        .breadcrumb li {
+            display: inline; /* 横向排列 */
+            margin-right: 5px; /* 间距 */
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #EDEDE8;
+        }
+
         .page-container {
-            max-width: 75%;
-            margin: auto;
+            max-width: 80%;
+            margin: 0 auto;
             padding: 20px;
             border: 1px solid #dddddd;
             border-radius: 5px;
             box-shadow: 5px 5px 20px #aaa;
+            background: url('/static/img/logomimilast2.png') no-repeat center center fixed;
+            font-family: 'Arial', sans-serif;
+            background-size: 80% auto; /* 将高度调整为 auto */
         }
 
-        h1 {
+
+        header {
+            /*background-color: #2c3e50;*/
+            background-color: #3c3c3c;
+            color: #ecf0f1;
             text-align: center;
+            display: flex;
+        }
+
+        header h1 {
+            margin-top: 80px;
+            margin-bottom: 80px;
             font-weight: bolder;
-            margin-top: 60px;
+        }
+
+        header img {
+            margin-top: 0px;
+            margin-right: 280px;
         }
 
         h3 {
-            margin-top: 100px;
+            margin-top: 60px;
+            color: #2c3e50;
+            margin-bottom: 0.5em;
+        }
+        p{
+            margin: 60px 0 60px;
         }
 
         .ad {
@@ -47,11 +89,6 @@
             align-items: center;
             margin-top: 30px;
             margin-bottom: 20px;
-        }
-
-
-        body {
-            background: #EDEDE8;
         }
 
         table {
@@ -71,6 +108,15 @@
             border: 1px solid #ddd;
             padding: 1px;
             text-align: center;
+        }
+
+        .chen {
+            height: 5rem;
+            border: solid 4px rgb(115, 46, 55);
+            display: flex;
+            align-items: center;
+            margin-bottom: 20vh;
+            font-size: 20px;
         }
 
     </style>
@@ -140,9 +186,14 @@
         <!-- 現在の画面の位置-->
         <li><a href="#">C-Tream-APP</a></li>
         <li><a href="#">このサイトについて</a></li>
+        <li><a href="#">サイトの利用ガイド</a></li>
         <li class="active">SHOW</li>
     </ol>
-    <h1>このサイトについて</h1>
+    <header>
+        <div><img width="160" src="/static/img/logo.png" alt=""></div>
+        <h1>サイトの利用ガイド</h1>
+    </header>
+
     <div class="item1">
         <h3>1.ヘッダー・トップ画面 </h3>
         <div class="ad">
@@ -238,7 +289,7 @@
                         <td>翻訳を開始します</td>
                     </tr>
                     <tr>
-                        <td colspan="3">※   ログインしないと履歴画面は使用できません</td>
+                        <td colspan="3">※ ログインしないと履歴画面は使用できません</td>
                     </tr>
                     </tbody>
                 </table>
@@ -247,7 +298,76 @@
 
     </div>
     <div class="item1">
-        <h3>3.翻訳画面(ログインあり) </h3>
+        <h3>3.ユーザ画面 </h3>
+        <div class="ad">
+            <div class="left">
+                <img width="480px" src="/static/img/shuoming5.png">
+            </div>
+            <div class="right">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>NO.</th>
+                        <th>名前</th>
+                        <th>内容</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>ID</td>
+                        <td>ユーザのIDです</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>パスワード</td>
+                        <td>ユーザのパスワードを表示します</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>メアド</td>
+                        <td>ユーザのメールアドレスを表示します</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>変更</td>
+                        <td>ユーザのパスワードを変更します</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="item1">
+        <h3>4.ログイン関連画面 </h3>
+    </div>
+    <div class="item1" style="margin-top: 30px">
+        <h4>※ 新規登録とログイン</h4>
+    </div>
+    <div class="item1">
+        <div class="ad">
+            <div class="left">
+                <img width="660px" src="/static/img/shuoming6.png">
+            </div>
+            <div class="left">
+                <img width="460px" src="/static/img/shuoming7.png">
+            </div>
+        </div>
+        <div class="item1">
+            <h4>※ パスワード忘れたとログイン </h4>
+        </div>
+        <div class="ad">
+            <div class="left">
+                <img width="660px" src="/static/img/shoming8.png">
+            </div>
+            <div class="left">
+                <img width="460px" src="/static/img/shuoming9.png">
+            </div>
+        </div>
+    </div>
+    <div class="item1">
+        <h3>5.翻訳画面(ログインあり) </h3>
         <div class="ad">
             <div class="left">
                 <img width="480px" src="/static/img/shuoming3.png">
@@ -303,7 +423,7 @@
         </div>
     </div>
     <div class="item1">
-        <h3>4.履歴検索画面 </h3>
+        <h3>6.履歴検索画面 </h3>
         <div class="ad">
             <div class="left">
                 <img width="480px" src="/static/img/shuoming4.png">
@@ -372,134 +492,90 @@
         </div>
 
     </div>
-    <div class="item1">
-        <h3>5.ユーザ画面 </h3>
-        <div class="ad">
-            <div class="left">
-                <img width="480px" src="/static/img/shuoming5.png">
-            </div>
-            <div class="right">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>NO.</th>
-                        <th>名前</th>
-                        <th>内容</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>ID</td>
-                        <td>ユーザのIDです		</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>パスワード</td>
-                        <td>ユーザのパスワードを表示します		</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>メアド</td>
-                        <td>ユーザのメールアドレスを表示します		</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>変更</td>
-                        <td>ユーザのパスワードを変更します		</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <P style="margin-bottom: 60px">
+        当サイトをご選択いただきありがとうございます。何か質問や提案があれば、いつでもサポートチームにお問い合わせください。学習とサービスのご利用を成功させることをお祈りしています。</P>
 
-    </div>
-    <div class="item1">
-        <h3>6.ログイン関連画面   </h3>
-    </div>
-     <div class="item1" style="margin-top: 30px">
-        <h4>※ 新規登録とログイン</h4>
-    </div>
-     <div class="item1">
-        <div class="ad">
-            <div class="left">
-                <img width="660px" src="/static/img/shuoming6.png">
-            </div>
-            <div class="left">
-                <img width="460px" src="/static/img/shuoming7.png">
-            </div>
-        </div>
-          <div class="item1">
-        <h4>※ パスワード忘れたとログイン  </h4>
-    </div>
-         <div class="ad">
-            <div class="left">
-                <img width="660px" src="/static/img/shoming8.png">
-            </div>
-            <div class="left">
-                <img width="460px" src="/static/img/shuoming9.png">
-            </div>
-        </div>
+    <div class="chen" style="text-align: center ">
+        <a class="about-link " href="/top/1"
+           style="width: 50%;">ホームページ</a>
+        <span>|</span>
+        <a class="portfolio-link" href="/about_website2"
+           style="width: 50%;">お問い合わせ</a>
     </div>
 
-     <div class="item1">
-        <h3>3.翻訳画面(ログインあり) </h3>
-        <div class="ad">
-            <div class="left">
-                <img width="480px" src="/static/img/shuoming3.png">
-            </div>
-            <div class="right">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>NO.</th>
-                        <th>名前</th>
-                        <th>内容</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>入力言語</td>
-                        <td>入力言語を指定できます</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>マイク</td>
-                        <td>音声で入力できます</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>ファイル選択ボタン</td>
-                        <td>ファイルを選択して文字を入力できます</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>textボックス</td>
-                        <td>翻訳したい言語を指定します</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>出力言語</td>
-                        <td>出力言語を指定できます</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>翻訳ボタン</td>
-                        <td>翻訳を開始します</td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>翻訳結果</td>
-                        <td>翻訳の結果を表示します、コピーもできます</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <div style="text-align: center;">
+        <a 　class="portfolio-link" href="/about_website1"
+           style="width: 50%;">このサイトについて</a>
+        <span>|</span>
+        <a class="portfolio-link"
+           style="width: 50%;">開発の履歴</a>
     </div>
+
 </div>
+
 <script src="/static/plugins/jquery-3.6.0.min.js"></script>
 <script src="/static/plugins/bootstrap-3.4.1/bootstrap-3.4.1-dist/js/bootstrap.js"></script>
+<script>
+    $(document).ready(function () {
+        var timer; // 定义一个计时器
+        function startTimer() {
+            timer = setInterval(function () {
+                // 切换链接的样式
+                $(".chen").animate({
+                    width: "50%"
+                }, 500, function () {
+                    $(this).css({
+                        "background-color": "",
+                        "background-image": "",
+                        "justify-content": "",
+                        "flex-direction": ""
+                    });
+                });
+            }, 2000);
+        }
+
+        // 初始化计时器
+        startTimer();
+
+        // 鼠标进入链接时，停止计时器
+        $(".about-link, .portfolio-link").mouseenter(function () {
+            clearInterval(timer);
+        });
+
+        // 鼠标离开链接时，重新启动计时器
+        $(".about-link, .portfolio-link").mouseleave(function () {
+            startTimer();
+        });
+
+        // About链接的鼠标事件
+        $(".about-link").mouseenter(function () {
+            $(".chen").css({
+                "background-color": "#bee0c2",
+                "background-image": "none"
+            }).animate({
+                width: "80%"
+            }, 1000);
+        });
+
+        // Portfolio链接的鼠标事件
+        $(".portfolio-link").mouseenter(function () {
+            $(".chen").css({
+                "background-color": "#c1e4e9",
+                "background-image": "none"
+            }).animate({
+                width: "80%"
+            }, {
+                duration: 1000,
+                start: function () {
+                    $(this).css({
+                        "justify-content": "flex-end",
+                        "flex-direction": "row-reverse"
+                    });
+                }
+            });
+        });
+    });
+</script>
+
 </body>
 </html>

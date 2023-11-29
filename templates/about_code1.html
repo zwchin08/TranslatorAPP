@@ -23,24 +23,6 @@
         }
 
 
-        h1 {
-            text-align: center;
-            font-weight: bolder;
-            margin-top: 60px;
-            margin-bottom: 70px;
-        }
-
-        body {
-            background: #EDEDE8;
-        }
-
-        /* 页面容器样式 */
-        .page-container {
-            max-width: 75%; /* 设置最大宽度 */
-            margin: 0 auto; /* 居中对齐 */
-            padding: 20px; /* 添加内边距 */
-        }
-
         /* 面包屑导航样式 */
         .breadcrumb {
             background-color: #f8f9fa; /* 设置背景颜色 */
@@ -52,11 +34,58 @@
             display: inline; /* 横向排列 */
             margin-right: 5px; /* 间距 */
         }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #EDEDE8;
+        }
+
+        .page-container {
+            max-width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #dddddd;
+            border-radius: 5px;
+            box-shadow: 5px 5px 20px #aaa;
+            background: url('/static/img/logomimilast2.png') no-repeat center center fixed;
+            font-family: 'Arial', sans-serif;
+            background-size: 80% auto; /* 将高度调整为 auto */
+        }
+
+
         h1 {
             text-align: center;
             font-weight: bolder;
             margin-top: 60px;
+            margin-bottom: 70px;
         }
+
+        body {
+            background: #EDEDE8;
+        }
+
+
+        header {
+            /*background-color: #2c3e50;*/
+            background-color: #3c3c3c;
+            color: #ecf0f1;
+            text-align: center;
+            display: flex;
+        }
+
+        header h1 {
+            margin-top: 80px;
+            margin-bottom: 80px;
+            font-weight: bolder;
+        }
+
+        header img {
+            margin-top: 0px;
+            margin-right: 280px;
+        }
+
 
         p {
             line-height: 1.6; /* 设置行高 */
@@ -86,14 +115,13 @@
             height: auto; /* 图片高度自适应 */
         }
 
-        /* 省略其他样式，保留页面容器的样式 */
-        .page-container {
-            max-width: 75%;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #dddddd;
-            border-radius: 5px;
-            box-shadow: 5px 5px 20px #aaa;
+        .chen {
+            height: 5rem;
+            border: solid 4px rgb(115, 46, 55);
+            display: flex;
+            align-items: center;
+            margin-bottom: 20vh;
+            font-size: 20px;
         }
 
 
@@ -121,7 +149,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false"> <img width="32px" src="/static/img/icon-user.jpg"><span
                             class="caret"></span></a>
-                     <ul class="dropdown-menu">
+                    <ul class="dropdown-menu">
                         <li><a href="/login/1">ログイン</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="/add_user/1">新規登録</a></li>
@@ -140,8 +168,12 @@
         <li><a href="#">開発の資料について</a></li>
         <li class="active">SHOW</li>
     </ol>
-    <h1>開発について</h1>
-    <p style="margin-bottom: 40px">当ウェブサイトをご利用いただきありがとうございます。以下は、ウェブサイトの開発についての重要な情報です。</p>
+    <header>
+        <div><img width="160" src="/static/img/logo.png" alt=""></div>
+        <h1>開発について</h1>
+    </header>
+
+    <p style="margin:60px 0 40px">当ウェブサイトをご利用いただきありがとうございます。以下は、ウェブサイトの開発についての重要な情報です。</p>
     <h3>1. 開発進捗</h3>
     <p>プロジェクトの開発進捗は、以下のリンクから確認できます：<a
             href="https://docs.google.com/spreadsheets/d/1AyeoMmYo8rrUO7NvuJxPkIo3mtQn7OR_7BWKvpKeTsY/edit?pli=1#gid=251568323">開発進捗</a>
@@ -164,18 +196,90 @@
     <p>プロジェクトのソースコードは、以下のリンクから確認できます：</p>
     <li style="margin-left: 20px">ソースコード：<a href="https://github.com/zwchin08/TranslatorAPP" target="_blank">ソースコード</a>
     </li>
-    <P style="margin-top: 60px" >
+    <P style="margin: 60px 0 60px">
         当サイトをご選択いただきありがとうございます。何か質問や提案があれば、いつでもサポートチームにお問い合わせください。学習とサービスのご利用を成功させることをお祈りしています。</P>
 
     <div class="chen" style="text-align: center ">
-        <a class="about-link " href="/about_website"
-           style="width: 50%;">サイトの利用ガイド</a>
+        <a class="about-link " href="/top/1"
+           style="width: 50%;">ホームページ</a>
         <span>|</span>
         <a class="portfolio-link" href="/about_website2"
            style="width: 50%;">お問い合わせ</a>
     </div>
+
+    <div style="text-align: center;">
+        <a 　class="portfolio-link" href="/about_website1"
+           style="width: 50%;">サイトについて</a>
+        <span>|</span>
+        <a class="portfolio-link" href="/about_website"
+           style="width: 50%;">サイトの利用ガイド</a>
+    </div>
+
 </div>
+
 <script src="/static/plugins/jquery-3.6.0.min.js"></script>
 <script src="/static/plugins/bootstrap-3.4.1/bootstrap-3.4.1-dist/js/bootstrap.js"></script>
+<script>
+    $(document).ready(function () {
+        var timer; // 定义一个计时器
+        function startTimer() {
+            timer = setInterval(function () {
+                // 切换链接的样式
+                $(".chen").animate({
+                    width: "50%"
+                }, 500, function () {
+                    $(this).css({
+                        "background-color": "",
+                        "background-image": "",
+                        "justify-content": "",
+                        "flex-direction": ""
+                    });
+                });
+            }, 2000);
+        }
+
+        // 初始化计时器
+        startTimer();
+
+        // 鼠标进入链接时，停止计时器
+        $(".about-link, .portfolio-link").mouseenter(function () {
+            clearInterval(timer);
+        });
+
+        // 鼠标离开链接时，重新启动计时器
+        $(".about-link, .portfolio-link").mouseleave(function () {
+            startTimer();
+        });
+
+        // About链接的鼠标事件
+        $(".about-link").mouseenter(function () {
+            $(".chen").css({
+                "background-color": "#bee0c2",
+                "background-image": "none"
+            }).animate({
+                width: "80%"
+            }, 1000);
+        });
+
+        // Portfolio链接的鼠标事件
+        $(".portfolio-link").mouseenter(function () {
+            $(".chen").css({
+                "background-color": "#c1e4e9",
+                "background-image": "none"
+            }).animate({
+                width: "80%"
+            }, {
+                duration: 1000,
+                start: function () {
+                    $(this).css({
+                        "justify-content": "flex-end",
+                        "flex-direction": "row-reverse"
+                    });
+                }
+            });
+        });
+    });
+</script>
+
 </body>
 </html>

@@ -8,7 +8,7 @@ import chatgpt_robot
 import top_page
 import user
 from datetime import datetime
-
+import logging
 app = Flask(__name__)
 
 app.secret_key = 'my_secret_key_123'
@@ -187,9 +187,6 @@ def show_translation_list():
     return render_template("translation_list.html", title="翻訳したリスト", data_list=data_list)
 
 
-import logging
-
-
 @app.errorhandler(500)
 def internal_server_error(e):
     logging.error('发生内部服务器错误：%s', e)
@@ -282,6 +279,11 @@ def about_website2():
         conn.commit()
         close_database_connection(conn, cursor)
         return "お問い合わせが送信されました。ありがとうございます！"
+
+
+@app.route("/about_team")
+def about_team():
+    return render_template("about_team.html")
 
 
 @app.route("/about_code")

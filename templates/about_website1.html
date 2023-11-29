@@ -23,24 +23,6 @@
         }
 
 
-        h1 {
-            text-align: center;
-            font-weight: bolder;
-            margin-top: 60px;
-            margin-bottom: 70px;
-        }
-
-        body {
-            background: #EDEDE8;
-        }
-
-        /* 页面容器样式 */
-        .page-container {
-            max-width: 75%; /* 设置最大宽度 */
-            margin: 0 auto; /* 居中对齐 */
-            padding: 20px; /* 添加内边距 */
-        }
-
         /* 面包屑导航样式 */
         .breadcrumb {
             background-color: #f8f9fa; /* 设置背景颜色 */
@@ -53,12 +35,45 @@
             margin-right: 5px; /* 间距 */
         }
 
-        /* 标题样式 */
-        h1 {
-            text-align: center;
-            font-weight: bolder;
-            margin-top: 60px;
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #EDEDE8;
         }
+
+        .page-container {
+            max-width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #dddddd;
+            border-radius: 5px;
+            box-shadow: 5px 5px 20px #aaa;
+            background: url('/static/img/logomimilast2.png') no-repeat center center fixed;
+            font-family: 'Arial', sans-serif;
+            background-size: 80% auto; /* 将高度调整为 auto */
+        }
+
+
+        header {
+            /*background-color: #2c3e50;*/
+            background-color: #3c3c3c;
+            color: #ecf0f1;
+            text-align: center;
+            display: flex;
+        }
+
+        header h1 {
+            margin-top: 80px;
+            margin-bottom: 80px;
+            font-weight: bolder;
+        }
+
+        header img {
+            margin-top: 0px;
+            margin-right: 280px;
+        }
+
 
         /* 段落样式 */
         p {
@@ -94,17 +109,6 @@
             max-width: 100%; /* 图片宽度不超过其容器 */
             height: auto; /* 图片高度自适应 */
         }
-
-        /* 省略其他样式，保留页面容器的样式 */
-        .page-container {
-            max-width: 75%;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #dddddd;
-            border-radius: 5px;
-            box-shadow: 5px 5px 20px #aaa;
-        }
-
 
         .chen {
             height: 5rem;
@@ -185,8 +189,12 @@
         <li><a href="#">このサイトについて</a></li>
         <li class="active">SHOW</li>
     </ol>
-    <h1>このサイトについて</h1>
-    <p style="margin-bottom: 40px">当ウェブサイトをご利用いただきありがとうございます。以下は、ウェブサイトの効果的な利用についての重要な情報です。</p>
+    <header>
+        <div><img width="160" src="/static/img/logo.png" alt=""></div>
+        <h1>このサイトについて</h1>
+    </header>
+
+    <p style="margin: 60px 0 40px">当ウェブサイトをご利用いただきありがとうございます。以下は、ウェブサイトの効果的な利用についての重要な情報です。</p>
     <li>1. 言語のサポート</li>
     <p>弊サイトは現在、英語、日本語、中国語の3つの言語をサポートしています。日本語が理解できなくても安心してご利用いただけます。</p>
     <li>2. 登録とログイン</li>
@@ -211,9 +219,13 @@
            style="width: 50%;">お問い合わせ</a>
     </div>
 
+
     <div style="text-align: center;">
-        <a class="portfolio-link"
-           style="width: 50%;">C-Team   <span>|</span>サイトの利用ガイド</a>
+        <a 　class="portfolio-link" href="/about_team"
+           style="width: 50%;">C-Teamについて</a>
+        <span>|</span>
+        <a class="portfolio-link" href="/top/1"
+           style="width: 50%;">ホームページ</a>
     </div>
 
 </div>
