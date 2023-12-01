@@ -12,6 +12,7 @@
         .navbar {
             border-radius: 0px;
         }
+
         .navbar-brand {
             line-height: 32px;
         }
@@ -28,6 +29,9 @@
             border: 1px solid #dddddd;
             border-radius: 5px;
             box-shadow: 5px 5px 20px #aaa;
+        }
+        form{
+            margin-top: 60px;
         }
 
         h1 {
@@ -79,6 +83,69 @@
             background-color: #2980b9;
         }
 
+        .chen {
+            height: 5rem;
+            border: solid 4px rgb(115, 46, 55);
+            display: flex;
+            align-items: center;
+            margin-bottom: 20vh;
+            font-size: 20px;
+        }
+
+        hr {
+            color: #ccc; /* 设置颜色为浅灰色 */
+            background-color: #ccc; /* 设置背景色为浅灰色 */
+            height: 1px; /* 设置高度，可以根据需要调整 */
+            border: none; /* 移除默认边框 */
+            margin: 20px 0; /* 设置上下边距，可以根据需要调整 */
+        }
+
+        .big {
+            background-color: #696969;
+            height: 220px;
+        }
+
+        .line {
+            position: relative;
+            z-index: 999;
+            background-color: white;
+            width: 100%;
+            border-radius: 5px;
+            border-bottom: 160px;
+            height: 5px;
+
+        }
+
+        .line1 {
+            position: absolute;
+            z-index: 2;
+            background-color: #d58512;
+            width: 18%;
+            border-radius: 5px;
+            border-bottom: 160px;
+            height: 5px;
+
+        }
+
+        header {
+            /*background-color: #2c3e50;*/
+            background-color: #696969;
+            color: #ecf0f1;
+            text-align: center;
+            display: flex;
+        }
+
+        header h1 {
+            margin-top: 80px;
+            margin-bottom: 40px;
+            font-weight: bolder;
+            color: #ecf0f1;
+        }
+
+        header img {
+            margin-top: 0px;
+            margin-right: 250px;
+        }
     </style>
 </head>
 <body>
@@ -139,17 +206,25 @@
         </div>
     </div>
 </nav>
-<br>
-<br>
 <div class="page-container">
     <ol class="breadcrumb">
         <!-- 現在の画面の位置-->
-        <li><a href="#">C-Tream-APP</a></li>
-        <li><a href="#">このサイトについて</a></li>
+        <li><a href="/top/1">C-Tream-APP</a></li>
+        <li><a href="/about_website1">このサイトについて</a></li>
         <li><a href="#">お問い合わせ</a></li>
         <li class="active">SHOW</li>
     </ol>
-    <h1>お問い合わせ</h1>
+
+    <div class="big">
+        <header>
+            <div><img width="160" src="/static/img/logola.png" alt=""></div>
+            <h1>お問い合わせ</h1>
+        </header>
+        <div class="line">
+            <div class="line1"></div>
+        </div>
+    </div>
+
 
     <form id="contactForm" action="/about_website3" method="post">
         <label for="name">お名前:</label>
@@ -161,7 +236,30 @@
         <button type="submit">送信する</button>
     </form>
 
+    <br>
+    <br>
 
+    <hr>
+    <P style="margin-bottom: 60px"><small>※
+        当サイトをご選択いただきありがとうございます。何か質問や提案があれば、いつでもサポートチームにお問い合わせください。学習とサービスのご利用を成功させることをお祈りしています。</small></P>
+    <div class="chen" style="text-align: center ">
+        <a class="about-link " href="/about_website"
+           style="width: 50%;">サイトの利用ガイド</a>
+        <span>|</span>
+         <a class="portfolio-link" href="/top/1"
+           style="width: 50%;">ホームページ</a>
+
+    </div>
+
+
+    <div style="text-align: center;">
+        <a 　class="portfolio-link" href="/about_team"
+           style="width: 50%;">C-Teamについて</a>
+        <span>|</span>
+
+        <a class="portfolio-link" href="/about_development"
+           style="width: 50%;">開発履歴について</a>
+    </div>
 </div>
 
 <script>
@@ -189,5 +287,67 @@
 
 <script src="/static/plugins/jquery-3.6.0.min.js"></script>
 <script src="/static/plugins/bootstrap-3.4.1/bootstrap-3.4.1-dist/js/bootstrap.js"></script>
+<script>
+    $(document).ready(function () {
+        var timer; // 定义一个计时器
+
+        function startTimer() {
+            timer = setInterval(function () {
+                // 切换链接的样式
+                $(".chen").animate({
+                    width: "50%"
+                }, 500, function () {
+                    $(this).css({
+                        "background-color": "",
+                        "background-image": "",
+                        "justify-content": "",
+                        "flex-direction": ""
+                    });
+                });
+            }, 2000);
+        }
+
+        // 初始化计时器
+        startTimer();
+
+        // 鼠标进入链接时，停止计时器
+        $(".about-link, .portfolio-link").mouseenter(function () {
+            clearInterval(timer);
+        });
+
+        // 鼠标离开链接时，重新启动计时器
+        $(".about-link, .portfolio-link").mouseleave(function () {
+            startTimer();
+        });
+
+        // About链接的鼠标事件
+        $(".about-link").mouseenter(function () {
+            $(".chen").css({
+                "background-color": "#bee0c2",
+                "background-image": "none"
+            }).animate({
+                width: "80%"
+            }, 1000);
+        });
+
+        // Portfolio链接的鼠标事件
+        $(".portfolio-link").mouseenter(function () {
+            $(".chen").css({
+                "background-color": "#c1e4e9",
+                "background-image": "none"
+            }).animate({
+                width: "80%"
+            }, {
+                duration: 1000,
+                start: function () {
+                    $(this).css({
+                        "justify-content": "flex-end",
+                        "flex-direction": "row-reverse"
+                    });
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>

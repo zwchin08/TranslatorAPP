@@ -56,9 +56,10 @@
         }
 
 
+
         header {
             /*background-color: #2c3e50;*/
-            background-color: #3c3c3c;
+            background-color: #696969;
             color: #ecf0f1;
             text-align: center;
             display: flex;
@@ -66,7 +67,7 @@
 
         header h1 {
             margin-top: 80px;
-            margin-bottom: 80px;
+            margin-bottom: 40px;
             font-weight: bolder;
         }
 
@@ -124,6 +125,29 @@
             margin-bottom: 0.5em;
         }
 
+        .cteam {
+            position: relative;
+            display: inline-block;
+            font-family: 'hts';
+            font-size: 24px;
+            /* Adjust this value based on your preference */
+            /* Adjust this value based on your preference */
+            padding: 3px 16px 2px;
+
+
+        }
+
+        .cteam::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 8px;
+           /* background-color: #d58512;*/
+            background-color: #777777;
+        }
+
 
         p {
             color: #7f8c8d;
@@ -151,6 +175,40 @@
             align-items: center;
             margin-bottom: 20vh;
             font-size: 20px;
+        }
+
+        .big {
+            background-color: #696969;
+            height: 220px;
+        }
+
+        .line {
+            position: relative;
+            z-index: 999;
+            background-color: white;
+            width: 100%;
+            border-radius: 5px;
+            border-bottom: 160px;
+            height: 5px;
+
+        }
+        .line1 {
+            position: absolute;
+            z-index: 2;
+            background-color: #d58512;
+            width: 18%;
+            border-radius: 5px;
+            border-bottom: 160px;
+            height: 5px;
+
+        }
+
+        hr {
+            color: #ccc; /* 设置颜色为浅灰色 */
+            background-color: #ccc; /* 设置背景色为浅灰色 */
+            height: 1px; /* 设置高度，可以根据需要调整 */
+            border: none; /* 移除默认边框 */
+            margin: 20px 0; /* 设置上下边距，可以根据需要调整 */
         }
 
 
@@ -219,21 +277,41 @@
 <div class="page-container">
 
     <ol class="breadcrumb">
-        <li><a href="#">C-Tream-APP</a></li>
+        <li><a href="/top/1">C-Tream-APP</a></li>
         <li><a href="#">C-チームについて</a></li>
         <li class="active">SHOW</li>
     </ol>
-    <header>
-        <div><img width="160" src="/static/img/logo.png" alt=""></div>
-        <h1>C-チームについて</h1>
-    </header>
+
+    <div class="big">
+        <header>
+            <div><img width="160" src="/static/img/logola.png" alt=""></div>
+             <h1>C-チームについて</h1>
+        </header>
+        <div class="line">
+        <div class="line1"></div>
+        </div>
+    </div>
 
     <section id="team">
 
         <div id="team-intro" id="team-intro">
-            <h2>C-Team紹介</h2>
+            <h2 class="cteam">C-Team紹介</h2>
             <p>C-チームは、革新的なアプローチと協力により、さまざまなプロジェクトに成功裏に取り組んでいます。私たちは技術への情熱を共有し、ユーザーエクスペリエンスの向上に尽力しています。</p>
         </div>
+        <div class="member">
+            <img src="/static/img/zhong.jpg" alt="メンバー1">
+            <h2>中屋 龍平</h2>
+            <p>職種: ソフトウェアエンジニア</p>
+            <p>紹介: フロントエンド開発に深い経験を持ち、革新的な技術に熱心です。</p>
+        </div>
+
+        <div class="member">
+            <img src="/static/img/i.jpg" alt="メンバー2">
+            <h2>伊藤 隼斗</h2>
+            <p>職種: デザイナー</p>
+            <p>紹介: ユーザーインターフェースデザインが得意で、美術と創造的なデザインを愛しています。</p>
+        </div>
+
 
         <div class="member">
             <img src="/static/img/a.jpg" alt="メンバー1">
@@ -241,6 +319,7 @@
             <p>職種: ソフトウェアエンジニア</p>
             <p>紹介: フロントエンド開発に深い経験を持ち、革新的な技術に熱心です。</p>
         </div>
+
 
         <div class="member">
             <img src="/static/img/my01.jpg" alt="メンバー2">
@@ -255,14 +334,12 @@
             <p>職種: フルスタックエンジニア</p>
             <p>紹介: フロントエンド開発に深い経験を持ち、革新的な技術に熱心です。</p>
         </div>
-
         <div class="member">
-            <img src="/static/img/i.jpg" alt="メンバー2">
-            <h2>伊藤 隼斗</h2>
+            <img src="/static/img/you.jpg" alt="メンバー2">
+            <h2>藤岡 悠</h2>
             <p>職種: デザイナー</p>
             <p>紹介: ユーザーインターフェースデザインが得意で、美術と創造的なデザインを愛しています。</p>
         </div>
-
         <div class="member">
             <img src="/static/img/xiong.jpg" alt="メンバー1">
             <h2>熊谷 文吾</h2>
@@ -270,31 +347,21 @@
             <p>紹介: フロントエンド開発に深い経験を持ち、革新的な技術に熱心です。</p>
         </div>
 
-        <div class="member">
-            <img src="/static/img/you.jpg" alt="メンバー2">
-            <h2>藤岡 悠</h2>
-            <p>職種: デザイナー</p>
-            <p>紹介: ユーザーインターフェースデザインが得意で、美術と創造的なデザインを愛しています。</p>
-        </div>
-
-        <div class="member">
-            <img src="/static/img/my01.jpg" alt="メンバー1">
-            <h2>メンバー一</h2>
-            <p>職種: ソフトウェアエンジニア</p>
-            <p>紹介: フロントエンド開発に深い経験を持ち、革新的な技術に熱心です。</p>
-        </div>
 
         <div class="member">
             <img src="/static/img/my01.jpg" alt="メンバー2">
-            <h2>メンバー二</h2>
+            <h2>峯 美海</h2>
             <p>職種: デザイナー</p>
             <p>紹介: ユーザーインターフェースデザインが得意で、美術と創造的なデザインを愛しています。</p>
         </div>
 
     </section>
-    <P style="margin-bottom: 60px">
-        当サイトをご選択いただきありがとうございます。何か質問や提案があれば、いつでもサポートチームにお問い合わせください。学習とサービスのご利用を成功させることをお祈りしています。</P>
+      <br>
+        <br>
 
+        <hr>
+    <P style="margin-bottom: 60px"><small>※
+        当サイトをご選択いただきありがとうございます。何か質問や提案があれば、いつでもサポートチームにお問い合わせください。学習とサービスのご利用を成功させることをお祈りしています。</small></P>
     <div class="chen" style="text-align: center ">
         <a class="about-link " href="/about_website"
            style="width: 50%;">サイトの利用ガイド</a>

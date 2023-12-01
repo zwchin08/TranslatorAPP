@@ -290,6 +290,15 @@ def about_team():
 def about_code():
     return render_template("about_code1.html")
 
+@app.route("/about_future")
+def about_future():
+    return render_template("about_future.html")
+
+
+@app.route("/about_development")
+def about_development():
+    return render_template("about_development.html")
+
 
 @app.route("/getdatabase")
 def user_list():
