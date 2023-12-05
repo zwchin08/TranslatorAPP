@@ -5,24 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Translate Tool</title>
     <link rel="stylesheet" href="/static/plugins/bootstrap-3.4.1/bootstrap-3.4.1-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/plugins/bootstrap-3.4.1/bootstrap-3.4.1-dist/css/bootstrap-theme.css">
     <link rel="stylesheet" href="/static/plugins/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css">
     <style>
+
+        .nav-user-sub {
+            display: block;
+            position: absolute;
+            background: rgba(82, 66, 1, .7);
+            top: 56px;
+            right: 0;
+            padding-right: 1px;
+        }
+
+        ol, ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            counter-reset: number;
+        }
+
         .navbar {
             border-radius: 0;
+            background: #222222;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000; /* 使导航栏在其他元素之上 */
         }
-         .navbar-brand img {
+
+        .navbar-default .navbar-nav > li > a {
+            color: #fff;;
+        }
+
+        .navbar-brand img {
             position: relative;
-            bottom: 12px;
-            background: #808080;
+            bottom: 14px;
+            /*background: #808080;*/
+            background: #222222;
         }
-        .hero-header img{
-             position: relative;
-             margin-top: 18px;
-             bottom: 22px;
+
+        .hero-header img {
+            position: relative;
+            margin-top: 18px;
+            bottom: 22px;
         }
 
         body {
-            background-image: url('/static/img/banner.png');
+            padding-top: 50px; /* 调整这个值以适应你的导航栏高度 */
+            /*background-image: url('/static/img/banner.png');*/
+            background-image: url("/static/img/6.png");
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -33,8 +65,8 @@
             text-align: left;
             -webkit-text-size-adjust: 100%;
             -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;/* 之后再这个地方添加侧面导航栏，移动页面显现右侧导航栏的功能 */
-            overflow: auto; /* 将 overflow-y: scroll; 改为 overflow: auto; */
+            overflow-x: hidden; /* 之后再这个地方添加侧面导航栏，移动页面显现右侧导航栏的功能 */
+            overflow: scroll; /* 将 overflow-y: scroll; 改为 overflow: auto; */
             font-size: 1.5rem;
         }
 
@@ -44,7 +76,7 @@
             top: 58px; /* 距离顶部的高度，根据您的导航栏高度调整 */
             left: 0;
             width: 100%;
-            height: calc(100% - 58px); /* 高度减去导航栏的高度 */
+            height: calc(100% - 0px); /* 高度减去导航栏的高度 */
             background-color: rgba(0, 0, 0, 0.6);
             z-index: 1;
         }
@@ -80,15 +112,13 @@
         .hero-header a:hover {
             text-decoration: underline;
         }
-
     </style>
 </head>
 <body>
 <nav class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
-             <a class="navbar-brand" href="/top/1"> <img width="160px" src="/static/img/logola.png"></a>
-
+            <a class="navbar-brand" href="/top/1"> <img width="160px" src="/static/img/logola.png"></a>
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
@@ -131,6 +161,18 @@
 
         </div>
     </div>
+{#    <ul class="nav-user-sub">#}
+{#        <ul class="nav navbar-nav nav-user-sub">#}
+{#            <li><a href="/login/1">ログイン</a></li>#}
+{#            <li><a href="/add_user/1">新規登録</a></li>#}
+{#        </ul>#}
+{#    </ul>#}
+      <ul class="nav-user-sub">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/login/1">ログイン</a></li>
+            <li><a href="/add_user/1">新規登録</a></li>
+        </ul>
+    </ul>
 </nav>
 <div class="overlay"></div>
 <br>
@@ -138,7 +180,7 @@
 <div class="hero-header">
     <br>
     <br>
-    <img  width="280px" src="/static/img/logola.png">
+    <img width="280px" src="/static/img/logola.png">
     <!--<h1>吉田学園学生のAPPです！！</h1>-->
     <p class="br-t"><span>翻訳機能を使って</span><span>・自分だけの単語帳・</span><span>を作ってみよう！！</span>
     </p>

@@ -6,13 +6,13 @@
     <title>Translate Tool</title>
     <link rel="stylesheet" href="/static/plugins/bootstrap-3.4.1/bootstrap-3.4.1-dist/css/bootstrap.css">
     <link rel="stylesheet" href="/static/plugins/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css">
-     <link rel="stylesheet" href="/static/css/userTranslateHistory.css">
+    <link rel="stylesheet" href="/static/css/userTranslateHistory.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-default">
     <div class="container">
-       <div class="navbar-header">
+        <div class="navbar-header">
             <a class="navbar-brand" href="/top/1"> <img width="160px" src="/static/img/logola.png"></a>
 
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -31,10 +31,10 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">言語選択<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                             <li><a href="/user_translation_page/0">日本語</a></li>
+                            <li><a href="/user_translation_page/0">日本語</a></li>
                             <li><a href="/user_translation_page/4">English</a></li>
                             <li><a href="/user_translation_page/5">中文</a></li>
-{#                            <li><a href="/top/4">မြန်မာဘာသာ</a></li>#}
+                            {#                            <li><a href="/top/4">မြန်မာဘာသာ</a></li>#}
                         </ul>
                     </li>
                 </ul>
@@ -62,37 +62,38 @@
 </nav>
 <div class="container">
     <div>
-         <ol class="breadcrumb">
+        <ol class="breadcrumb">
             <li><a href="/top/1">C-Tream-APP</a></li>
-             <li><a href="/top/1">トップページ</a></li>
+            <li><a href="/top/1">トップページ</a></li>
             <li><a href="#">翻訳画面</a></li>
             <li class="active">SHOW</li>
         </ol>
         <form action="/user_translation_page/0" method="post">
             <label for="inputLanguage">入力言語：</label>
-          	<input type="text"  name="inputLanguage" id="inputLanguage" placeholder="入力したい言語を入力して"  required>
-{#            <select name="inputLanguage" id="inputLanguage">#}
-{#                <option value="">入力したい言語</option>#}
-{#                <option value="english">英語</option>#}
-{#                <option value="japanese">日本語</option>#}
-{#                <option value="chinese">中国語</option>#}
-{#                <option value="Burmese">ミャンマー語</option>#}
-{#            </select>#}
+            <input type="text" name="inputLanguage" id="inputLanguage" placeholder="入力したい言語を入力して" required>
+            {#            <select name="inputLanguage" id="inputLanguage">#}
+            {#                <option value="">入力したい言語</option>#}
+            {#                <option value="english">英語</option>#}
+            {#                <option value="japanese">日本語</option>#}
+            {#                <option value="chinese">中国語</option>#}
+            {#                <option value="Burmese">ミャンマー語</option>#}
+            {#            </select>#}
             <br>
             <label for="textToTranslate">翻訳されたい文章：</label>
             <br>
-            <textarea class="form-control" name="textToTranslate" id="textToTranslate" rows="9" style="background: #DBDDDA;"
+            <textarea class="form-control" name="textToTranslate" id="textToTranslate" rows="9"
+                      style="background: #DBDDDA;"
                       placeholder="文章を入力してください"></textarea>
             <br>
             <label for="outputLanguage">出力言語：</label>
-            <input type="text" name="outputLanguage" id="outputLanguage" placeholder="翻訳されたい言語を入力して"  required>
-{#            <select name="outputLanguage" id="outputLanguage">#}
-{#                <option value="">翻訳されたい言語</option>#}
-{#                <option value="en-US">英語</option>#}
-{#                <option value="ja-JP">日本語</option>#}
-{#                <option value="zh-CN">中国語</option>#}
-{#                <option value="my-MM">ミャンマー語</option>#}
-{#            </select>#}
+            <input type="text" name="outputLanguage" id="outputLanguage" placeholder="翻訳されたい言語を入力して" required>
+            {#            <select name="outputLanguage" id="outputLanguage">#}
+            {#                <option value="">翻訳されたい言語</option>#}
+            {#                <option value="en-US">英語</option>#}
+            {#                <option value="ja-JP">日本語</option>#}
+            {#                <option value="zh-CN">中国語</option>#}
+            {#                <option value="my-MM">ミャンマー語</option>#}
+            {#            </select>#}
             <div style="margin-bottom: 10px">
                 <input type="submit" name="" id="" value="翻訳">
             </div>

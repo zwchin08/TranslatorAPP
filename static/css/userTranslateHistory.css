@@ -1,12 +1,15 @@
 
 .navbar {
     border-radius: 0;
+    background: #222222;
+
 }
+
 
 .navbar-brand img {
     position: relative;
     bottom: 8px;
-    background: #808080;
+    background: #222222;
 }
 
 .navbar-brand {
@@ -15,6 +18,10 @@
 
 .navbar-nav > li > a {
     line-height: 32px;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #fff;;
 }
 
 ul {
@@ -35,6 +42,15 @@ select, input {
     border-radius: 5px;
 }
 
+/*button {*/
+/*    background-color: #007bff;*/
+/*    color: #fff;*/
+/*    padding: 6px 20px;*/
+/*    border: none;*/
+/*    cursor: pointer;*/
+/*    border-radius: 6px;*/
+/*}*/
+
 button {
     background-color: #007bff;
     color: #fff;
@@ -43,7 +59,6 @@ button {
     cursor: pointer;
     border-radius: 6px;
 }
-
 th, td {
     padding: 8px;
     text-align: center;

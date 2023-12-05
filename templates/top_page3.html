@@ -9,19 +9,32 @@
     <style>
         .navbar {
             border-radius: 0;
+            background: #222222;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000; /* 使导航栏在其他元素之上 */
+        }
+        .navbar-default .navbar-nav > li > a {
+           color: #fff;;
         }
         .navbar-brand img {
             position: relative;
-            bottom: 12px;
-            background: #808080;
+            bottom: 14px;
+            /*background: #808080;*/
+            background: #222222;
         }
-        .hero-header img{
-             position: relative;
-             margin-top: 18px;
-             bottom: 22px;
+
+        .hero-header img {
+            position: relative;
+            margin-top: 18px;
+            bottom: 22px;
         }
+
         body {
-            background-image: url('/static/img/banner.png');
+            padding-top: 50px; /* 调整这个值以适应你的导航栏高度 */
+            /*background-image: url('/static/img/banner.png');*/
+            background-image: url("/static/img/6.png");
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -33,7 +46,7 @@
             -webkit-text-size-adjust: 100%;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden; /* 之后再这个地方添加侧面导航栏，移动页面显现右侧导航栏的功能 */
-            overflow: auto; /* 将 overflow-y: scroll; 改为 overflow: auto; */
+            overflow: scroll; /* 将 overflow-y: scroll; 改为 overflow: auto; */
             font-size: 1.5rem;
         }
 
@@ -43,7 +56,7 @@
             top: 58px; /* 距离顶部的高度，根据您的导航栏高度调整 */
             left: 0;
             width: 100%;
-            height: calc(100% - 58px); /* 高度减去导航栏的高度 */
+            height: calc(100% - 0px); /* 高度减去导航栏的高度 */
             background-color: rgba(0, 0, 0, 0.6);
             z-index: 1;
         }
@@ -79,7 +92,6 @@
         .hero-header a:hover {
             text-decoration: underline;
         }
-
     </style>
 
 </head>
