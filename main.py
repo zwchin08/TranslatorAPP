@@ -1,6 +1,3 @@
-from getpass import getpass
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 from collections import OrderedDict
 import pymysql, bcrypt, random, datetime, hashlib, string, smtplib
 from flask import Flask, render_template, request, redirect, jsonify, session
@@ -37,6 +34,13 @@ def close_database_connection(conn, cursor):
 from user_info import user_bp
 
 app.register_blueprint(user_bp)
+
+'''
+データ分析
+'''
+from data_analysis import data_ana
+app.register_blueprint(data_ana)
+
 
 from chatbot import chat_bp
 

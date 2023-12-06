@@ -9,9 +9,59 @@
     <link rel="stylesheet" href="/static/css/userTranslateHistory.css">
     <script src="/static/plugins/jquery-3.6.0.min.js"></script>
     <style>
-        .navbar {
-            border-radius: 0px;
+        .container {
+            width: 100%;
+            padding-right: 50px;
+            padding-left: 100px;
         }
+
+        /* 调整伪元素位置，使其在导航栏左侧 */
+        .nav-user-sub {
+            display: block;
+            position: absolute;
+            background: rgba(82, 66, 1, .7);
+            top: 56px;
+            right: 0px;
+            padding-right: 1px;
+            z-index: 2; /* 保证在内容之上 */
+        }
+
+        /* 旋转伪元素180° */
+        .nav-user-sub::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -25px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 25px 0 0 25px; /* 调整这里的值来改变三角形的大小 */
+            border-color: transparent transparent transparent rgba(82, 66, 1, .7); /* 使三角形颜色与背景一致 */
+            transform: rotate(180deg); /* 旋转180° */
+        }
+
+        .nav-user-sub {
+            display: block;
+            position: absolute;
+            background: rgba(82, 66, 1, .7);
+            top: 62px;
+            right: 0px;
+            padding-right: 3px;
+            padding-top: 3px;
+        }
+
+        .nav-user-sub a {
+            text-decoration: none;
+            font-size: 15px;
+            color: aliceblue;
+            font-family: "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic", "メイリオ", sans-serif;
+        }
+
+
+        .navbar {
+            border-radius: 0;
+        }
+
 
         .navbar-brand {
             line-height: 32px;
@@ -218,6 +268,12 @@
             </ul>
         </div>
     </div>
+    <ul class="nav-user-sub">
+        <ul class="nav navbar-nav navbar-right">
+            <a href="/login/1" style="color: white"><small>&nbspログイン&nbsp</small></a>|<a href="/add_user/1"
+                                                                                         style="color: white"><small>&nbsp新規登録&nbsp&nbsp&nbsp&nbsp&nbsp</small></a>
+        </ul>
+    </ul>
 </nav>
 <br>
 <br>
@@ -240,8 +296,9 @@
 
     <h2 style="margin-top:60px ">開発履歴</h2>
     <h4 style="margin:20px 10px ">翻訳APP</h4>
-    <p><small>(2023/12/05 03:42更新)</small></p>
-     <p>2023/12/05 - [C-Team APP] Top pageについての画面デザインしました。</p>
+    <p><small>(2023/12/06 21:15更新)</small></p>
+    <p>2023/12/06 - [C-Team APP] ・サイトのデザイン ・単語の履歴データ分析の機能をチャレンジして</p>
+    <p>2023/12/05 - [C-Team APP] Top pageについての画面デザインしました。</p>
     <p>2023/12/04 - [C-Team APP] 開発履歴についての画面デザインしました。</p>
     <p>2023/12/01 - [C-Team APP] C-Team、サイトについての画面デザインしました。</p>
     <p>2023/11/30 - [C-Team APP] 開発履歴を追加</p>
@@ -288,23 +345,23 @@
     <hr>
     <br>
     <br>
-        <h4>巡回ボットAPP</h4>
-        <p><small>(2023/10/20 17:30更新完了)</small></p>
-        <p>2023/10/20 - [巡回ボットAPP] プレゼンの発表</p>
-        <p>2023/10/19 - [巡回ボットAPP] プレゼン資料を作成しました。</p>
-        <p>2023/10/18 - [巡回ボットAPP] 特定のキーワードをチャットに入力したら最新情報が取得できる機能をチャレンジしました。</p>
-        <p>2023/10/17 - [巡回ボットAPP] 複数の門限を過ぎたら毎時通知する機能を実装しました</p>
-        <p>2023/10/16 - [巡回ボットAPP] 毎時のデータ更新に基づいて、不在者リストを変更しました。</p>
-        <p>2023/10/15 - [巡回ボットAPP] Rank管理：Chatの通知をどう絞って通知すべきか改善する。</p>
-        <p>2023/10/13 - [巡回ボットAPP] 最新情報を得る機能の実装</p>
-        <p>2023/10/12 - [巡回ボットAPP] GoogleフォームとChatの連携プロセスに関する不具合を調査し、対処しました</p>
-        <p>2023/10/11 - [巡回ボットAPP] 不在者管理の対応ために、トリガーを使ってChatを送信することができました。</p>
-        <p>2023/10/10 - [巡回ボットAPP] GoogleフォームとChatの連携、送信機能を実現しました。</p>
-        <p>2023/10/06 - [巡回ボットAPP] 会社のインターンを参加し、課題を理解し、インターンシップにおける自己課題・目標を作り</p>
-        <br>
-        <br>
+    <h4>巡回ボットAPP</h4>
+    <p><small>(2023/10/20 17:30更新完了)</small></p>
+    <p>2023/10/20 - [巡回ボットAPP] プレゼンの発表</p>
+    <p>2023/10/19 - [巡回ボットAPP] プレゼン資料を作成しました。</p>
+    <p>2023/10/18 - [巡回ボットAPP] 特定のキーワードをチャットに入力したら最新情報が取得できる機能をチャレンジしました。</p>
+    <p>2023/10/17 - [巡回ボットAPP] 複数の門限を過ぎたら毎時通知する機能を実装しました</p>
+    <p>2023/10/16 - [巡回ボットAPP] 毎時のデータ更新に基づいて、不在者リストを変更しました。</p>
+    <p>2023/10/15 - [巡回ボットAPP] Rank管理：Chatの通知をどう絞って通知すべきか改善する。</p>
+    <p>2023/10/13 - [巡回ボットAPP] 最新情報を得る機能の実装</p>
+    <p>2023/10/12 - [巡回ボットAPP] GoogleフォームとChatの連携プロセスに関する不具合を調査し、対処しました</p>
+    <p>2023/10/11 - [巡回ボットAPP] 不在者管理の対応ために、トリガーを使ってChatを送信することができました。</p>
+    <p>2023/10/10 - [巡回ボットAPP] GoogleフォームとChatの連携、送信機能を実現しました。</p>
+    <p>2023/10/06 - [巡回ボットAPP] 会社のインターンを参加し、課題を理解し、インターンシップにおける自己課題・目標を作り</p>
+    <br>
+    <br>
 
-        <hr>
+    <hr>
     <P style="margin-bottom: 60px"><small>※
         当サイトをご選択いただきありがとうございます。何か質問や提案があれば、いつでもサポートチームにお問い合わせください。学習とサービスのご利用を成功させることをお祈りしています。</small></P>
     <div class="chen" style="text-align: center ">

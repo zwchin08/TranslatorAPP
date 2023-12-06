@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+        }
+
+        canvas {
+            max-width: 800px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body style="max-width: 900px; margin: auto;">
+<h1>Translation Data Analysis</h1>
+<!-- 添加一个新的 canvas 元素，用于显示单词统计的柱状图 -->
+<canvas id="wordCountChart" width="800" height="400"></canvas>
+
+<!-- 饼状图保持不变 -->
+<canvas id="userPieChart" width="400" height="400"></canvas>
+
+</body>
+<script>
+    // script.js
+    // 使用Fetch获取数据
+    fetch('/data_analysis')
+        .then(response => response.json())
+        .then(data => {
+            // 处理数据并调用可视化函数
+            visualizeWordCount(data);
+            visualizeUserPieChart(data);
+        })
+        .catch(error => console.error('Error:', error));
+
+    // 使用Chart.js创建柱状图，展示某个用户在一个月内每天的单词统计
+    function visualizeWordCount(data) {
+        // 假设数据结构包含 user_id、date 和 total_words 字段
+        const user1Data = data.filter(entry => entry.user_id === 'user1');
+        const labels = user1Data.map(entry => entry.date);
+        const values = user1Data.map(entry => entry.total_words);
+
+        const ctx = document.getElementById('wordCountChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Word Count',
+                    data: values,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+
+    // 使用Chart.js创建饼状图，展示不同用户的总记录数
+    function visualizeUserPieChart(data) {
+        // 假设数据结构包含 user_id 和 total_records 字段
+        const userLabels = data.map(entry => entry.user_id);
+        const userValues = data.map(entry => entry.total_records);
+
+        const userCtx = document.getElementById('userPieChart').getContext('2d');
+        new Chart(userCtx, {
+            type: 'pie',
+            data: {
+                labels: userLabels,
+                datasets: [{
+                    data: userValues,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        // Add more colors as needed
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        // Add more colors as needed
+                    ],
+                    borderWidth: 1
+                }]
+            }
+        });
+    }
+</script>
+</html>
