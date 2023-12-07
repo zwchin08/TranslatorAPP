@@ -8,7 +8,77 @@
     <link rel="stylesheet" href="/static/plugins/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/css/userTranslateHistory.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+    <style>
+        .container {
+            width: 100%;
+            padding-right: 50px;
+            padding-left: 100px;
+        }
 
+        /* 调整伪元素位置，使其在导航栏左侧 */
+        .nav-user-sub {
+            display: block;
+            position: absolute;
+            background: rgba(82, 66, 1, .7);
+            top: 56px;
+            right: 0px;
+            padding-right: 1px;
+            z-index: 2; /* 保证在内容之上 */
+        }
+
+        /* 旋转伪元素180° */
+        .nav-user-sub::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -25px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 25px 0 0 25px; /* 调整这里的值来改变三角形的大小 */
+            border-color: transparent transparent transparent rgba(82, 66, 1, .7); /* 使三角形颜色与背景一致 */
+            transform: rotate(180deg); /* 旋转180° */
+        }
+
+        .nav-user-sub {
+            display: block;
+            position: absolute;
+            background: rgba(82, 66, 1, .7);
+            top: 62px;
+            right: 0px;
+            padding-right: 3px;
+            padding-top: 3px;
+        }
+
+        .nav-user-sub a {
+            text-decoration: none;
+            font-size: 15px;
+            color: aliceblue;
+            font-family: "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic", "メイリオ", sans-serif;
+        }
+
+        .navbar {
+            border-radius: 0px;
+        }
+
+
+        .navbar-default .navbar-nav > li > a {
+            color: #fff;
+        }
+
+        /* 省略其他样式，保留页面容器的样式 */
+        .page-container {
+            max-width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #dddddd;
+            border-radius: 5px;
+            box-shadow: 5px 5px 20px #aaa;
+            background: url('/static/img/logomimilast2.png') no-repeat center center fixed;
+            font-family: 'Arial', sans-serif;
+            background-size: 80% auto; /* 将高度调整为 auto */
+        }
+    </style>
     <script>
         const languageMapping = {
             '日本語': 1,
@@ -76,111 +146,118 @@
             </ul>
         </div>
     </div>
+    <ul class="nav-user-sub">
+        <ul class="nav navbar-nav navbar-right">
+            <a href="/user_info/1" style="color: white"><small>&nbsp個人情報&nbsp</small></a>|<a href="/logout/1"
+                                                                                             style="color: white"><small>&nbspログアウト&nbsp&nbsp&nbsp&nbsp&nbsp</small></a>
+        </ul>
+    </ul>
 </nav>
-<div class="container">
-    <div class="container">
-        <ol class="breadcrumb">
-            <!-- 現在の画面の位置-->
-            <li><a href="#">C-Tream-APP</a></li>
-            <li><a href="#">履歴画面</a></li>
-            <li class="active">SHOW</li>
-        </ol>
+<br>
 
-        <div class="select">
-            <ul>
-                <li>
-{#                    <label>入力言語:</label>#}
-                    <div class="btn-group">
-{##}
-{#                        <select class="btn btn-info" id="inputLanguageDropdown">#}
-{#                            <option value="">(選んでください)</option>#}
-{#                            <option value="en-US">英語</option>#}
-{#                            <option value="ja-JP">日本語</option>#}
-{#                            <option value="zh-CN">中国語</option>#}
-{#                            <option value="my-MM">ミャンマー語</option>#}
-{#                        </select>#}
-                        <button type="button" class="btn btn-info" id="inputLanguageButton">入力言語</button>
-                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu" id="inputLanguageDropdown">
-                            <li><a href="#">日本語</a></li>
-                            <li><a href="#">English</a></li>
-                            <li><a href="#">中文</a></li>
-                            <li><a href="#">မြန်မာဘာသာ</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-{#                     <label >出力言語:</label>#}
-                    <div class="btn-group">
+<div class="page-container">
 
-{#                         <select class="btn btn-info" id="outputLanguageDropdown">#}
-{#                            <option value="">(選んでください)</option>#}
-{#                            <option value="en-US">英語</option>#}
-{#                            <option value="ja-JP">日本語</option>#}
-{#                            <option value="zh-CN">中国語</option>#}
-{#                            <option value="my-MM">ミャンマー語</option>#}
-{#                        </select>#}
+    <ol class="breadcrumb">
+        <!-- 現在の画面の位置-->
+        <li><a href="#">C-Tream-APP</a></li>
+        <li><a href="#">履歴画面</a></li>
+        <li class="active">SHOW</li>
+    </ol>
 
-                        <button type="button" class="btn btn-info" id="outputLanguageButton">出力言語</button>
-                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu" id="outputLanguageDropdown">
-                            <li><a href="#">日本語</a></li>
-                            <li><a href="#">English</a></li>
-                            <li><a href="#">中文</a></li>
-                            <li><a href="#">န်မာဘာသာ</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li>か ら: <input class="btn-info" type="date" id="startDate"></li>
-                <li>ま で: <input class="btn-info" type="date" id="endDate"></li>
-            </ul>
-            <ul>
-                <li>
-                    <button type="button" class="btn btn-info" id="ascendingOrderButton"><span
-                            class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> 昇順
+    <div class="select">
+        <ul>
+            <li>
+                {#                    <label>入力言語:</label>#}
+                <div class="btn-group">
+                    {##}
+                    {#                        <select class="btn btn-info" id="inputLanguageDropdown">#}
+                    {#                            <option value="">(選んでください)</option>#}
+                    {#                            <option value="en-US">英語</option>#}
+                    {#                            <option value="ja-JP">日本語</option>#}
+                    {#                            <option value="zh-CN">中国語</option>#}
+                    {#                            <option value="my-MM">ミャンマー語</option>#}
+                    {#                        </select>#}
+                    <button type="button" class="btn btn-info" id="inputLanguageButton">入力言語</button>
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
                     </button>
-                    <button type="button" class="btn btn-info" id="descendingOrderButton"><span
-                            class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> 降順
-                    </button>
+                    <ul class="dropdown-menu" id="inputLanguageDropdown">
+                        <li><a href="#">日本語</a></li>
+                        <li><a href="#">English</a></li>
+                        <li><a href="#">中文</a></li>
+                        <li><a href="#">မြန်မာဘာသာ</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                {#                     <label >出力言語:</label>#}
+                <div class="btn-group">
 
-                </li>
-                <li>
-                    <button type="button" class="btn btn-info" id="showFavoritesButton" value="0">
-                        <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> いいね！<span
-                            class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                    {#                         <select class="btn btn-info" id="outputLanguageDropdown">#}
+                    {#                            <option value="">(選んでください)</option>#}
+                    {#                            <option value="en-US">英語</option>#}
+                    {#                            <option value="ja-JP">日本語</option>#}
+                    {#                            <option value="zh-CN">中国語</option>#}
+                    {#                            <option value="my-MM">ミャンマー語</option>#}
+                    {#                        </select>#}
+
+                    <button type="button" class="btn btn-info" id="outputLanguageButton">出力言語</button>
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
                     </button>
-                </li>
-                <li>
-                    <div class="row">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="searchInput" placeholder="Search for...">
-                            <span class="input-group-btn">
+                    <ul class="dropdown-menu" id="outputLanguageDropdown">
+                        <li><a href="#">日本語</a></li>
+                        <li><a href="#">English</a></li>
+                        <li><a href="#">中文</a></li>
+                        <li><a href="#">န်မာဘာသာ</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li>か ら: <input class="btn-info" type="date" id="startDate"></li>
+            <li>ま で: <input class="btn-info" type="date" id="endDate"></li>
+        </ul>
+        <ul>
+            <li>
+                <button type="button" class="btn btn-info" id="ascendingOrderButton"><span
+                        class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> 昇順
+                </button>
+                <button type="button" class="btn btn-info" id="descendingOrderButton"><span
+                        class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> 降順
+                </button>
+
+            </li>
+            <li>
+                <button type="button" class="btn btn-info" id="showFavoritesButton" value="0">
+                    <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> いいね！<span
+                        class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                </button>
+            </li>
+            <li>
+                <div class="row">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="searchInput" placeholder="Search for...">
+                        <span class="input-group-btn">
                                     <button class="btn btn-default" type="button" id="searchButton">確認</button>
                             </span>
-                        </div>
                     </div>
-                </li>
-                <li>
-                    <button type="button" class="btn-danger" id="resetButton"><span class="glyphicon glyphicon-repeat"
-                                                                                    aria-hidden="true"></span> リセット
-                    </button>
-                </li>
-            </ul>
-        </div>
-        <div style="margin-bottom: 10px">
-            <!-- 送信のブタン -->
-            <button id="submitButton" class="btn btn-success">
-                <span class="glyphicon glyphicon-check" aria-hidden="true"></span> SUBMIT
-            </button>
-        </div>
+                </div>
+            </li>
+            <li>
+                <button type="button" class="btn-danger" id="resetButton"><span class="glyphicon glyphicon-repeat"
+                                                                                aria-hidden="true"></span> リセット
+                </button>
+            </li>
+        </ul>
+    </div>
+    <div style="margin-bottom: 10px">
+        <!-- 送信のブタン -->
+        <button id="submitButton" class="btn btn-success">
+            <span class="glyphicon glyphicon-check" aria-hidden="true"></span> SUBMIT
+        </button>
     </div>
     <div class="bs-example" data-example-id="bordered-table">
         <div class="panel panel-default">

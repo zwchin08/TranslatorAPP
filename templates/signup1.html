@@ -7,19 +7,23 @@
     <title>Translate Tool</title>
     <link rel="stylesheet" href="/static/plugins/bootstrap-3.4.1/bootstrap-3.4.1-dist/css/bootstrap.css">
     <link rel="stylesheet" href="/static/plugins/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css">
- <link rel="stylesheet" href="/static/css/signup.css">
-      <style>
-         .container {
+    <link rel="stylesheet" href="/static/css/signup.css">
+    <style>
+        .container {
             width: 100%;
             padding-right: 50px;
             padding-left: 100px;
+        }
+
+        .navbar-default .navbar-nav > li > a {
+            color: #fff;
         }
     </style>
 </head>
 <body>
 <nav class="navbar navbar-default">
     <div class="container">
-       <div class="navbar-header">
+        <div class="navbar-header">
             <a class="navbar-brand" href="/top/1"> <img width="160px" src="/static/img/logola.png"></a>
 
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -84,9 +88,10 @@
                    class="input"/>
         </div>
         <div class="item">
-            <input type="password" name="pwd1" id="confirm-password" autocomplete="new-password" placeholder="パスワード（再入力）"
+            <input type="password" name="pwd1" id="confirm-password" autocomplete="new-password"
+                   placeholder="パスワード（再入力）"
                    class="input"/>
-            <span class="small-text"  id="error-password"></span>
+            <span class="small-text" id="error-password"></span>
         </div>
         <button class="btn" type="submit">登録する</button>
     </form>
