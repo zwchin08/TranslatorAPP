@@ -6,7 +6,63 @@
     <title>Translate Tool</title>
     <link rel="stylesheet" href="/static/plugins/bootstrap-3.4.1/bootstrap-3.4.1-dist/css/bootstrap.css">
     <link rel="stylesheet" href="/static/plugins/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css">
-    <style>
+     <style>
+        .container {
+            width: 100%;
+            padding-right: 50px;
+            padding-left: 100px;
+        }
+
+        /* 调整伪元素位置，使其在导航栏左侧 */
+        .nav-user-sub {
+            display: block;
+            position: absolute;
+            background: rgba(82, 66, 1, .7);
+            top: 56px;
+            right: 0px;
+            padding-right: 1px;
+            z-index: 2; /* 保证在内容之上 */
+        }
+
+        /* 旋转伪元素180° */
+        .nav-user-sub::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -25px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 26px 0 0 26px; /* 调整这里的值来改变三角形的大小 */
+            border-color: transparent transparent transparent rgba(82, 66, 1, .7); /* 使三角形颜色与背景一致 */
+            transform: rotate(180deg); /* 旋转180° */
+        }
+
+        .nav-user-sub {
+            display: block;
+            position: absolute;
+            background: rgba(82, 66, 1, .7);
+            top: 56px;
+            right: 0px;
+            padding-right: 3px;
+            padding-top: 3px;
+        }
+
+        .nav-user-sub a {
+            text-decoration: none;
+            font-size: 15px;
+            color: aliceblue;
+            font-family: "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic", "メイリオ", sans-serif;
+        }
+
+        ol, ul {
+            margin: 0;
+            padding: 0 15px;
+            list-style: none;
+            counter-reset: number;
+        }
+
+
         .navbar {
             border-radius: 0;
             background: #222222;
@@ -15,9 +71,32 @@
             top: 0;
             z-index: 1000; /* 使导航栏在其他元素之上 */
         }
-        .navbar-default .navbar-nav > li > a {
-           color: #fff;;
+
+        #tranbg:hover {
+            background: #8c8c8c;
+            margin-top: 3px;
         }
+
+        #tranbg1:hover {
+            background: #8c8c8c;
+            margin-top: 3px;
+        }
+
+        #tranbg2:hover {
+            background: #8c8c8c;
+            margin-top: 1px;
+        }
+
+        .navbar-default .navbar-nav > li > a {
+            color: #fff;
+        }
+
+
+        .navbar-default .navbar-nav > li > a:hover {
+            color: #ffbf00;
+        }
+
+
         .navbar-brand img {
             position: relative;
             bottom: 14px;
@@ -92,6 +171,9 @@
         .hero-header a:hover {
             text-decoration: underline;
         }
+         #nav-user-sub123 :hover {
+            text-decoration: underline;
+        }
     </style>
 
 </head>
@@ -100,7 +182,7 @@
 <nav class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
-             <a class="navbar-brand" href="/top/1"> <img width="160px" src="/static/img/logola.png"></a>
+            <a class="navbar-brand" href="/top/1"> <img width="160px" src="/static/img/logola.png"></a>
 
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -112,8 +194,8 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/user_translation_page/5">翻译画面</a></li>
-                <ul class="nav navbar-nav navbar-right">
+                <li id="tranbg"><a href="/user_translation_page/5">翻译画面</a></li>
+                <ul id="tranbg1" class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">语言选择<span class="caret"></span></a>
@@ -121,7 +203,7 @@
                             <li><a href="/top/1">日本語</a></li>
                             <li><a href="/top/2">English</a></li>
                             <li><a href="/top/3">中文</a></li>
-{#                            <li><a href="/top/4">မြန်မာဘာသာ</a></li>#}
+                            {#                            <li><a href="/top/4">မြန်မာဘာသာ</a></li>#}
                         </ul>
                     </li>
                 </ul>
@@ -132,7 +214,7 @@
                     <input type="text" class="form-control" placeholder="Search for..." style="margin-top: 10px;">
 
                 </li>
-                <li class="dropdown">
+                <li id="tranbg2" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false"> <img width="25" height="25"
                                                    src="/static/img/icon-user.jpg"><span class="caret"></span></a>
@@ -146,14 +228,20 @@
 
         </div>
     </div>
+     <ul class="nav-user-sub">
+        <ul class="nav navbar-nav navbar-right" id="nav-user-sub123">
+            <a href="/login/1" style="color: white"><small>登录&nbsp</small></a>|<a href="/add_user/1"
+                                                                                    style="color: white"><small>&nbsp注册&nbsp&nbsp&nbsp</small></a>
+        </ul>
+    </ul>
 </nav>
 <div class="overlay"></div>
 <br>
 <br>
 <div class="hero-header">
-      <br>
     <br>
-    <img  width="280px" src="/static/img/logola.png">
+    <br>
+    <img width="280px" src="/static/img/logola.png">
     <!--<h1>这是吉田学園学生开发的APP！！</h1>-->
     <p class="br-t"><span>利用翻译功能，</span><span>・创建・</span><span>属于自己的单词本！！</span>
     </p>
@@ -173,6 +261,15 @@
         <a href="https://kiite.jp/history">・关于今后・</a>
         <a href="https://github.com/zwchin08/TranslatorAPP" target="_blank">获取开发资料</a>
     </p>
+    <br>
+    <div class="small" style="text-align: center ">
+        <a class="about-link " href="/about_website"
+           style="width: 50%;"><small style="font-size: 8px ">使用指南</small></a>
+        <span style="font-size: 8px ">|</span>
+        <a class="portfolio-link" href="/about_website2"
+           style="width: 50%;"><small style="font-size: 8px ">联系我们</small></a>
+    </div>
+    <p><small style="font-size: 8px ">Copyright© 2023 - 2024 吉田学園情報ビジネス専門学校 | AIシステム学科2年生 | C-Team 版权所有</small></p>
 </div>
 </div>
 </div>

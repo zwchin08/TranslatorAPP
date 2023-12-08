@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="/static/plugins/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/css/userTranslateHistory.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
-     <style>
+    <style>
         .container {
             width: 100%;
             padding-right: 50px;
             padding-left: 100px;
         }
 
-        .  /* 调整伪元素位置，使其在导航栏左侧 */
+        . /* 调整伪元素位置，使其在导航栏左侧 */
         .nav-user-sub {
             display: block;
             position: absolute;
@@ -35,7 +35,7 @@
             width: 0;
             height: 0;
             border-style: solid;
-            border-width: 25px 0 0 25px; /* 调整这里的值来改变三角形的大小 */
+            border-width: 26px 0 0 26px; /* 调整这里的值来改变三角形的大小 */
             border-color: transparent transparent transparent rgba(82, 66, 1, .7); /* 使三角形颜色与背景一致 */
             transform: rotate(180deg); /* 旋转180° */
         }
@@ -44,7 +44,7 @@
             display: block;
             position: absolute;
             background: rgba(82, 66, 1, .7);
-            top: 62px;
+            top: 56px;
             right: 0px;
             padding-right: 3px;
             padding-top: 3px;
@@ -57,13 +57,57 @@
             font-family: "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic", "メイリオ", sans-serif;
         }
 
+        ol, ul {
+            margin: 0;
+            padding: 0 15px;
+            list-style: none;
+            counter-reset: number;
+        }
+
         .navbar {
             border-radius: 0px;
         }
 
 
+        #tranbg:hover {
+            background: #8c8c8c;
+            margin-top: 0px;
+        }
+        #tranbg1:hover {
+            background: #8c8c8c;
+            margin-top: 0px;
+        }
+
+        #tranbg2:hover {
+            background: #8c8c8c;
+            margin-top: 0px;
+        }
+
+        #nav-user-sub123 :hover {
+            text-decoration: underline;
+        }
+
         .navbar-default .navbar-nav > li > a {
             color: #fff;
+        }
+
+
+        .navbar-default .navbar-nav > li > a:hover {
+            color: #ffbf00;
+        }
+
+
+        .navbar-brand img {
+            position: relative;
+            bottom: 14px;
+            /*background: #808080;*/
+            background: #222222;
+        }
+
+        .hero-header img {
+            position: relative;
+            margin-top: 18px;
+            bottom: 22px;
         }
 
         /* 省略其他样式，保留页面容器的样式 */
@@ -85,7 +129,6 @@
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="/top/1"> <img width="160px" src="/static/img/logola.png"></a>
-
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
@@ -96,8 +139,8 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/user_translation_page/0">翻訳画面</a></li>
-                <ul class="nav navbar-nav navbar-right">
+                <li id="tranbg"><a href="/user_translation_page/0">翻訳画面</a></li>
+                <ul id="tranbg1" class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">言語選択<span class="caret"></span></a>
@@ -116,7 +159,7 @@
                     <input type="text" class="form-control" placeholder="Search for..." style="margin-top: 10px;">
 
                 </li>
-                <li class="dropdown">
+                <li id="tranbg2" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false"> <img width="25" height="25"
                                                    src="/static/img/icon-user.jpg"><span class="caret"></span></a>
@@ -130,7 +173,7 @@
 
         </div>
     </div>
-     <ul class="nav-user-sub">
+    <ul class="nav-user-sub">
         <ul class="nav navbar-nav navbar-right">
             <a href="/user_info/1" style="color: white"><small>&nbsp個人情報&nbsp</small></a>|<a href="/logout/1"
                                                                                              style="color: white"><small>&nbspログアウト&nbsp&nbsp&nbsp&nbsp&nbsp</small></a>
@@ -149,13 +192,6 @@
         <form action="/user_translation_page/0" method="post">
             <label for="inputLanguage">入力言語：</label>
             <input type="text" name="inputLanguage" id="inputLanguage" placeholder="入力したい言語を入力して" required>
-            {#            <select name="inputLanguage" id="inputLanguage">#}
-            {#                <option value="">入力したい言語</option>#}
-            {#                <option value="english">英語</option>#}
-            {#                <option value="japanese">日本語</option>#}
-            {#                <option value="chinese">中国語</option>#}
-            {#                <option value="Burmese">ミャンマー語</option>#}
-            {#            </select>#}
             <br>
             <label for="textToTranslate">翻訳されたい文章：</label>
             <br>
@@ -165,19 +201,11 @@
             <br>
             <label for="outputLanguage">出力言語：</label>
             <input type="text" name="outputLanguage" id="outputLanguage" placeholder="翻訳されたい言語を入力して" required>
-            {#            <select name="outputLanguage" id="outputLanguage">#}
-            {#                <option value="">翻訳されたい言語</option>#}
-            {#                <option value="en-US">英語</option>#}
-            {#                <option value="ja-JP">日本語</option>#}
-            {#                <option value="zh-CN">中国語</option>#}
-            {#                <option value="my-MM">ミャンマー語</option>#}
-            {#            </select>#}
             <div style="margin-bottom: 10px">
                 <input type="submit" name="" id="" value="翻訳">
             </div>
         </form>
         <a class="btn btn-primary btn-xs" href="/depart/20/edit/">翻訳結果</a>
-        <!-- 処理した結果ここの<div>に表示する -->
         <div id="result" name="result" style="position: relative; background: #F7F7F9;">
             <button class="copy-button" id="copy-button" data-clipboard-target="#text-to-copy"
                     style="background-color: dimgrey; color: #fff; padding: 1px; float: right; border: none;">

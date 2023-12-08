@@ -74,16 +74,29 @@
             top: 0;
             z-index: 1000; /* 使导航栏在其他元素之上 */
         }
-        .navbar:hover{
+
+        #tranbg:hover {
             background: #8c8c8c;
+            margin-top: 3px;
+        }
+
+        #tranbg1:hover {
+            background: #8c8c8c;
+            margin-top: 3px;
+        }
+
+        #tranbg2:hover {
+            background: #8c8c8c;
+              margin-top: 0px;
         }
 
         .navbar-default .navbar-nav > li > a {
             color: #fff;
         }
 
+
         .navbar-default .navbar-nav > li > a:hover {
-             color: #ffbf00;
+            color: #ffbf00;
         }
 
 
@@ -161,13 +174,9 @@
         .hero-header a:hover {
             text-decoration: underline;
         }
-
-        .share {
-            margin: 10px 0;
+         #nav-user-sub123 :hover {
+            text-decoration: underline;
         }
-
-
-
     </style>
 </head>
 <body>
@@ -185,8 +194,8 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/user_translation_page/0" >翻訳画面</a></li>
-                <ul class="nav navbar-nav navbar-right">
+                <li id="tranbg" class="tranbg"><a href="/user_translation_page/0">翻訳画面</a></li>
+                <ul id="tranbg1" class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">言語選択<span class="caret"></span></a>
@@ -198,11 +207,11 @@
                     </li>
                 </ul>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li>
+            <ul  class="nav navbar-nav navbar-right">
+                <li >
                     <input type="text" class="form-control" placeholder="Search for..." style="margin-top: 10px;">
                 </li>
-                <li class="dropdown">
+                <li id="tranbg2" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false"> <img width="25" height="25"
                                                    src="/static/img/icon-user.jpg"><span class="caret"></span></a>
@@ -217,8 +226,9 @@
         </div>
     </div>
     <ul class="nav-user-sub">
-        <ul class="nav navbar-nav navbar-right">
-            <a href="/login/1" style="color: white"><small>ログイン&nbsp</small></a>|<a href="/add_user/1" style="color: white"><small>&nbsp新規登録&nbsp&nbsp&nbsp</small></a>
+        <ul class="nav navbar-nav navbar-right" id="nav-user-sub123">
+            <a href="/login/1" style="color: white"><small>ログイン&nbsp</small></a>|<a href="/add_user/1"
+                                                                                    style="color: white"><small>&nbsp新規登録&nbsp&nbsp&nbsp</small></a>
         </ul>
     </ul>
 </nav>
@@ -248,14 +258,14 @@
         <a href="/about_code" target="_blank">開発の資料</a>
     </p>
     <br>
-   <div class="small" style="text-align: center ">
+    <div class="small" style="text-align: center ">
         <a class="about-link " href="/about_website"
            style="width: 50%;"><small style="font-size: 8px ">サイトの利用ガイド</small></a>
         <span style="font-size: 8px ">|</span>
         <a class="portfolio-link" href="/about_website2"
            style="width: 50%;"><small style="font-size: 8px ">お問い合わせ</small></a>
     </div>
-    <p><small style="font-size: 8px ">Copyright © 2022 - 2023 吉田学園情報ビジネス専門学校 AIシステム学科 2年生 C-Team 著作権所有</small></p>
+    <p><small style="font-size: 8px ">Copyright©  2023 - 2024  吉田学園情報ビジネス専門学校 | AIシステム学科2年生 | C-Team 著作権所有</small></p>
 
 </div>
 </div>

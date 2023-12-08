@@ -6,6 +6,7 @@ import top_page
 import user
 from datetime import datetime
 import logging
+
 app = Flask(__name__)
 
 app.secret_key = 'my_secret_key_123'
@@ -39,8 +40,8 @@ app.register_blueprint(user_bp)
 データ分析
 '''
 from data_analysis import data_ana
-app.register_blueprint(data_ana)
 
+app.register_blueprint(data_ana)
 
 from chatbot import chat_bp
 
@@ -164,10 +165,13 @@ def insert_translation(input_language, input_text, output_language, output_text)
 @app.route("/user_translation_page/<int:index>", methods=["GET", "POST"])
 def input_translate_output(index):
     if request.method == "GET":
-        if index in range(0, 6):
-            return render_template(f"user_translation_page{index}.html")
+        if 'user_id' not in session or session['user_id'] is None:
+            return render_template(f"login{index}.html")
         else:
-            return "Invalid index"
+            if index in range(0, 6):
+                return render_template(f"user_translation_page{index}.html")
+            else:
+                return "Invalid index"
     if request.method == "POST":
         input_language = request.form.get("inputLanguage").strip()
         output_language = request.form.get("outputLanguage").strip()
@@ -293,6 +297,7 @@ def about_team():
 @app.route("/about_code")
 def about_code():
     return render_template("about_code1.html")
+
 
 @app.route("/about_future")
 def about_future():

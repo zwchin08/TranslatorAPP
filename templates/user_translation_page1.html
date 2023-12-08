@@ -11,14 +11,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
     <!-- v5 -->
     <script src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js'></script>
-      <style>
+    <style>
         .container {
             width: 100%;
             padding-right: 50px;
             padding-left: 100px;
         }
 
-        .  /* 调整伪元素位置，使其在导航栏左侧 */
+        . /* 调整伪元素位置，使其在导航栏左侧 */
         .nav-user-sub {
             display: block;
             position: absolute;
@@ -65,8 +65,37 @@
         }
 
 
+        #tranbg:hover {
+            background: #8c8c8c;
+        }
+
+        #tranbg1:hover {
+            background: #8c8c8c;
+        }
+
+        #tranbg2:hover {
+            background: #8c8c8c;
+        }
+
+        #tranbg3:hover {
+            background: #8c8c8c;
+        }
+
+        #tranbg4:hover {
+            background: #8c8c8c;
+        }
+
         .navbar-default .navbar-nav > li > a {
             color: #fff;
+        }
+
+
+        .navbar-default .navbar-nav > li > a:hover {
+            color: #ffbf00;
+        }
+
+        #nav-user-sub123 :hover {
+            text-decoration: underline;
         }
 
         /* 省略其他样式，保留页面容器的样式 */
@@ -82,7 +111,6 @@
             background-size: 80% auto; /* 将高度调整为 auto */
         }
     </style>
-
 </head>
 
 <body>
@@ -100,10 +128,10 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/user_translation_page/1">翻訳画面</a></li>
-                <li><a href="/user_translate_history/1">履歴画面</a></li>
+                <li id="tranbg"><a href="/user_translation_page/1">翻訳画面</a></li>
+                <li id="tranbg1"><a href="/user_translate_history/1">履歴画面</a></li>
             </ul>
-            <ul class="nav navbar-nav ">
+            <ul id="tranbg3" class="nav navbar-nav ">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                        aria-haspopup="true" aria-expanded="false">言語選択<span class="caret"></span></a>
@@ -116,7 +144,7 @@
                 </li>
             </ul>
 
-            <ul class="nav navbar-nav ">
+            <ul id="tranbg4" class="nav navbar-nav ">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                        aria-haspopup="true" aria-expanded="false">他のAPP<span class="caret"></span></a>
@@ -130,7 +158,7 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
+                <li id="tranbg2" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                        aria-haspopup="true" aria-expanded="false"> <img width="32px" src="/static/img/user1.jpg"><span
                             class="caret"></span></a>
@@ -145,8 +173,8 @@
             </ul>
         </div>
     </div>
-     <ul class="nav-user-sub">
-        <ul class="nav navbar-nav navbar-right">
+    <ul class="nav-user-sub">
+        <ul class="nav navbar-nav navbar-right" id="nav-user-sub123">
             <a href="/user_info/1" style="color: white"><small>&nbsp個人情報&nbsp</small></a>|<a href="/logout/1"
                                                                                              style="color: white"><small>&nbspログアウト&nbsp&nbsp&nbsp&nbsp&nbsp</small></a>
         </ul>
@@ -158,6 +186,8 @@
         <ol class="breadcrumb">
             <!-- 面包屑导航 -->
             <li><a href="/top/1">C-Tream-APP</a></li>
+            <li><a href="/top/1">トップページ</a></li>
+            <li><a href="/login/1">ログイン</a></li>
             <li><a href="#">翻訳画面</a></li>
             <li class="active">SHOW</li>
         </ol>
@@ -208,7 +238,7 @@
         <div id="result" name="result" style="position: relative; background: #F7F7F9;">
             <button class="copy-button" id="copy-button" data-clipboard-target="#text-to-copy"
                     style="background-color: dimgrey; color: #fff; padding: 1px; float: right; border: none;">
-               <span class="glyphicon glyphicon-copy" aria-hidden="true"></span> Copy code
+                <span class="glyphicon glyphicon-copy" aria-hidden="true"></span> Copy code
             </button>
             <textarea id="text-to-copy" class="form-control" rows="10"
                       style="background: #DBDDDA;">{{ result }}</textarea>
