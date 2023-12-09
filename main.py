@@ -199,8 +199,6 @@ def show_translation_list():
 def internal_server_error(e):
     logging.error('发生内部服务器错误：%s', e)
     return jsonify(error='内部服务器错误'), 500
-
-
 # 在某处定义错误处理程序
 @app.errorhandler(500)
 def internal_server_error(error):
