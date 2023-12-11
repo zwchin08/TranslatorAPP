@@ -165,10 +165,13 @@ def insert_translation(input_language, input_text, output_language, output_text)
 @app.route("/user_translation_page/<int:index>", methods=["GET", "POST"])
 def input_translate_output(index):
     if request.method == "GET":
+        if index == 0:
+            return render_template(f"user_translation_page{index}.html")
+
         if 'user_id' not in session or session['user_id'] is None:
-            return render_template(f"login{index}.html")
+            return render_template(f"login_signup.html")
         else:
-            if index in range(0, 6):
+            if index in range(1, 6):
                 return render_template(f"user_translation_page{index}.html")
             else:
                 return "Invalid index"
@@ -184,6 +187,14 @@ def input_translate_output(index):
             insert_translation(input_language, text, output_language, result)
         return render_template(f"user_translation_page{index}.html", result=result)
 
+
+@app.route("/close/<int:index>",methods=["GET", "POST"])
+def close(index):
+    if request.method == "GET":
+        if index == 1:
+            return redirect("/about_website1")
+        if index == 2:
+            return redirect("/user_translate_history1")
 
 @app.route("/show_translation_list")
 def show_translation_list():
