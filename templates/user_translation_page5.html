@@ -15,8 +15,112 @@
             padding-left: 100px;
         }
 
+        . /* 调整伪元素位置，使其在导航栏左侧 */
+        .nav-user-sub {
+            display: block;
+            position: absolute;
+            background: rgba(82, 66, 1, .7);
+            top: 56px;
+            right: 0px;
+            padding-right: 1px;
+            z-index: 2; /* 保证在内容之上 */
+        }
+
+        /* 旋转伪元素180° */
+        .nav-user-sub::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -25px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 26px 0 0 26px; /* 调整这里的值来改变三角形的大小 */
+            border-color: transparent transparent transparent rgba(82, 66, 1, .7); /* 使三角形颜色与背景一致 */
+            transform: rotate(180deg); /* 旋转180° */
+        }
+
+        .nav-user-sub {
+            display: block;
+            position: absolute;
+            background: rgba(82, 66, 1, .7);
+            top: 62px;
+            right: 0px;
+            padding-right: 3px;
+            padding-top: 3px;
+        }
+
+        .nav-user-sub a {
+            text-decoration: none;
+            font-size: 15px;
+            color: aliceblue;
+            font-family: "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic", "メイリオ", sans-serif;
+        }
+
+        ol, ul {
+            margin: 0;
+            padding: 0 15px;
+            list-style: none;
+            counter-reset: number;
+        }
+
+        .navbar {
+            border-radius: 0px;
+        }
+
+
+        #tranbg:hover {
+            background: #8c8c8c;
+            margin-top: 0px;
+        }
+        #tranbg1:hover {
+            background: #8c8c8c;
+            margin-top: 0px;
+        }
+
+        #tranbg2:hover {
+            background: #8c8c8c;
+            margin-top: 0px;
+        }
+
+        #nav-user-sub123 :hover {
+            text-decoration: underline;
+        }
+
         .navbar-default .navbar-nav > li > a {
             color: #fff;
+        }
+
+
+        .navbar-default .navbar-nav > li > a:hover {
+            color: #ffbf00;
+        }
+
+
+        .navbar-brand img {
+            position: relative;
+            bottom: 14px;
+            /*background: #808080;*/
+            background: #222222;
+        }
+
+        .hero-header img {
+            position: relative;
+            margin-top: 18px;
+            bottom: 22px;
+        }
+
+        /* 省略其他样式，保留页面容器的样式 */
+        .page-container {
+            max-width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #dddddd;
+            border-radius: 5px;
+            box-shadow: 5px 5px 20px #aaa;
+            background: url('/static/img/logomimilast2.png') no-repeat center center fixed;
+            font-family: 'Arial', sans-serif;
+            background-size: 80% auto; /* 将高度调整为 auto */
         }
     </style>
 </head>
@@ -36,8 +140,8 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/user_translation_page/0">翻译画面</a></li>
-                <ul class="nav navbar-nav navbar-right">
+                <li id="tranbg"><a href="/user_translation_page/0">翻译画面</a></li>
+                <ul id="tranbg1" class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">语言选择<span class="caret"></span></a>
@@ -45,18 +149,12 @@
                              <li><a href="/user_translation_page/0">日本語</a></li>
                             <li><a href="/user_translation_page/4">English</a></li>
                             <li><a href="/user_translation_page/5">中文</a></li>
-{#                            <li><a href="/top/4">မြန်မာဘာသာ</a></li>#}
                         </ul>
                     </li>
                 </ul>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-
-                <li>
-                    <input type="text" class="form-control" placeholder="Search for..." style="margin-top: 10px;">
-
-                </li>
-                <li class="dropdown">
+                <li id="tranbg2" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false"> <img width="25" height="25"
                                                    src="/static/img/icon-user.jpg"><span class="caret"></span></a>
@@ -67,11 +165,17 @@
                     </ul>
                 </li>
             </ul>
-
         </div>
     </div>
+     <ul class="nav-user-sub">
+        <ul class="nav navbar-nav navbar-right" id="nav-user-sub123">
+            <a href="/login/1" style="color: white"><small>ログイン&nbsp</small></a>|<a href="/add_user/1"
+                                                                                    style="color: white"><small>&nbsp新規登録&nbsp&nbsp&nbsp</small></a>
+        </ul>
+    </ul>
 </nav>
-<div class="container">
+<br>
+<div class="page-container">
     <div>
          <ol class="breadcrumb">
             <li><a href="/top/1">C-Tream-APP</a></li>

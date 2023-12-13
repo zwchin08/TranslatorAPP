@@ -67,8 +67,28 @@
             line-height: 32px;
         }
 
-        .navbar-nav > li > a {
-            line-height: 32px;
+        #tranbg:hover {
+            background: #8c8c8c;
+            margin-top: 1px;
+        }
+
+        #tranbg1:hover {
+            background: #8c8c8c;
+            margin-top: 1px;
+        }
+
+        #tranbg2:hover {
+            background: #8c8c8c;
+            margin-top: 0px;
+        }
+
+        .navbar-default .navbar-nav > li > a {
+            color: #fff;
+        }
+
+
+        .navbar-default .navbar-nav > li > a:hover {
+            color: #ffbf00;
         }
 
 
@@ -103,13 +123,12 @@
             background-size: 80% auto; /* 将高度调整为 auto */
         }
 
-
         header {
-            /*background-color: #2c3e50;*/
-            background-color: #696969;
             color: #ecf0f1;
             text-align: center;
             display: flex;
+            position: absolute;
+            z-index: 999;
         }
 
         header h1 {
@@ -123,8 +142,6 @@
             margin-right: 180px;
         }
 
-
-        /* 段落样式 */
         p {
             line-height: 1.6; /* 设置行高 */
             text-indent: 1em;
@@ -148,12 +165,8 @@
             display: inline-block;
             font-family: 'hts';
             font-size: 24px;
-            /* Adjust this value based on your preference */
-            /* Adjust this value based on your preference */
             padding: 3px 1058px 2px 16px;
             background-color: #d3d3d3;
-
-
         }
 
         h2::before {
@@ -184,19 +197,29 @@
         }
 
         .big {
-            background-color: #696969;
+            background: url('/static/img/Xin.png');
             height: 220px;
+            width: 100%;
+            position: relative;
         }
 
+        .overlay {
+
+            width: 100%;
+            height: 220px;
+            background-color: rgba(0, 0, 0, 0.6);
+            position: absolute;
+            z-index: 10;
+        }
         .line {
-            position: relative;
+            position: absolute;
             z-index: 999;
             background-color: white;
             width: 100%;
             border-radius: 5px;
             border-bottom: 160px;
             height: 5px;
-
+            bottom: 60px;
         }
 
         .line1 {
@@ -208,6 +231,7 @@
             border-bottom: 160px;
             height: 5px;
         }
+
 
     </style>
 </head>
@@ -226,11 +250,11 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/user_translation_page/0">翻訳画面</a></li>
-                <li><a href="/user_translate_history/1">履歴画面</a></li>
+                <li id="tranbg"><a href="/user_translation_page/0">翻訳画面</a></li>
+                <li id="tranbg1"><a href="/user_translate_history/1">履歴画面</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
+                <li id="tranbg2" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false"> <img width="32px" src="/static/img/icon-user.jpg"><span
                             class="caret"></span></a>
@@ -252,6 +276,7 @@
         </ul>
     </ul>
 </nav>
+
 <br>
 <br>
 <div class="page-container">
@@ -261,23 +286,27 @@
         <li><a href="#">開発履歴について</a></li>
         <li class="active">SHOW</li>
     </ol>
+
     <div class="big">
+        <div class="overlay"></div>
         <header>
             <div><img width="160" src="/static/img/logola.png" alt=""></div>
-            <h1>開発履歴(2023/12/05 更新)</h1>
+            <h1>開発履歴(2023/12/12 更新)</h1>
         </header>
         <div class="line">
             <div class="line1"></div>
         </div>
     </div>
 
+
     <h2 style="margin-top:60px ">開発履歴</h2>
     <h4 style="margin:20px 10px ">翻訳APP</h4>
     <p><small>(2023/12/06 21:15更新)</small></p>
-    <p>2023/12/06 - [C-Team APP] ・サイトのデザイン ・単語の履歴データ分析の機能をチャレンジして</p>
-    <p>2023/12/05 - [C-Team APP] Top pageについての画面デザインしました。</p>
-    <p>2023/12/04 - [C-Team APP] 開発履歴についての画面デザインしました。</p>
-    <p>2023/12/01 - [C-Team APP] C-Team、サイトについての画面デザインしました。</p>
+    <p>2023/12/12 - [C-Team APP] ユーザーがログインしていない場合に、ログインを促す機能を追加</p>
+    <p>2023/12/06 - [C-Team APP] ・サイトのデザイン ・単語の履歴データ分析の機能をチャレンジ</p>
+    <p>2023/12/05 - [C-Team APP] Top pageについての画面デザイン</p>
+    <p>2023/12/04 - [C-Team APP] 開発履歴についての画面デザイン</p>
+    <p>2023/12/01 - [C-Team APP] C-Team、サイトについての画面デザインしました</p>
     <p>2023/11/30 - [C-Team APP] 開発履歴を追加</p>
     <p>2023/11/29 - [C-Team APP] サイトについてを追加</p>
     <p>2023/11/29 - [C-Team APP] お問い合わせの機能を追加</p>
@@ -322,22 +351,21 @@
     <hr>
     <br>
     <br>
-{#    <h4>巡回ボットAPP</h4>#}
-{#    <p><small>(2023/10/20 17:30更新完了)</small></p>#}
-{#    <p>2023/10/20 - [巡回ボットAPP] プレゼンの発表</p>#}
-{#    <p>2023/10/19 - [巡回ボットAPP] プレゼン資料を作成しました。</p>#}
-{#    <p>2023/10/18 - [巡回ボットAPP] 特定のキーワードをチャットに入力したら最新情報が取得できる機能をチャレンジしました。</p>#}
-{#    <p>2023/10/17 - [巡回ボットAPP] 複数の門限を過ぎたら毎時通知する機能を実装しました</p>#}
-{#    <p>2023/10/16 - [巡回ボットAPP] 毎時のデータ更新に基づいて、不在者リストを変更しました。</p>#}
-{#    <p>2023/10/15 - [巡回ボットAPP] Rank管理：Chatの通知をどう絞って通知すべきか改善する。</p>#}
-{#    <p>2023/10/13 - [巡回ボットAPP] 最新情報を得る機能の実装</p>#}
-{#    <p>2023/10/12 - [巡回ボットAPP] GoogleフォームとChatの連携プロセスに関する不具合を調査し、対処しました</p>#}
-{#    <p>2023/10/11 - [巡回ボットAPP] 不在者管理の対応ために、トリガーを使ってChatを送信することができました。</p>#}
-{#    <p>2023/10/10 - [巡回ボットAPP] GoogleフォームとChatの連携、送信機能を実現しました。</p>#}
-{#    <p>2023/10/06 - [巡回ボットAPP] 会社のインターンを参加し、課題を理解し、インターンシップにおける自己課題・目標を作り</p>#}
-{#    <br>#}
+    {#    <h4>巡回ボットAPP</h4>#}
+    {#    <p><small>(2023/10/20 17:30更新完了)</small></p>#}
+    {#    <p>2023/10/20 - [巡回ボットAPP] プレゼンの発表</p>#}
+    {#    <p>2023/10/19 - [巡回ボットAPP] プレゼン資料を作成しました。</p>#}
+    {#    <p>2023/10/18 - [巡回ボットAPP] 特定のキーワードをチャットに入力したら最新情報が取得できる機能をチャレンジしました。</p>#}
+    {#    <p>2023/10/17 - [巡回ボットAPP] 複数の門限を過ぎたら毎時通知する機能を実装しました</p>#}
+    {#    <p>2023/10/16 - [巡回ボットAPP] 毎時のデータ更新に基づいて、不在者リストを変更しました。</p>#}
+    {#    <p>2023/10/15 - [巡回ボットAPP] Rank管理：Chatの通知をどう絞って通知すべきか改善する。</p>#}
+    {#    <p>2023/10/13 - [巡回ボットAPP] 最新情報を得る機能の実装</p>#}
+    {#    <p>2023/10/12 - [巡回ボットAPP] GoogleフォームとChatの連携プロセスに関する不具合を調査し、対処しました</p>#}
+    {#    <p>2023/10/11 - [巡回ボットAPP] 不在者管理の対応ために、トリガーを使ってChatを送信することができました。</p>#}
+    {#    <p>2023/10/10 - [巡回ボットAPP] GoogleフォームとChatの連携、送信機能を実現しました。</p>#}
+    {#    <p>2023/10/06 - [巡回ボットAPP] 会社のインターンを参加し、課題を理解し、インターンシップにおける自己課題・目標を作り</p>#}
+    {#    <br>#}
     <br>
-
     <hr>
     <P style="margin-bottom: 60px"><small>※
         当サイトをご選択いただきありがとうございます。何か質問や提案があれば、いつでもサポートチームにお問い合わせください。学習とサービスのご利用を成功させることをお祈りしています。</small></P>
@@ -348,7 +376,6 @@
         <a class="portfolio-link" href="/about_website2"
            style="width: 50%;">お問い合わせ</a>
     </div>
-
 
     <div style="text-align: center;">
         <a 　class="portfolio-link" href="/about_team"

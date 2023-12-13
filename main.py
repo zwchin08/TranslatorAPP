@@ -165,16 +165,10 @@ def insert_translation(input_language, input_text, output_language, output_text)
 @app.route("/user_translation_page/<int:index>", methods=["GET", "POST"])
 def input_translate_output(index):
     if request.method == "GET":
-        if index == 0:
+        if index in range(0, 6):
             return render_template(f"user_translation_page{index}.html")
-
-        if 'user_id' not in session or session['user_id'] is None:
-            return render_template(f"login_signup.html")
         else:
-            if index in range(1, 6):
-                return render_template(f"user_translation_page{index}.html")
-            else:
-                return "Invalid index"
+            return "Invalid index"
     if request.method == "POST":
         input_language = request.form.get("inputLanguage").strip()
         output_language = request.form.get("outputLanguage").strip()

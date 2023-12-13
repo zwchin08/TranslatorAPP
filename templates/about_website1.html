@@ -9,12 +9,14 @@
     <link rel="stylesheet" href="/static/plugins/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/css/userTranslateHistory.css">
     <script src="/static/plugins/jquery-3.6.0.min.js"></script>
-    <style>
-         .container {
+      <style>
+        .container {
             width: 100%;
             padding-right: 50px;
             padding-left: 100px;
         }
+
+        /* 调整伪元素位置，使其在导航栏左侧 */
         .nav-user-sub {
             display: block;
             position: absolute;
@@ -22,9 +24,10 @@
             top: 56px;
             right: 0px;
             padding-right: 1px;
-            z-index: 2;
+            z-index: 2; /* 保证在内容之上 */
         }
 
+        /* 旋转伪元素180° */
         .nav-user-sub::before {
             content: '';
             position: absolute;
@@ -35,7 +38,7 @@
             border-style: solid;
             border-width: 25px 0 0 25px; /* 调整这里的值来改变三角形的大小 */
             border-color: transparent transparent transparent rgba(82, 66, 1, .7); /* 使三角形颜色与背景一致 */
-            transform: rotate(180deg);
+            transform: rotate(180deg); /* 旋转180° */
         }
 
         .nav-user-sub {
@@ -54,13 +57,39 @@
             color: aliceblue;
             font-family: "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic", "メイリオ", sans-serif;
         }
+
         .navbar {
-            border-radius: 0px;
+            border-radius: 0;
         }
 
         .navbar-brand {
             line-height: 32px;
         }
+
+        #tranbg:hover {
+            background: #8c8c8c;
+            margin-top: 1px;
+        }
+
+        #tranbg1:hover {
+            background: #8c8c8c;
+            margin-top: 1px;
+        }
+
+        #tranbg2:hover {
+            background: #8c8c8c;
+            margin-top: 0px;
+        }
+
+        .navbar-default .navbar-nav > li > a {
+            color: #fff;
+        }
+
+
+        .navbar-default .navbar-nav > li > a:hover {
+            color: #ffbf00;
+        }
+
 
         /* 面包屑导航样式 */
         .breadcrumb {
@@ -93,31 +122,44 @@
             background-size: 80% auto; /* 将高度调整为 auto */
         }
 
+
+        h1 {
+            text-align: center;
+            font-weight: bolder;
+            margin-top: 60px;
+            margin-bottom: 70px;
+        }
+
+        body {
+            background: #EDEDE8;
+        }
+
         header {
-            /*background-color: #2c3e50;*/
-            background-color: #696969;
             color: #ecf0f1;
             text-align: center;
             display: flex;
+            position: absolute;
+            z-index: 999;
         }
 
         header h1 {
             margin-top: 80px;
             margin-bottom: 40px;
             font-weight: bolder;
+            background: url('/static/img/Xin.png');
         }
 
         header img {
             margin-top: 0px;
-            margin-right: 230px;
+            margin-right: 280px;
         }
 
-        /* 段落样式 */
         p {
             line-height: 1.6; /* 设置行高 */
             text-indent: 1em;
             font-family: "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic", "メイリオ", sans-serif;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
+            margin-top: 10px;
         }
 
         /* 第一段的字体样式 */
@@ -129,6 +171,7 @@
         p:last-of-type {
             font-family: 'Font1', sans-serif; /* 用你喜欢的字体替代 'Font1' */
         }
+
         /* 强调文字样式 */
         strong {
             font-weight: bold; /* 设置文字加粗 */
@@ -148,17 +191,18 @@
             margin-bottom: 20vh;
             font-size: 20px;
         }
-         h5 {
+
+        h2 {
+            margin-top: 60px;
             position: relative;
             display: inline-block;
             font-family: 'hts';
             font-size: 24px;
-            /* Adjust this value based on your preference */
-            /* Adjust this value based on your preference */
-            padding: 3px 850px 2px 16px;
+            padding: 3px 840px 2px 16px;
+
         }
 
-        h5::before {
+        h2::before {
             content: "";
             position: absolute;
             left: 0;
@@ -177,18 +221,30 @@
         }
 
         .big {
-            background-color: #696969;
+            background: url('/static/img/Xin.png');
             height: 220px;
+            width: 100%;
+            position: relative;
+        }
+
+        .overlay {
+
+            width: 100%;
+            height: 220px;
+            background-color: rgba(0, 0, 0, 0.6);
+            position: absolute;
+            z-index: 10;
         }
 
         .line {
-            position: relative;
+            position: absolute;
             z-index: 999;
             background-color: white;
             width: 100%;
             border-radius: 5px;
             border-bottom: 160px;
             height: 5px;
+            bottom: 60px;
         }
 
         .line1 {
@@ -218,11 +274,11 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/user_translation_page/1">翻訳画面</a></li>
-                <li><a href="/user_translate_history/1">履歴画面</a></li>
+                <li id="tranbg"><a href="/user_translation_page/0">翻訳画面</a></li>
+                <li id="tranbg1"><a href="/user_translate_history/1">履歴画面</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
+                <li id="tranbg2" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false"> <img width="32px" src="/static/img/icon-user.jpg"><span
                             class="caret"></span></a>
@@ -239,7 +295,8 @@
     </div>
     <ul class="nav-user-sub">
         <ul class="nav navbar-nav navbar-right">
-            <a href="/login/1" style="color: white"><small>&nbspログイン&nbsp</small></a>|<a href="/add_user/1" style="color: white"><small>&nbsp新規登録&nbsp&nbsp&nbsp&nbsp&nbsp</small></a>
+            <a href="/login/1" style="color: white"><small>&nbspログイン&nbsp</small></a>|<a href="/add_user/1"
+                                                                                         style="color: white"><small>&nbsp新規登録&nbsp&nbsp&nbsp&nbsp&nbsp</small></a>
         </ul>
     </ul>
 </nav>
@@ -253,6 +310,7 @@
         <li class="active">SHOW</li>
     </ol>
     <div class="big">
+        <div class="overlay"></div>
         <header>
             <div><img width="160" src="/static/img/logola.png" alt=""></div>
             <h1>このサイトについて</h1>

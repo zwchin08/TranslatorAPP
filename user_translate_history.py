@@ -21,6 +21,8 @@ def connect_to_database():
 @history_bp.route("/user_translate_history/<int:index>", methods=["GET", "POST"])
 def user_translate_history(index):
     if request.method == "GET":
+        if 'user_id' not in session or session['user_id'] is None:
+            return render_template(f"login_signup.html")
         return render_template(f"user_translate_history{index}.html")
 
     if request.method == "POST":

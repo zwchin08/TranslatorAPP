@@ -44,7 +44,7 @@
             display: block;
             position: absolute;
             background: rgba(82, 66, 1, .7);
-            top: 56px;
+            top: 62px;
             right: 0px;
             padding-right: 3px;
             padding-top: 3px;
@@ -148,17 +148,11 @@
                             <li><a href="/user_translation_page/0">日本語</a></li>
                             <li><a href="/user_translation_page/4">English</a></li>
                             <li><a href="/user_translation_page/5">中文</a></li>
-                            {#                            <li><a href="/top/4">မြန်မာဘာသာ</a></li>#}
                         </ul>
                     </li>
                 </ul>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-
-                <li>
-                    <input type="text" class="form-control" placeholder="Search for..." style="margin-top: 10px;">
-
-                </li>
                 <li id="tranbg2" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false"> <img width="25" height="25"
@@ -170,13 +164,12 @@
                     </ul>
                 </li>
             </ul>
-
         </div>
     </div>
     <ul class="nav-user-sub">
-        <ul class="nav navbar-nav navbar-right">
-            <a href="/user_info/1" style="color: white"><small>&nbsp個人情報&nbsp</small></a>|<a href="/logout/1"
-                                                                                             style="color: white"><small>&nbspログアウト&nbsp&nbsp&nbsp&nbsp&nbsp</small></a>
+        <ul class="nav navbar-nav navbar-right" id="nav-user-sub123">
+            <a href="/login/1" style="color: white"><small>ログイン&nbsp</small></a>|<a href="/add_user/1"
+                                                                                    style="color: white"><small>&nbsp新規登録&nbsp&nbsp&nbsp</small></a>
         </ul>
     </ul>
 </nav>
