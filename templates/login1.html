@@ -15,15 +15,15 @@
             padding-left: 100px;
         }
 
-        . /* 调整伪元素位置，使其在导航栏左侧 */
         .nav-user-sub {
             display: block;
             position: absolute;
             background: rgba(82, 66, 1, .7);
-            top: 56px;
+            top: 57px;
             right: 0px;
-            padding-right: 1px;
-            z-index: 2; /* 保证在内容之上 */
+            padding-right: 3px;
+            padding-top: 3px;
+            z-index: 5;
         }
 
         /* 旋转伪元素180° */
@@ -39,17 +39,6 @@
             border-color: transparent transparent transparent rgba(82, 66, 1, .7); /* 使三角形颜色与背景一致 */
             transform: rotate(180deg); /* 旋转180° */
         }
-
-        .nav-user-sub {
-            display: block;
-            position: absolute;
-            background: rgba(82, 66, 1, .7);
-            top: 62px;
-            right: 0px;
-            padding-right: 3px;
-            padding-top: 3px;
-        }
-
         .nav-user-sub a {
             text-decoration: none;
             font-size: 15px;
@@ -89,11 +78,10 @@
         }
 
         #nav-user-sub123 {
-           margin-right: 3px;
+            margin-right: 3px;
         }
     </style>
 </head>
-
 <body>
 <nav class="navbar navbar-default">
     <div class="container">
@@ -148,6 +136,7 @@
         </ul>
     </ul>
 </nav>
+<div class="overlay"></div>
 <div class="loginBox">
     <h2>ログイン</h2>
     <form action="/login/1" method="post">

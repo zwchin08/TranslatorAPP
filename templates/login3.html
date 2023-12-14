@@ -23,7 +23,7 @@
             top: 56px;
             right: 0px;
             padding-right: 1px;
-            z-index: 2; /* 保证在内容之上 */
+            z-index: 5;
         }
 
         /* 旋转伪元素180° */
@@ -39,17 +39,6 @@
             border-color: transparent transparent transparent rgba(82, 66, 1, .7); /* 使三角形颜色与背景一致 */
             transform: rotate(180deg); /* 旋转180° */
         }
-
-        .nav-user-sub {
-            display: block;
-            position: absolute;
-            background: rgba(82, 66, 1, .7);
-            top: 62px;
-            right: 0px;
-            padding-right: 3px;
-            padding-top: 3px;
-        }
-
         .nav-user-sub a {
             text-decoration: none;
             font-size: 15px;
@@ -150,6 +139,7 @@
         </ul>
     </ul>
 </nav>
+<div class="overlay"></div>
 <div class="loginBox">
     <h2>登 录</h2>
     <form action="/login/3" method="post">
